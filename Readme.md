@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов» [![Build status][travis-image]][travis-url]
 
 * Студент: [Анастасия Горбенко](https://up.htmlacademy.ru/react/4/user/958277).
-* Наставник: `Неизвестно`.
+* Наставник: [Виталий Комолаев](https://htmlacademy.ru/profile/id1274335).
 
 ---
 
