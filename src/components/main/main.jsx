@@ -96,7 +96,7 @@ const Main = (props) => {
               <div className="cities__places-list places__list tabs__content">
 
                 {offersNames.map((offerName) => (
-                  <article className="cities__place-card place-card" key="offerName">
+                  <article className="cities__place-card place-card" key={offerName}>
                     <div className="place-card__mark">
                       <span>Premium</span>
                     </div>
