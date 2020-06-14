@@ -2,6 +2,8 @@ import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import React from "react";
 
+const placeNameClickHandler = () => {};
+
 const App = (props) => {
   const {offersCount, offersNames} = props;
 
@@ -9,6 +11,7 @@ const App = (props) => {
     <Main
       offersCount = {offersCount}
       offersNames = {offersNames}
+      onPlaceNameClick = {placeNameClickHandler}
     />
   );
 };
