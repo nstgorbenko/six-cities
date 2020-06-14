@@ -15,6 +15,7 @@ describe(`Main Component rendering`, () => {
           <Main
             offersCount = {testOffersCount}
             offersNames = {testOffersNames}
+            onPlaceNameClick = {() => {}}
           />
       )
       .toJSON();

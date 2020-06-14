@@ -91,6 +91,7 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
     >
       <a
         href="#"
+        onClick={[Function]}
       >
         Beautiful & luxurious apartment at great location
       </a>

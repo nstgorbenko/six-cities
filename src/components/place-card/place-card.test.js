@@ -10,6 +10,7 @@ describe(`PlaceCard Component rendering`, () => {
       .create(
           <PlaceCard
             name = {testName}
+            onNameClick = {() => {}}
           />
       )
       .toJSON();

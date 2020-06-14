@@ -314,6 +314,7 @@ exports[`App Component rendering App Component should render correctly 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Beautiful & luxurious apartment at great location
                   </a>
@@ -415,6 +416,7 @@ exports[`App Component rendering App Component should render correctly 1`] = `
                 >
                   <a
                     href="#"
+                    onClick={[Function]}
                   >
                     Wood and stone place
                   </a>
