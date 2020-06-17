@@ -4,11 +4,14 @@ import React from "react";
 const FAVORITE_CLASS = `place-card__bookmark-button--active`;
 
 const PlaceCard = (props) => {
-  const {place, onNameClick} = props;
-  const {name, type, price, photo, rating, isPremium, isFavorite} = place;
+  const {place, onNameClick, onHover} = props;
+  const {id, name, type, price, photo, rating, isPremium, isFavorite} = place;
 
   return (
-    <article className="cities__place-card place-card">
+    <article className="cities__place-card place-card"
+      onMouseEnter={() => onHover(id)}
+      onMouseLeave={() => onHover(null)}
+    >
       {isPremium ?
         <div className="place-card__mark">
           <span>Premium</span>
@@ -51,6 +54,7 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   place: PropTypes.shape({
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
@@ -59,7 +63,8 @@ PlaceCard.propTypes = {
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired,
   }).isRequired,
-  onNameClick: PropTypes.func.isRequired
+  onNameClick: PropTypes.func.isRequired,
+  onHover: PropTypes.func.isRequired
 };
 
 export default PlaceCard;

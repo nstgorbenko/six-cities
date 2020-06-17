@@ -5,6 +5,7 @@ import Main from "./main.jsx";
 
 const testOffersCount = 170;
 const testOffers = [{
+  id: `1`,
   name: `Stylish apartment in the citycenter`,
   type: `Private room`,
   price: 136,
@@ -13,6 +14,7 @@ const testOffers = [{
   isPremium: false,
   isFavorite: true,
 }, {
+  id: `2`,
   name: `Beautiful Van Gogh studio`,
   type: `Private room`,
   price: 90,

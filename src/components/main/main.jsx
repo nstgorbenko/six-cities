@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import PlaceCard from "../place-card/place-card.jsx";
+import PlacesList from "../places-list/places-list.jsx";
 
 const Main = (props) => {
   const {offersCount, offers, onPlaceCardNameClick} = props;
@@ -87,21 +87,11 @@ const Main = (props) => {
                   <li className="places__option" tabIndex="0">Price: high to low</li>
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
-                {/* <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" selected="">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
-                </select> */}
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offers.map((offer, index) =>
-                  <PlaceCard
-                    key = {offer + index}
-                    place = {offer}
-                    onNameClick = {onPlaceCardNameClick}
-                  />)}
-              </div>
+              <PlacesList
+                places = {offers}
+                onPlaceCardNameClick = {onPlaceCardNameClick}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

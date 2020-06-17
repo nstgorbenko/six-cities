@@ -1,6 +1,7 @@
-import Main from "../main/main.jsx";
 import PropTypes from "prop-types";
 import React from "react";
+
+import Main from "../main/main.jsx";
 
 const App = (props) => {
   const {offersCount, offers} = props;

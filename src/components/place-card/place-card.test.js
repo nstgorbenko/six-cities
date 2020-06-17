@@ -3,6 +3,7 @@ import renderer from "react-test-renderer";
 import PlaceCard from "./place-card.jsx";
 
 const testPlace = {
+  id: `0`,
   name: `Stylish apartment in the citycenter`,
   type: `Private room`,
   price: 136,
@@ -17,8 +18,9 @@ describe(`PlaceCard Component rendering`, () => {
     const tree = renderer
       .create(
           <PlaceCard
-            place = {testPlace}
-            onNameClick = {() => {}}
+            place={testPlace}
+            onNameClick={() => {}}
+            onHover={() => {}}
           />
       )
       .toJSON();
