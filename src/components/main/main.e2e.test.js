@@ -4,10 +4,23 @@ import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
 
 const testOffersCount = 170;
-const testOffersNames = [
-  `Beautiful & luxurious apartment at great location`,
-  `Wood and stone place`
-];
+const testOffers = [{
+  name: `Stylish apartment in the citycenter`,
+  type: `Private room`,
+  price: 136,
+  photo: `img/apartment-small-04.jpg`,
+  rating: 4,
+  isPremium: false,
+  isFavorite: true,
+}, {
+  name: `Beautiful Van Gogh studio`,
+  type: `Private room`,
+  price: 90,
+  photo: `img/room.jpg`,
+  rating: 4,
+  isPremium: true,
+  isFavorite: false,
+}];
 
 Enzyme.configure({
   adapter: new Adapter()
@@ -15,13 +28,13 @@ Enzyme.configure({
 
 describe(`Places names click test`, () => {
   it(`Places names should be clicked`, () => {
-    const onPlaceNameClick = jest.fn();
+    const onPlaceCardNameClick = jest.fn();
 
     const main = mount(
         <Main
           offersCount = {testOffersCount}
-          offersNames = {testOffersNames}
-          onPlaceNameClick = {onPlaceNameClick}
+          offers = {testOffers}
+          onPlaceCardNameClick = {onPlaceCardNameClick}
         />
     );
 
@@ -31,6 +44,6 @@ describe(`Places names click test`, () => {
       name.simulate(`click`, {preventDefault() {}});
     });
 
-    expect(onPlaceNameClick).toHaveBeenCalledTimes(placesNames.length);
+    expect(onPlaceCardNameClick).toHaveBeenCalledTimes(placesNames.length);
   });
 });

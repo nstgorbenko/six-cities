@@ -3,7 +3,7 @@ import React from "react";
 import PlaceCard from "../place-card/place-card.jsx";
 
 const Main = (props) => {
-  const {offersCount, offersNames, onPlaceNameClick} = props;
+  const {offersCount, offers, onPlaceCardNameClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -95,11 +95,11 @@ const Main = (props) => {
                 </select> */}
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {offersNames.map((offerName, index) =>
+                {offers.map((offer, index) =>
                   <PlaceCard
-                    name = {offerName}
-                    key = {offerName + index}
-                    onNameClick = {onPlaceNameClick}
+                    key = {offer + index}
+                    place = {offer}
+                    onNameClick = {onPlaceCardNameClick}
                   />)}
               </div>
             </section>
@@ -115,8 +115,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offersNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onPlaceNameClick: PropTypes.func.isRequired
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onPlaceCardNameClick: PropTypes.func.isRequired
 };
 
 export default Main;
