@@ -1,5 +1,5 @@
 import React from "react";
-import Enzyme, {mount} from "enzyme";
+import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
 
@@ -24,7 +24,7 @@ const testOffers = [{
   isFavorite: false,
 }];
 
-Enzyme.configure({
+configure({
   adapter: new Adapter()
 });
 
