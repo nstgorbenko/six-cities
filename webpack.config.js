@@ -11,6 +11,7 @@ module.exports = {
     contentBase: projectPath,
     open: true,
     port: 1337,
+    historyApiFallback: true,
   },
   module: {
     rules: [
