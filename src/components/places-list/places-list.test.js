@@ -1,9 +1,8 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import App from "./app.jsx";
+import PlacesList from "./places-list.jsx";
 
-const testOffersCount = 170;
-const testOffers = [{
+const testPlaces = [{
   id: `1`,
   name: `Stylish apartment in the citycenter`,
   type: `Private room`,
@@ -23,13 +22,13 @@ const testOffers = [{
   isFavorite: false,
 }];
 
-describe(`App Component rendering`, () => {
-  it(`App Component should render correctly`, () => {
+describe(`PlacesList Component rendering`, () => {
+  it(`PlacesList Component should render correctly`, () => {
     const tree = renderer
       .create(
-          <App
-            offersCount = {testOffersCount}
-            offers = {testOffers}
+          <PlacesList
+            places = {testPlaces}
+            onPlaceCardNameClick = {() => {}}
           />
       )
       .toJSON();

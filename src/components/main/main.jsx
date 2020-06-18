@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
-import PlaceCard from "../place-card/place-card.jsx";
+import PlacesList from "../places-list/places-list.jsx";
 
 const Main = (props) => {
-  const {offersCount, offersNames, onPlaceNameClick} = props;
+  const {offersCount, offers, onPlaceCardNameClick} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -87,21 +87,11 @@ const Main = (props) => {
                   <li className="places__option" tabIndex="0">Price: high to low</li>
                   <li className="places__option" tabIndex="0">Top rated first</li>
                 </ul>
-                {/* <select className="places__sorting-type" id="places-sorting">
-                  <option className="places__option" value="popular" selected="">Popular</option>
-                  <option className="places__option" value="to-high">Price: low to high</option>
-                  <option className="places__option" value="to-low">Price: high to low</option>
-                  <option className="places__option" value="top-rated">Top rated first</option>
-                </select> */}
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                {offersNames.map((offerName, index) =>
-                  <PlaceCard
-                    name = {offerName}
-                    key = {offerName + index}
-                    onNameClick = {onPlaceNameClick}
-                  />)}
-              </div>
+              <PlacesList
+                places = {offers}
+                onPlaceCardNameClick = {onPlaceCardNameClick}
+              />
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
@@ -115,8 +105,8 @@ const Main = (props) => {
 
 Main.propTypes = {
   offersCount: PropTypes.number.isRequired,
-  offersNames: PropTypes.arrayOf(PropTypes.string).isRequired,
-  onPlaceNameClick: PropTypes.func.isRequired
+  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onPlaceCardNameClick: PropTypes.func.isRequired
 };
 
 export default Main;

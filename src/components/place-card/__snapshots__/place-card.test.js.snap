@@ -3,14 +3,9 @@
 exports[`PlaceCard Component rendering PlaceCard Component should render correctly 1`] = `
 <article
   className="cities__place-card place-card"
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
-  <div
-    className="place-card__mark"
-  >
-    <span>
-      Premium
-    </span>
-  </div>
   <div
     className="cities__image-wrapper place-card__image-wrapper"
   >
@@ -18,10 +13,10 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
       href="#"
     >
       <img
-        alt="Place image"
+        alt="Stylish apartment in the citycenter"
         className="place-card__image"
         height="200"
-        src="img/apartment-01.jpg"
+        src="img/apartment-small-04.jpg"
         width="260"
       />
     </a>
@@ -38,7 +33,8 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
         <b
           className="place-card__price-value"
         >
-          €120
+          €
+          136
         </b>
         <span
           className="place-card__price-text"
@@ -47,7 +43,7 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
         </span>
       </div>
       <button
-        className="place-card__bookmark-button button"
+        className="place-card__bookmark-button place-card__bookmark-button--active button"
         type="button"
       >
         <svg
@@ -93,13 +89,13 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
         href="#"
         onClick={[Function]}
       >
-        Beautiful & luxurious apartment at great location
+        Stylish apartment in the citycenter
       </a>
     </h2>
     <p
       className="place-card__type"
     >
-      Apartment
+      Private room
     </p>
   </div>
 </article>
