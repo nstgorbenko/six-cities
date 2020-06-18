@@ -10,7 +10,7 @@ configure({
 const mockPlace = {
   id: `5`,
   name: `place name`,
-  type: `place type`,
+  type: `room`,
   price: 100,
   photo: `path`,
   rating: 5,

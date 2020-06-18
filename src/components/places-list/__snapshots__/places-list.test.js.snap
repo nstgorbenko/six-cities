@@ -98,7 +98,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
       <p
         className="place-card__type"
       >
-        Private room
+        Room
       </p>
     </div>
   </article>
@@ -203,7 +203,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
       <p
         className="place-card__type"
       >
-        Private room
+        Room
       </p>
     </div>
   </article>

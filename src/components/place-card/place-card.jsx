@@ -1,11 +1,17 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+import {OFFER_TYPES} from "../../const.js";
+import {capitalizeWord, getRatingPercent} from "../../utils.js";
+
 const FAVORITE_CLASS = `place-card__bookmark-button--active`;
 
 const PlaceCard = (props) => {
   const {place, onNameClick, onHover} = props;
   const {id, name, type, price, photo, rating, isPremium, isFavorite} = place;
+
+  const ratingPercent = getRatingPercent(rating);
+  const placeType = capitalizeWord(type);
 
   return (
     <article className="cities__place-card place-card"
@@ -36,7 +42,7 @@ const PlaceCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `${rating * 20}%`}}></span>
+            <span style={{width: `${ratingPercent}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -46,7 +52,7 @@ const PlaceCard = (props) => {
             onClick={onNameClick}
           >{name}</a>
         </h2>
-        <p className="place-card__type">{type}</p>
+        <p className="place-card__type">{placeType}</p>
       </div>
     </article>
   );
@@ -56,7 +62,7 @@ PlaceCard.propTypes = {
   place: PropTypes.shape({
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(OFFER_TYPES).isRequired,
     price: PropTypes.number.isRequired,
     photo: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,

@@ -164,7 +164,7 @@ exports[`App Component rendering App Component should render correctly 1`] = `
           <b
             className="places__found"
           >
-            170
+            2
              places to stay in Amsterdam
           </b>
           <form
@@ -239,7 +239,7 @@ exports[`App Component rendering App Component should render correctly 1`] = `
                     alt="Stylish apartment in the citycenter"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-small-04.jpg"
+                    src="path"
                     width="260"
                   />
                 </a>
@@ -318,7 +318,7 @@ exports[`App Component rendering App Component should render correctly 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  Room
                 </p>
               </div>
             </article>
@@ -344,7 +344,7 @@ exports[`App Component rendering App Component should render correctly 1`] = `
                     alt="Beautiful Van Gogh studio"
                     className="place-card__image"
                     height="200"
-                    src="img/room.jpg"
+                    src="path"
                     width="260"
                   />
                 </a>
@@ -423,7 +423,7 @@ exports[`App Component rendering App Component should render correctly 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  Room
                 </p>
               </div>
             </article>

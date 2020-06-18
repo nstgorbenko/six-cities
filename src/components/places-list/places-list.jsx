@@ -15,12 +15,12 @@ class PlacesList extends PureComponent {
 
     return (
       <div className="cities__places-list places__list tabs__content">
-        {places.map((place, index) =>
+        {places.map((place) =>
           <PlaceCard
-            key = {place + index}
-            place = {place}
-            onNameClick = {onPlaceCardNameClick}
-            onHover = {this._handlePlaceCardHover}
+            key={place.id}
+            place={place}
+            onNameClick={onPlaceCardNameClick}
+            onHover={this._handlePlaceCardHover}
           />)}
       </div>
     );

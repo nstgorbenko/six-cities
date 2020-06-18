@@ -95,7 +95,7 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
     <p
       className="place-card__type"
     >
-      Private room
+      Room
     </p>
   </div>
 </article>

@@ -3,23 +3,24 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import Main from "../main/main.jsx";
-import Property from "../property/property.jsx";
+import Offer from "../offer/offer.jsx";
 
 const App = (props) => {
-  const {offersCount, offers} = props;
+  const {offers} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
           <Main
-            offersCount = {offersCount}
-            offers = {offers}
-            onPlaceCardNameClick = {() => {}}
+            offers={offers}
+            onPlaceCardNameClick={() => {}}
           />
         </Route>
-        <Route exact path="/property">
-          <Property/>
+        <Route exact path="/offer">
+          <Offer
+            place={offers[0]}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -27,7 +28,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offersCount: PropTypes.number.isRequired,
   offers: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 

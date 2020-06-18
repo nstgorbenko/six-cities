@@ -3,11 +3,10 @@ import {configure, mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Main from "./main.jsx";
 
-const testOffersCount = 170;
 const testOffers = [{
   id: `1`,
   name: `Stylish apartment in the citycenter`,
-  type: `Private room`,
+  type: `room`,
   price: 136,
   photo: `img/apartment-small-04.jpg`,
   rating: 4,
@@ -16,7 +15,7 @@ const testOffers = [{
 }, {
   id: `2`,
   name: `Beautiful Van Gogh studio`,
-  type: `Private room`,
+  type: `room`,
   price: 90,
   photo: `img/room.jpg`,
   rating: 4,
@@ -34,7 +33,6 @@ describe(`Places names click test`, () => {
 
     const main = mount(
         <Main
-          offersCount = {testOffersCount}
           offers = {testOffers}
           onPlaceCardNameClick = {onPlaceCardNameClick}
         />

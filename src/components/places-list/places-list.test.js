@@ -5,7 +5,7 @@ import PlacesList from "./places-list.jsx";
 const testPlaces = [{
   id: `1`,
   name: `Stylish apartment in the citycenter`,
-  type: `Private room`,
+  type: `room`,
   price: 136,
   photo: `img/apartment-small-04.jpg`,
   rating: 4,
@@ -14,7 +14,7 @@ const testPlaces = [{
 }, {
   id: `2`,
   name: `Beautiful Van Gogh studio`,
-  type: `Private room`,
+  type: `room`,
   price: 90,
   photo: `img/room.jpg`,
   rating: 4,

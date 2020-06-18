@@ -5,7 +5,7 @@ import PlaceCard from "./place-card.jsx";
 const testPlace = {
   id: `0`,
   name: `Stylish apartment in the citycenter`,
-  type: `Private room`,
+  type: `room`,
   price: 136,
   photo: `img/apartment-small-04.jpg`,
   rating: 4,
