@@ -164,7 +164,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
           <b
             className="places__found"
           >
-            170
+            2
              places to stay in Amsterdam
           </b>
           <form
@@ -318,7 +318,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  Room
                 </p>
               </div>
             </article>
@@ -423,7 +423,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                 <p
                   className="place-card__type"
                 >
-                  Private room
+                  Room
                 </p>
               </div>
             </article>
