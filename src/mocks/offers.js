@@ -1,5 +1,6 @@
 export default [{
   id: `1`,
+  location: [52.3909553943508, 4.85309666406198],
   name: `Beautiful & luxurious apartment at great location`,
   type: `apartment`,
   description: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
@@ -38,6 +39,7 @@ export default [{
 },
 {
   id: `2`,
+  location: [52.369553943508, 4.85309666406198],
   name: `Wood and stone place`,
   type: `room`,
   description: `Nice, central but quiet apartment on the Singel. 5 min. Walk from Amsterdam Central Station. Close to museums, shops, restaurants, supermarkets.`,
@@ -74,6 +76,7 @@ export default [{
 },
 {
   id: `3`,
+  location: [52.3909553943508, 4.929309666406198],
   name: `Canal View Prinsengracht`,
   type: `room`,
   description: `This small but cosy studio offers all amenities you need for a stay in Amsterdam! It's located in the heart of the famous Jordaan district, in the old city center and within the most beautiful area of the canal belt.`,
@@ -110,6 +113,7 @@ export default [{
 },
 {
   id: `4`,
+  location: [52.3809553943508, 4.939309666406198],
   name: `Nice, cozy, warm big bed apartment`,
   type: `apartment`,
   description: `This luxurious, yet cosy, 75m2 apartment is located on the ground floor. It is a 1-bedroom apartment with a double bed.`,

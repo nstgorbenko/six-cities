@@ -4,6 +4,7 @@ import App from "./app.jsx";
 
 const testOffers = [{
   id: `1`,
+  location: [52.3709553943508, 4.90309666406198],
   name: `Stylish apartment in the citycenter`,
   type: `room`,
   description: `Located in the City Center, close to all important attractions.`,
@@ -23,6 +24,7 @@ const testOffers = [{
   isFavorite: true,
 }, {
   id: `2`,
+  location: [52.3809553943508, 4.87309666406198],
   name: `Beautiful Van Gogh studio`,
   type: `room`,
   description: `Spacious room with very comfortable bed and private en-suite bathroom in Amsterdam's historic city centre.`,
@@ -45,11 +47,11 @@ const testOffers = [{
 describe(`App Component rendering`, () => {
   it(`App Component should render correctly`, () => {
     const tree = renderer
-      .create(
-          <App
-            offers = {testOffers}
-          />
-      )
+      .create(<App
+        offers = {testOffers}
+      />, {
+        createNodeMock: () => document.createElement(`div`)
+      })
       .toJSON();
 
     expect(tree).toMatchSnapshot();

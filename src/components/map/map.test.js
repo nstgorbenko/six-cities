@@ -1,6 +1,6 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Main from "./main.jsx";
+import Map from "./map.jsx";
 
 const testOffers = [{
   id: `1`,
@@ -24,12 +24,11 @@ const testOffers = [{
   isFavorite: false,
 }];
 
-describe(`Main Component rendering`, () => {
-  it(`Main Component should render correctly`, () => {
+describe(`Map Component rendering`, () => {
+  it(`Map Component should render correctly`, () => {
     const tree = renderer
-      .create(<Main
+      .create(<Map
         offers = {testOffers}
-        onPlaceCardNameClick = {() => {}}
       />, {
         createNodeMock: () => document.createElement(`div`)
       })
