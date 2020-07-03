@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {CardType, OFFER_TYPES} from "../../const.js";
+import {CardType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
+import {offerType} from "../../types.js";
 
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
@@ -19,7 +20,7 @@ const Offer = (props) => {
   const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
   const ratingPercent = getRatingPercent(rating);
-  const offerType = capitalizeWord(type);
+  const placeType = capitalizeWord(type);
 
   return (
     <div className="page">
@@ -80,7 +81,7 @@ const Offer = (props) => {
                 <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
-                <li className="property__feature property__feature--entire">{offerType}</li>
+                <li className="property__feature property__feature--entire">{placeType}</li>
                 <li className="property__feature property__feature--bedrooms">{bedrooms} Bedrooms</li>
                 <li className="property__feature property__feature--adults">
                   Max {adults} adults
@@ -186,26 +187,7 @@ const Offer = (props) => {
 };
 
 Offer.propTypes = {
-  place: PropTypes.shape({
-    location: PropTypes.arrayOf(PropTypes.number).isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(OFFER_TYPES).isRequired,
-    description: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    allPhotos: PropTypes.arrayOf(PropTypes.string).isRequired,
-    bedrooms: PropTypes.number.isRequired,
-    adults: PropTypes.number.isRequired,
-    amenities: PropTypes.arrayOf(PropTypes.string).isRequired,
-    host: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      avatar: PropTypes.string.isRequired,
-      isSuper: PropTypes.bool.isRequired
-    }).isRequired,
-    rating: PropTypes.number.isRequired,
-    reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired
-  }).isRequired,
+  place: PropTypes.shape(offerType).isRequired,
   nearbyPlaces: PropTypes.arrayOf(PropTypes.shape).isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,
 };

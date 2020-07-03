@@ -1,23 +1,15 @@
 import React from "react";
 import renderer from "react-test-renderer";
-import Review from "./review.jsx";
 
-const testInfo = {
-  userName: `Alex`,
-  userAvatar: `img/avatar-max.jpg`,
-  rating: 3.4,
-  text: `Just perfect.`,
-  time: `2020-03-15T22:55:56.845Z`,
-};
+import Review from "./review.jsx";
+import {testReviews} from "../../test-data.js";
 
 describe(`Review Component rendering`, () => {
   it(`Review Component should render correctly`, () => {
     const tree = renderer
-      .create(
-          <Review
-            info={testInfo}
-          />
-      )
+      .create(<Review
+        info={testReviews[0]}
+      />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

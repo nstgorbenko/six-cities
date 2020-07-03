@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {CardType, OFFER_TYPES} from "../../const.js";
+import {CardType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
+import {offerType} from "../../types.js";
 
 const FAVORITE_CLASS = `place-card__bookmark-button--active`;
 
@@ -66,16 +67,7 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   cardType: PropTypes.oneOf(Object.values(CardType)).isRequired,
-  place: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(OFFER_TYPES).isRequired,
-    price: PropTypes.number.isRequired,
-    photo: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }).isRequired,
+  place: PropTypes.shape(offerType).isRequired,
   onNameClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired
 };

@@ -3,6 +3,7 @@ import React from "react";
 
 import {getRatingPercent} from "../../utils/common.js";
 import {formatDateToDatetime, formatDateToReviewTime} from "../../utils/date.js";
+import {reviewType} from "../../types.js";
 
 const Review = (props) => {
   const {info} = props;
@@ -35,13 +36,7 @@ const Review = (props) => {
 };
 
 Review.propTypes = {
-  info: PropTypes.shape({
-    userName: PropTypes.string.isRequired,
-    userAvatar: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    text: PropTypes.string.isRequired,
-    time: PropTypes.string.isRequired,
-  }).isRequired,
+  info: PropTypes.shape(reviewType).isRequired,
 };
 
 export default Review;

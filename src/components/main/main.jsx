@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {CardType} from "../../const.js";
+import {offerType} from "../../types.js";
 
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
@@ -116,7 +117,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired
 };
 

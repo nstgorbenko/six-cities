@@ -2,6 +2,8 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
+import {offerType} from "../../types.js";
+
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
 
@@ -79,7 +81,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
 };
 
 export default App;

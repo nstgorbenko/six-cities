@@ -16,7 +16,7 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
         alt="Stylish apartment in the citycenter"
         className="place-card__image"
         height="200"
-        src="img/apartment-small-04.jpg"
+        src="img/apartment-01.jpg"
         width="260"
       />
     </a>
@@ -71,7 +71,7 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
         <span
           style={
             Object {
-              "width": "80%",
+              "width": "100%",
             }
           }
         />

@@ -2,6 +2,8 @@ import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
+import {offerType} from "../../types.js";
+
 const MAP_ZOOM = 12;
 const MARKER_SETTINGS = {
   iconUrl: `img/pin.svg`,
@@ -56,7 +58,7 @@ class Map extends PureComponent {
 
 Map.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
 };
 
 export default Map;
