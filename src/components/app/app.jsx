@@ -35,6 +35,7 @@ class App extends PureComponent {
             <Offer
               place={offers[0]}
               nearbyPlaces={offers.slice(1, 4)}
+              onPlaceCardNameClick={this._handlePlaceCardNameClick}
             />
           </Route>
         </Switch>
@@ -68,6 +69,7 @@ class App extends PureComponent {
           <Offer
             place={offers[offerIndex]}
             nearbyPlaces={nearbyPlaces}
+            onPlaceCardNameClick={this._handlePlaceCardNameClick}
           />
         );
       default:

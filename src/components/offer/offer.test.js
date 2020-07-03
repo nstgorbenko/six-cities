@@ -42,7 +42,7 @@ const testPlace = {
 
 const testNearbyPlaces = [
   {
-    id: `1`,
+    id: `2`,
     location: [52.3709553943508, 4.90309666406198],
     name: `Stylish apartment in the citycenter`,
     type: `room`,
@@ -78,7 +78,7 @@ const testNearbyPlaces = [
     isPremium: false,
     isFavorite: true,
   }, {
-    id: `1`,
+    id: `3`,
     location: [52.3709553943508, 4.90309666406198],
     name: `Stylish apartment in the citycenter`,
     type: `room`,
@@ -122,6 +122,7 @@ describe(`Offer Component rendering`, () => {
       .create(<Offer
         place={testPlace}
         nearbyPlaces={testNearbyPlaces}
+        onPlaceCardNameClick={() => {}}
       />, {
         createNodeMock: () => document.createElement(`div`)
       }

@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PlaceCard from "./place-card.jsx";
 
+const testType = `cities`;
+
 const testPlace = {
   id: `0`,
   name: `Stylish apartment in the citycenter`,
@@ -18,6 +20,7 @@ describe(`PlaceCard Component rendering`, () => {
     const tree = renderer
       .create(
           <PlaceCard
+            cardType={testType}
             place={testPlace}
             onNameClick={() => {}}
             onHover={() => {}}

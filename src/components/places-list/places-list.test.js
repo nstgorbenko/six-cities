@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import PlacesList from "./places-list.jsx";
 
+const testType = `cities`;
+
 const testPlaces = [{
   id: `1`,
   name: `Stylish apartment in the citycenter`,
@@ -27,8 +29,9 @@ describe(`PlacesList Component rendering`, () => {
     const tree = renderer
       .create(
           <PlacesList
-            places = {testPlaces}
-            onPlaceCardNameClick = {() => {}}
+            type={testType}
+            places={testPlaces}
+            onPlaceCardNameClick={() => {}}
           />
       )
       .toJSON();

@@ -587,6 +587,8 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
         >
           <article
             className="near-places__card place-card"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <div
               className="near-places__image-wrapper place-card__image-wrapper"
@@ -595,10 +597,10 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
                 href="#"
               >
                 <img
-                  alt="Place image"
+                  alt="Stylish apartment in the citycenter"
                   className="place-card__image"
                   height="200"
-                  src="img/room.jpg"
+                  src="path"
                   width="260"
                 />
               </a>
@@ -615,7 +617,8 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
                   <b
                     className="place-card__price-value"
                   >
-                    €80
+                    €
+                    136
                   </b>
                   <span
                     className="place-card__price-text"
@@ -668,19 +671,22 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
-                  Wood and stone place
+                  Stylish apartment in the citycenter
                 </a>
               </h2>
               <p
                 className="place-card__type"
               >
-                Private room
+                Room
               </p>
             </div>
           </article>
           <article
             className="near-places__card place-card"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <div
               className="near-places__image-wrapper place-card__image-wrapper"
@@ -689,10 +695,10 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
                 href="#"
               >
                 <img
-                  alt="Place image"
+                  alt="Stylish apartment in the citycenter"
                   className="place-card__image"
                   height="200"
-                  src="img/apartment-02.jpg"
+                  src="path"
                   width="260"
                 />
               </a>
@@ -709,7 +715,8 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
                   <b
                     className="place-card__price-value"
                   >
-                    €132
+                    €
+                    136
                   </b>
                   <span
                     className="place-card__price-text"
@@ -718,7 +725,7 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
                   </span>
                 </div>
                 <button
-                  className="place-card__bookmark-button button"
+                  className="place-card__bookmark-button place-card__bookmark-button--active button"
                   type="button"
                 >
                   <svg
@@ -733,7 +740,7 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
                   <span
                     className="visually-hidden"
                   >
-                    To bookmarks
+                    In bookmarks
                   </span>
                 </button>
               </div>
@@ -762,108 +769,15 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
               >
                 <a
                   href="#"
+                  onClick={[Function]}
                 >
-                  Canal View Prinsengracht
+                  Stylish apartment in the citycenter
                 </a>
               </h2>
               <p
                 className="place-card__type"
               >
-                Apartment
-              </p>
-            </div>
-          </article>
-          <article
-            className="near-places__card place-card"
-          >
-            <div
-              className="near-places__image-wrapper place-card__image-wrapper"
-            >
-              <a
-                href="#"
-              >
-                <img
-                  alt="Place image"
-                  className="place-card__image"
-                  height="200"
-                  src="img/apartment-03.jpg"
-                  width="260"
-                />
-              </a>
-            </div>
-            <div
-              className="place-card__info"
-            >
-              <div
-                className="place-card__price-wrapper"
-              >
-                <div
-                  className="place-card__price"
-                >
-                  <b
-                    className="place-card__price-value"
-                  >
-                    €180
-                  </b>
-                  <span
-                    className="place-card__price-text"
-                  >
-                    / night
-                  </span>
-                </div>
-                <button
-                  className="place-card__bookmark-button button"
-                  type="button"
-                >
-                  <svg
-                    className="place-card__bookmark-icon"
-                    height="19"
-                    width="18"
-                  >
-                    <use
-                      xlinkHref="#icon-bookmark"
-                    />
-                  </svg>
-                  <span
-                    className="visually-hidden"
-                  >
-                    To bookmarks
-                  </span>
-                </button>
-              </div>
-              <div
-                className="place-card__rating rating"
-              >
-                <div
-                  className="place-card__stars rating__stars"
-                >
-                  <span
-                    style={
-                      Object {
-                        "width": "100%",
-                      }
-                    }
-                  />
-                  <span
-                    className="visually-hidden"
-                  >
-                    Rating
-                  </span>
-                </div>
-              </div>
-              <h2
-                className="place-card__name"
-              >
-                <a
-                  href="#"
-                >
-                  Nice, cozy, warm big bed apartment
-                </a>
-              </h2>
-              <p
-                className="place-card__type"
-              >
-                Apartment
+                Room
               </p>
             </div>
           </article>

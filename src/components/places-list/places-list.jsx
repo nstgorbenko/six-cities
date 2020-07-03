@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
+
+import {CardType} from "../../const.js";
+
 import PlaceCard from "../place-card/place-card.jsx";
 
 class PlacesList extends PureComponent {
@@ -11,13 +14,16 @@ class PlacesList extends PureComponent {
   }
 
   render() {
-    const {places, onPlaceCardNameClick} = this.props;
+    const {type, places, onPlaceCardNameClick} = this.props;
+
+    const typeClassName = type === CardType.CITIES ? `${type}__places-list` : `${type}__list`;
 
     return (
-      <div className="cities__places-list places__list tabs__content">
+      <div className={`${typeClassName} places__list`}>
         {places.map((place) =>
           <PlaceCard
             key={place.id}
+            cardType={type}
             place={place}
             onNameClick={onPlaceCardNameClick}
             onHover={this._handlePlaceCardHover}
@@ -32,6 +38,7 @@ class PlacesList extends PureComponent {
 }
 
 PlacesList.propTypes = {
+  type: PropTypes.oneOf(Object.values(CardType)).isRequired,
   places: PropTypes.arrayOf(PropTypes.object).isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired
 };

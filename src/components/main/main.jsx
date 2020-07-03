@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+import {CardType} from "../../const.js";
+
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
 
@@ -93,6 +95,7 @@ const Main = (props) => {
                 </ul>
               </form>
               <PlacesList
+                type={CardType.CITIES}
                 places={offers}
                 onPlaceCardNameClick={onPlaceCardNameClick}
               />

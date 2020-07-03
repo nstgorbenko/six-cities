@@ -2,7 +2,7 @@
 
 exports[`PlacesList Component rendering PlacesList Component should render correctly 1`] = `
 <div
-  className="cities__places-list places__list tabs__content"
+  className="cities__places-list places__list"
 >
   <article
     className="cities__place-card place-card"
@@ -61,7 +61,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           <span
             className="visually-hidden"
           >
-            To bookmarks
+            In bookmarks
           </span>
         </button>
       </div>
@@ -151,7 +151,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           </span>
         </div>
         <button
-          className="place-card__bookmark-button  button"
+          className="place-card__bookmark-button false button"
           type="button"
         >
           <svg

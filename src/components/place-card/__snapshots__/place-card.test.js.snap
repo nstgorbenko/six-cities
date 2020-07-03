@@ -58,7 +58,7 @@ exports[`PlaceCard Component rendering PlaceCard Component should render correct
         <span
           className="visually-hidden"
         >
-          To bookmarks
+          In bookmarks
         </span>
       </button>
     </div>

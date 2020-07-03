@@ -7,6 +7,8 @@ configure({
   adapter: new Adapter()
 });
 
+const mockType = `cities`;
+
 const mockPlace = {
   id: `5`,
   name: `place name`,
@@ -24,6 +26,7 @@ describe(`PlaceCard working test`, () => {
 
     const placeCard = shallow(
         <PlaceCard
+          cardType={mockType}
           place = {mockPlace}
           onNameClick = {() => {}}
           onHover = {onHover}
