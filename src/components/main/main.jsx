@@ -1,8 +1,13 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+import {CardType} from "../../const.js";
+import {offerType} from "../../types.js";
+
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
+
+const MAP_CENTER = [52.38333, 4.9];
 
 const Main = (props) => {
   const {offers, onPlaceCardNameClick} = props;
@@ -91,14 +96,18 @@ const Main = (props) => {
                 </ul>
               </form>
               <PlacesList
+                type={CardType.CITIES}
                 places={offers}
                 onPlaceCardNameClick={onPlaceCardNameClick}
               />
             </section>
             <div className="cities__right-section">
-              <Map
-                offers={offers}
-              />
+              <section className="cities__map map">
+                <Map
+                  center={MAP_CENTER}
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>
@@ -108,7 +117,7 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired
 };
 

@@ -2,7 +2,7 @@
 
 exports[`PlacesList Component rendering PlacesList Component should render correctly 1`] = `
 <div
-  className="cities__places-list places__list tabs__content"
+  className="cities__places-list places__list"
 >
   <article
     className="cities__place-card place-card"
@@ -19,7 +19,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           alt="Stylish apartment in the citycenter"
           className="place-card__image"
           height="200"
-          src="img/apartment-small-04.jpg"
+          src="img/apartment-01.jpg"
           width="260"
         />
       </a>
@@ -61,7 +61,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           <span
             className="visually-hidden"
           >
-            To bookmarks
+            In bookmarks
           </span>
         </button>
       </div>
@@ -74,7 +74,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           <span
             style={
               Object {
-                "width": "80%",
+                "width": "100%",
               }
             }
           />
@@ -121,10 +121,10 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
         href="#"
       >
         <img
-          alt="Beautiful Van Gogh studio"
+          alt="Private Attic Studio"
           className="place-card__image"
           height="200"
-          src="img/room.jpg"
+          src="img/apartment-02.jpg"
           width="260"
         />
       </a>
@@ -142,7 +142,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
             className="place-card__price-value"
           >
             €
-            90
+            230
           </b>
           <span
             className="place-card__price-text"
@@ -151,7 +151,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           </span>
         </div>
         <button
-          className="place-card__bookmark-button  button"
+          className="place-card__bookmark-button false button"
           type="button"
         >
           <svg
@@ -197,13 +197,13 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           href="#"
           onClick={[Function]}
         >
-          Beautiful Van Gogh studio
+          Private Attic Studio
         </a>
       </h2>
       <p
         className="place-card__type"
       >
-        Room
+        Apartment
       </p>
     </div>
   </article>

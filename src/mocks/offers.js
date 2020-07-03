@@ -34,6 +34,22 @@ export default [{
     isSuper: true
   },
   rating: 4.8,
+  reviews: [{
+    id: `11`,
+    userName: `Max`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 3.8,
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    time: `2019-04-24T22:55:56.845Z`,
+  },
+  {
+    id: `12`,
+    userName: `Pavel`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 4.5,
+    text: `Magnificent loft with terrace! All like the photos. The owners are wonderful people! The location is great: 10 min and you are in the center.`,
+    time: `2017-07-10T22:55:56.845Z`,
+  }],
   isPremium: true,
   isFavorite: false,
 },
@@ -71,6 +87,30 @@ export default [{
     isSuper: false
   },
   rating: 3.8,
+  reviews: [{
+    id: `21`,
+    userName: `Max`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 3.8,
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    time: `2019-04-24T22:55:56.845Z`,
+  },
+  {
+    id: `22`,
+    userName: `Moti`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 4.2,
+    text: `Everything was better than described, comfortable and clean. Getting there and back by metro is very fast and easy. `,
+    time: `2020-03-03T22:55:56.845Z`,
+  },
+  {
+    id: `23`,
+    userName: `Pavel`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 4.5,
+    text: `Magnificent loft with terrace! All like the photos. The owners are wonderful people! The location is great: 10 min and you are in the center.`,
+    time: `2017-07-10T22:55:56.845Z`,
+  }],
   isPremium: false,
   isFavorite: true,
 },
@@ -108,6 +148,14 @@ export default [{
     isSuper: true
   },
   rating: 4.5,
+  reviews: [{
+    id: `31`,
+    userName: `Pavel`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 4.5,
+    text: `Magnificent loft with terrace! All like the photos. The owners are wonderful people! The location is great: 10 min and you are in the center.`,
+    time: `2017-07-10T22:55:56.845Z`,
+  }],
   isPremium: false,
   isFavorite: false,
 },
@@ -143,6 +191,22 @@ export default [{
     isSuper: false
   },
   rating: 3.1,
+
+  reviews: [{
+    id: `41`,
+    userName: `Max`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 3.8,
+    text: `A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.`,
+    time: `2019-04-24T22:55:56.845Z`,
+  }, {
+    id: `42`,
+    userName: `Pavel`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 4.5,
+    text: `Magnificent loft with terrace! All like the photos. The owners are wonderful people! The location is great: 10 min and you are in the center.`,
+    time: `2017-07-10T22:55:56.845Z`,
+  }],
   isPremium: true,
   isFavorite: true,
 }];

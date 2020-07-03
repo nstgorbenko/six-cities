@@ -2,6 +2,8 @@ import {BrowserRouter, Route, Switch} from "react-router-dom";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
+import {offerType} from "../../types.js";
+
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
 
@@ -34,6 +36,8 @@ class App extends PureComponent {
           <Route exact path="/offer">
             <Offer
               place={offers[0]}
+              nearbyPlaces={offers.slice(1, 4)}
+              onPlaceCardNameClick={this._handlePlaceCardNameClick}
             />
           </Route>
         </Switch>
@@ -60,10 +64,14 @@ class App extends PureComponent {
           />
         );
       case Screen.OFFER:
-        const offer = offers.find(({id}) => id === this.state.id);
+        const offerIndex = offers.findIndex(({id}) => id === this.state.id);
+        const nearbyPlaces = [...offers.slice(0, offerIndex), ...offers.slice(offerIndex + 1)];
+
         return (
           <Offer
-            place={offer}
+            place={offers[offerIndex]}
+            nearbyPlaces={nearbyPlaces}
+            onPlaceCardNameClick={this._handlePlaceCardNameClick}
           />
         );
       default:
@@ -73,7 +81,7 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.object).isRequired
+  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
 };
 
 export default App;

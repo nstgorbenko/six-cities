@@ -222,7 +222,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
             </ul>
           </form>
           <div
-            className="cities__places-list places__list tabs__content"
+            className="cities__places-list places__list"
           >
             <article
               className="cities__place-card place-card"
@@ -239,7 +239,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                     alt="Stylish apartment in the citycenter"
                     className="place-card__image"
                     height="200"
-                    src="img/apartment-small-04.jpg"
+                    src="img/apartment-01.jpg"
                     width="260"
                   />
                 </a>
@@ -281,7 +281,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                     <span
                       className="visually-hidden"
                     >
-                      To bookmarks
+                      In bookmarks
                     </span>
                   </button>
                 </div>
@@ -294,7 +294,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                     <span
                       style={
                         Object {
-                          "width": "80%",
+                          "width": "100%",
                         }
                       }
                     />
@@ -341,10 +341,10 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                   href="#"
                 >
                   <img
-                    alt="Beautiful Van Gogh studio"
+                    alt="Private Attic Studio"
                     className="place-card__image"
                     height="200"
-                    src="img/room.jpg"
+                    src="img/apartment-02.jpg"
                     width="260"
                   />
                 </a>
@@ -362,7 +362,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                       className="place-card__price-value"
                     >
                       €
-                      90
+                      230
                     </b>
                     <span
                       className="place-card__price-text"
@@ -371,7 +371,7 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button  button"
+                    className="place-card__bookmark-button false button"
                     type="button"
                   >
                     <svg
@@ -417,13 +417,13 @@ exports[`Main Component rendering Main Component should render correctly 1`] = `
                     href="#"
                     onClick={[Function]}
                   >
-                    Beautiful Van Gogh studio
+                    Private Attic Studio
                   </a>
                 </h2>
                 <p
                   className="place-card__type"
                 >
-                  Room
+                  Apartment
                 </p>
               </div>
             </article>

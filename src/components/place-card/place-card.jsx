@@ -1,28 +1,35 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {OFFER_TYPES} from "../../const.js";
-import {capitalizeWord, getRatingPercent} from "../../utils.js";
+import {CardType} from "../../const.js";
+import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
+import {offerType} from "../../types.js";
 
 const FAVORITE_CLASS = `place-card__bookmark-button--active`;
 
 const PlaceCard = (props) => {
-  const {place, onNameClick, onHover} = props;
+  const {cardType, place, onNameClick, onHover} = props;
   const {id, name, type, price, photo, rating, isPremium, isFavorite} = place;
 
   const ratingPercent = getRatingPercent(rating);
   const placeType = capitalizeWord(type);
 
+  const bookmarkActiveClass = isFavorite && FAVORITE_CLASS;
+  const bookmarkName = `${isFavorite ? `In` : `To`} bookmarks`;
+
+  const articleClassName = cardType === CardType.CITIES ? `${cardType}__place-card` : `${cardType}__card`;
+  const isCardMark = cardType === CardType.CITIES && isPremium;
+
   return (
-    <article className="cities__place-card place-card"
+    <article className={`${articleClassName} place-card`}
       onMouseEnter={() => onHover(id)}
       onMouseLeave={() => onHover(null)}
     >
-      {isPremium ?
+      {isCardMark &&
         <div className="place-card__mark">
           <span>Premium</span>
-        </div> : null}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+        </div>}
+      <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={photo} width="260" height="200" alt={name}/>
         </a>
@@ -33,11 +40,11 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${isFavorite ? FAVORITE_CLASS : ``} button`} type="button">
+          <button className={`place-card__bookmark-button ${bookmarkActiveClass} button`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>
-            <span className="visually-hidden">To bookmarks</span>
+            <span className="visually-hidden">{bookmarkName}</span>
           </button>
         </div>
         <div className="place-card__rating rating">
@@ -59,16 +66,8 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  place: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    type: PropTypes.oneOf(OFFER_TYPES).isRequired,
-    price: PropTypes.number.isRequired,
-    photo: PropTypes.string.isRequired,
-    rating: PropTypes.number.isRequired,
-    isPremium: PropTypes.bool.isRequired,
-    isFavorite: PropTypes.bool.isRequired,
-  }).isRequired,
+  cardType: PropTypes.oneOf(Object.values(CardType)).isRequired,
+  place: PropTypes.shape(offerType).isRequired,
   onNameClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired
 };
