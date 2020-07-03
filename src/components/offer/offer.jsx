@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import Map from '../map/map.jsx';
 import ReviewsList from "../reviews-list/reviews-list.jsx";
 
 import {OFFER_TYPES} from "../../const.js";
@@ -12,8 +13,8 @@ const ClassName = {
 };
 
 const Offer = (props) => {
-  const {place} = props;
-  const {name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, reviews, isPremium, isFavorite} = place;
+  const {place, nearbyPlaces} = props;
+  const {location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, reviews, isPremium, isFavorite} = place;
   const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
   const ratingPercent = getRatingPercent(rating);
@@ -161,7 +162,12 @@ const Offer = (props) => {
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <section className="property__map map">
+            <Map
+              center={location}
+              offers={nearbyPlaces}
+            />
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">
@@ -272,6 +278,7 @@ const Offer = (props) => {
 
 Offer.propTypes = {
   place: PropTypes.shape({
+    location: PropTypes.arrayOf(PropTypes.number).isRequired,
     name: PropTypes.string.isRequired,
     type: PropTypes.oneOf(OFFER_TYPES).isRequired,
     description: PropTypes.string.isRequired,
@@ -289,7 +296,8 @@ Offer.propTypes = {
     reviews: PropTypes.arrayOf(PropTypes.object).isRequired,
     isPremium: PropTypes.bool.isRequired,
     isFavorite: PropTypes.bool.isRequired
-  }).isRequired
+  }).isRequired,
+  nearbyPlaces: PropTypes.arrayOf(PropTypes.shape).isRequired,
 };
 
 export default Offer;

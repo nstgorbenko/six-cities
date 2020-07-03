@@ -2,6 +2,8 @@ import React from "react";
 import renderer from "react-test-renderer";
 import Map from "./map.jsx";
 
+const testCenter = [53.3, 4.872];
+
 const testOffers = [{
   id: `1`,
   location: [52.3709553943508, 4.90309666406198],
@@ -28,7 +30,8 @@ describe(`Map Component rendering`, () => {
   it(`Map Component should render correctly`, () => {
     const tree = renderer
       .create(<Map
-        offers = {testOffers}
+        center={testCenter}
+        offers={testOffers}
       />, {
         createNodeMock: () => document.createElement(`div`)
       })

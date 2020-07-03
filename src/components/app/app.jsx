@@ -34,6 +34,7 @@ class App extends PureComponent {
           <Route exact path="/offer">
             <Offer
               place={offers[0]}
+              nearbyPlaces={offers.slice(1, 4)}
             />
           </Route>
         </Switch>
@@ -60,10 +61,13 @@ class App extends PureComponent {
           />
         );
       case Screen.OFFER:
-        const offer = offers.find(({id}) => id === this.state.id);
+        const offerIndex = offers.findIndex(({id}) => id === this.state.id);
+        const nearbyPlaces = [...offers.slice(0, offerIndex), ...offers.slice(offerIndex + 1)];
+
         return (
           <Offer
-            place={offer}
+            place={offers[offerIndex]}
+            nearbyPlaces={nearbyPlaces}
           />
         );
       default:

@@ -560,7 +560,16 @@ exports[`Offer Component rendering Offer Component should render correctly 1`] =
       </div>
       <section
         className="property__map map"
-      />
+      >
+        <div
+          id="map"
+          style={
+            Object {
+              "height": "100%",
+            }
+          }
+        />
+      </section>
     </section>
     <div
       className="container"

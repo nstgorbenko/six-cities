@@ -4,6 +4,8 @@ import React from "react";
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
 
+const MAP_CENTER = [52.38333, 4.9];
+
 const Main = (props) => {
   const {offers, onPlaceCardNameClick} = props;
 
@@ -96,9 +98,12 @@ const Main = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <Map
-                offers={offers}
-              />
+              <section className="cities__map map">
+                <Map
+                  center={MAP_CENTER}
+                  offers={offers}
+                />
+              </section>
             </div>
           </div>
         </div>
