@@ -20,6 +20,21 @@ const testOffers = [{
     isSuper: true
   },
   rating: 4,
+  reviews: [{
+    id: `11`,
+    userName: `Alex`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 3.4,
+    text: `Just perfect.`,
+    time: `2020-03-15T22:55:56.845Z`,
+  }, {
+    id: `12`,
+    userName: `Luke`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 5.0,
+    text: `Great hospitality, and the breakfast in the morning was a nice touch.`,
+    time: `2019-12-05T22:55:56.845Z`,
+  }],
   isPremium: false,
   isFavorite: true,
 }, {
@@ -40,6 +55,21 @@ const testOffers = [{
     isSuper: true
   },
   rating: 4,
+  reviews: [{
+    id: `21`,
+    userName: `Egor`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 3.9,
+    text: `The apartment itself is cozy, quite and clean, moreover it has everything you need.`,
+    time: `2019-08-15T22:55:56.845Z`,
+  }, {
+    id: `22`,
+    userName: `Matt`,
+    userAvatar: `img/avatar-max.jpg`,
+    rating: 4.7,
+    text: `Amazing hosts, close to metro and the ferry, really clean and quiet attic room. Couldn’t ask for a better spot!`,
+    time: `2019-10-05T22:55:56.845Z`,
+  }],
   isPremium: true,
   isFavorite: false,
 }];

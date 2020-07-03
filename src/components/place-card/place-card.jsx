@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {OFFER_TYPES} from "../../const.js";
-import {capitalizeWord, getRatingPercent} from "../../utils.js";
+import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 
 const FAVORITE_CLASS = `place-card__bookmark-button--active`;
 
