@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {CardType} from "../../const.js";
+import {CardType, MapType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import {offerType} from "../../types.js";
 
@@ -166,6 +166,7 @@ const Offer = (props) => {
           </div>
           <section className="property__map map">
             <Map
+              type={MapType.OFFER}
               center={location}
               offers={nearbyPlaces}
             />
