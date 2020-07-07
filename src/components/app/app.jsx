@@ -77,11 +77,11 @@ class App extends PureComponent {
             {this._renderApp}
           </Route>
           <Route exact path="/offer">
-            <Offer
+            {offers.length && <Offer
               place={offers[0]}
               nearbyPlaces={offers.slice(1, 4)}
               onPlaceCardNameClick={this._handlePlaceCardNameClick}
-            />
+            />}
           </Route>
         </Switch>
       </BrowserRouter>
