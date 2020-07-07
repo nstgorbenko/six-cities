@@ -1,11 +1,17 @@
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
-import {offerType} from "../../types.js";
-
+import {ActionCreator} from "../../reducer.js";
+import {CITIES} from "../../const.js";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
+import {offerType} from "../../types.js";
+
+const getCityOffers = (chosenCity, offers) => {
+  return offers.filter(({city}) => city === chosenCity);
+};
 
 const Screen = {
   DEFAULT: `default`,
@@ -24,27 +30,6 @@ class App extends PureComponent {
     this._renderApp = this._renderApp.bind(this);
   }
 
-  render() {
-    const {offers} = this.props;
-
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp}
-          </Route>
-          <Route exact path="/offer">
-            <Offer
-              place={offers[0]}
-              nearbyPlaces={offers.slice(1, 4)}
-              onPlaceCardNameClick={this._handlePlaceCardNameClick}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-
   _handlePlaceCardNameClick(id) {
     this.setState({
       screen: `offer`,
@@ -53,14 +38,17 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {offers} = this.props;
+    const {city, offers, onCityChange} = this.props;
 
     switch (this.state.screen) {
       case Screen.DEFAULT:
         return (
           <Main
+            activeCity={city}
+            cities={CITIES}
             offers={offers}
             onPlaceCardNameClick={this._handlePlaceCardNameClick}
+            onCityNameClick={onCityChange}
           />
         );
       case Screen.OFFER:
@@ -78,10 +66,45 @@ class App extends PureComponent {
         return null;
     }
   }
+
+  render() {
+    const {offers} = this.props;
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp}
+          </Route>
+          <Route exact path="/offer">
+            {offers.length && <Offer
+              place={offers[0]}
+              nearbyPlaces={offers.slice(1, 4)}
+              onPlaceCardNameClick={this._handlePlaceCardNameClick}
+            />}
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
+  }
 }
 
 App.propTypes = {
+  city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  onCityChange: PropTypes.func.isRequired,
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  city: state.city,
+  offers: getCityOffers(state.city, state.offers),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCityChange(city) {
+    dispatch(ActionCreator.changeCity(city));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

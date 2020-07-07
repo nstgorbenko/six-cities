@@ -57,3 +57,5 @@ export const testPlaces = [{
   isPremium: true,
   isFavorite: false,
 }];
+
+export const testCities = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
