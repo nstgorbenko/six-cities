@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {CardType, MapType} from "../../const.js";
+import {CardType, MapType, SortType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import {offerType} from "../../types.js";
 
@@ -178,6 +178,7 @@ const Offer = (props) => {
             <PlacesList
               type={CardType.NEAR_PLACES}
               places={nearbyPlaces}
+              sortType={SortType.POPULAR}
               onPlaceCardNameClick={onPlaceCardNameClick}
             />
           </section>

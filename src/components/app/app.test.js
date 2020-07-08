@@ -10,7 +10,9 @@ describe(`App Component rendering`, () => {
       .create(<App
         city="Amsterdam"
         offers={testPlaces}
+        sortType="Popular"
         onCityChange={() => {}}
+        onSortTypeChange={() => {}}
       />, {
         createNodeMock: () => document.createElement(`div`)
       })

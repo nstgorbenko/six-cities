@@ -11,8 +11,10 @@ describe(`Main Component rendering`, () => {
         activeCity="Amsterdam"
         cities={testCities}
         offers = {testPlaces}
+        sortType="Popular"
         onPlaceCardNameClick = {() => {}}
         onCityNameClick = {() => {}}
+        onSortTypeChange={() => {}}
       />, {
         createNodeMock: () => document.createElement(`div`)
       })

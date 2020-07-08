@@ -38,7 +38,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {city, offers, onCityChange} = this.props;
+    const {city, offers, sortType, onCityChange, onSortTypeChange} = this.props;
 
     switch (this.state.screen) {
       case Screen.DEFAULT:
@@ -47,8 +47,11 @@ class App extends PureComponent {
             activeCity={city}
             cities={CITIES}
             offers={offers}
+            sortType={sortType}
+
             onPlaceCardNameClick={this._handlePlaceCardNameClick}
             onCityNameClick={onCityChange}
+            onSortTypeChange={onSortTypeChange}
           />
         );
       case Screen.OFFER:
@@ -92,17 +95,23 @@ class App extends PureComponent {
 App.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  sortType: PropTypes.string.isRequired,
   onCityChange: PropTypes.func.isRequired,
+  onSortTypeChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: getCityOffers(state.city, state.offers),
+  sortType: state.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
     dispatch(ActionCreator.changeCity(city));
+  },
+  onSortTypeChange(sortType) {
+    dispatch(ActionCreator.changeSortType(sortType));
   },
 });
 

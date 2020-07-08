@@ -17,8 +17,10 @@ describe(`Places names click test`, () => {
       activeCity="Amsterdam"
       cities={testCities}
       offers = {testPlaces}
+      sortType="Popular"
       onPlaceCardNameClick={onPlaceCardNameClick}
       onCityNameClick={() => {}}
+      onSortTypeChange={() => {}}
     />);
 
     const placesNames = main.find(`.place-card__name a`);

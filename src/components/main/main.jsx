@@ -4,12 +4,13 @@ import React from "react";
 import {CardType, CityNameToCoords, MapType} from "../../const.js";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from '../map/map.jsx';
+import NoPlaces from "../no-places/no-places.jsx";
 import {offerType} from "../../types.js";
 import PlacesList from "../places-list/places-list.jsx";
-import NoPlaces from "../no-places/no-places.jsx";
+import Sort from "../sort/sort.jsx";
 
 const Main = (props) => {
-  const {activeCity, cities, offers, onPlaceCardNameClick, onCityNameClick} = props;
+  const {activeCity, cities, offers, sortType, onPlaceCardNameClick, onCityNameClick, onSortTypeChange} = props;
 
   return (
     <div className="page page--gray page--main">
@@ -41,6 +42,7 @@ const Main = (props) => {
         <CitiesList
           activeCity={activeCity}
           cities={cities}
+          sortType={sortType}
           onCityNameClick={onCityNameClick}
         />
         <div className="cities">
@@ -49,24 +51,14 @@ const Main = (props) => {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {activeCity}</b>
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-                  <span className="places__sorting-type" tabIndex="0">
-                    Popular
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                    <li className="places__option" tabIndex="0">Price: low to high</li>
-                    <li className="places__option" tabIndex="0">Price: high to low</li>
-                    <li className="places__option" tabIndex="0">Top rated first</li>
-                  </ul>
-                </form>
+                <Sort
+                  activeType={sortType}
+                  onChange={onSortTypeChange}
+                />
                 <PlacesList
                   type={CardType.CITIES}
                   places={offers}
+                  sortType={sortType}
                   onPlaceCardNameClick={onPlaceCardNameClick}
                 />
               </section>
@@ -91,8 +83,10 @@ Main.propTypes = {
   activeCity: PropTypes.string.isRequired,
   cities: PropTypes.arrayOf(PropTypes.string).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  sortType: PropTypes.string.isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,
   onCityNameClick: PropTypes.func.isRequired,
+  onSortTypeChange: PropTypes.func.isRequired,
 };
 
 export default Main;
