@@ -23,7 +23,7 @@ const PlaceCard = (props) => {
   return (
     <article className={`${articleClassName} place-card`}
       onMouseEnter={() => onHover(id)}
-      onMouseLeave={() => onHover(null)}
+      onMouseLeave={() => onHover(``)}
     >
       {isCardMark &&
         <div className="place-card__mark">

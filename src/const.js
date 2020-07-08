@@ -14,11 +14,6 @@ export const CityNameToCoords = {
   'Dusseldorf': [51.238596, 6.814350],
 };
 
-export const MapType = {
-  CITY: `city`,
-  OFFER: `offer`,
-};
-
 export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 
 export const SortType = {

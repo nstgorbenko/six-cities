@@ -2,7 +2,6 @@ import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
-import {MapType} from "../../const.js";
 import {offerType} from "../../types.js";
 
 const MAP_ZOOM = 12;
@@ -44,7 +43,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.center !== prevProps.center) {
+    if (this.props.center !== prevProps.center || this.props.activeOffer !== prevProps.activeOffer) {
       this._updateMap();
     }
   }
@@ -55,18 +54,14 @@ class Map extends PureComponent {
   }
 
   _addMarkers() {
-    const {offers, type, center} = this.props;
+    const {offers, activeOffer} = this.props;
+
     const icon = leaflet.icon(MarkerSettings.DEFAULT);
     const mainIcon = leaflet.icon(MarkerSettings.ACTIVE);
 
-    if (type === MapType.OFFER) {
-      const mainMarker = leaflet.marker(center, {icon: mainIcon});
-      mainMarker.addTo(this._map);
-      this._markers.push(mainMarker);
-    }
-
-    offers.forEach(({location}) => {
-      const marker = leaflet.marker(location, {icon});
+    offers.forEach(({id, location}) => {
+      const iconType = id === activeOffer ? mainIcon : icon;
+      const marker = leaflet.marker(location, {icon: iconType});
       marker.addTo(this._map);
       this._markers.push(marker);
     });
@@ -94,9 +89,9 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  type: PropTypes.oneOf(Object.values(MapType)).isRequired,
   center: PropTypes.arrayOf(PropTypes.number).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  activeOffer: PropTypes.string.isRequired,
 };
 
 export default Map;

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import {CardType, MapType, SortType} from "../../const.js";
+import {CardType, SortType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import {offerType} from "../../types.js";
 
@@ -15,10 +15,11 @@ const ClassName = {
 };
 
 const Offer = (props) => {
-  const {place, nearbyPlaces, onPlaceCardNameClick} = props;
-  const {location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, reviews, isPremium, isFavorite} = place;
+  const {place, allPlaces, onPlaceCardNameClick} = props;
+  const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, reviews, isPremium, isFavorite} = place;
   const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
+  const nearbyPlaces = allPlaces.filter((currentPlace) => currentPlace.id !== id);
   const ratingPercent = getRatingPercent(rating);
   const placeType = capitalizeWord(type);
 
@@ -166,9 +167,9 @@ const Offer = (props) => {
           </div>
           <section className="property__map map">
             <Map
-              type={MapType.OFFER}
               center={location}
-              offers={nearbyPlaces}
+              offers={allPlaces}
+              activeOffer={id}
             />
           </section>
         </section>
@@ -180,6 +181,7 @@ const Offer = (props) => {
               places={nearbyPlaces}
               sortType={SortType.POPULAR}
               onPlaceCardNameClick={onPlaceCardNameClick}
+              onPlaceCardHover={() => {}}
             />
           </section>
         </div>
@@ -190,7 +192,7 @@ const Offer = (props) => {
 
 Offer.propTypes = {
   place: PropTypes.shape(offerType).isRequired,
-  nearbyPlaces: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  allPlaces: PropTypes.arrayOf(PropTypes.shape).isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,
 };
 

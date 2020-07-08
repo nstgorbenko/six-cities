@@ -55,13 +55,12 @@ class App extends PureComponent {
           />
         );
       case Screen.OFFER:
-        const offerIndex = offers.findIndex(({id}) => id === this.state.id);
-        const nearbyPlaces = [...offers.slice(0, offerIndex), ...offers.slice(offerIndex + 1)];
+        const currentOffer = offers.find(({id}) => id === this.state.id);
 
         return (
           <Offer
-            place={offers[offerIndex]}
-            nearbyPlaces={nearbyPlaces}
+            place={currentOffer}
+            allPlaces={offers}
             onPlaceCardNameClick={this._handlePlaceCardNameClick}
           />
         );
@@ -82,7 +81,7 @@ class App extends PureComponent {
           <Route exact path="/offer">
             {offers.length && <Offer
               place={offers[0]}
-              nearbyPlaces={offers.slice(1, 4)}
+              allPlaces={offers.slice(0, 4)}
               onPlaceCardNameClick={this._handlePlaceCardNameClick}
             />}
           </Route>

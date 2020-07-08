@@ -8,7 +8,7 @@ class Sort extends PureComponent {
     super(props);
 
     this.state = {
-      open: false,
+      isOpen: false,
     };
 
     this._handleSortListClick = this._handleSortListClick.bind(this);
@@ -17,7 +17,7 @@ class Sort extends PureComponent {
 
   _handleSortListClick() {
     this.setState((prevState) => ({
-      open: !prevState.open,
+      isOpen: !prevState.isOpen,
     }));
   }
 
@@ -28,7 +28,7 @@ class Sort extends PureComponent {
   }
 
   render() {
-    const {open: isOpen} = this.state;
+    const {isOpen} = this.state;
     const {activeType} = this.props;
 
     const openListClassName = isOpen ? `places__options--opened` : ``;
