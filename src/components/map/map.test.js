@@ -8,9 +8,9 @@ describe(`Map Component rendering`, () => {
   it(`Map Component should render correctly`, () => {
     const tree = renderer
       .create(<Map
-        type="city"
         center={[53.3, 4.872]}
         offers={testPlaces}
+        activeOffer={testPlaces[0].id}
       />, {
         createNodeMock: () => document.createElement(`div`)
       })

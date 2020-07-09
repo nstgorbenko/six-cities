@@ -9,7 +9,7 @@ describe(`Offer Component rendering`, () => {
     const tree = renderer
       .create(<Offer
         place={testPlaces[0]}
-        nearbyPlaces={testPlaces}
+        allPlaces={testPlaces}
         onPlaceCardNameClick={() => {}}
       />, {
         createNodeMock: () => document.createElement(`div`)

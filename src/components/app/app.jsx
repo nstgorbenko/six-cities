@@ -38,7 +38,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {city, offers, onCityChange} = this.props;
+    const {city, offers, sortType, onCityChange} = this.props;
 
     switch (this.state.screen) {
       case Screen.DEFAULT:
@@ -47,18 +47,19 @@ class App extends PureComponent {
             activeCity={city}
             cities={CITIES}
             offers={offers}
+            sortType={sortType}
+
             onPlaceCardNameClick={this._handlePlaceCardNameClick}
             onCityNameClick={onCityChange}
           />
         );
       case Screen.OFFER:
-        const offerIndex = offers.findIndex(({id}) => id === this.state.id);
-        const nearbyPlaces = [...offers.slice(0, offerIndex), ...offers.slice(offerIndex + 1)];
+        const currentOffer = offers.find(({id}) => id === this.state.id);
 
         return (
           <Offer
-            place={offers[offerIndex]}
-            nearbyPlaces={nearbyPlaces}
+            place={currentOffer}
+            allPlaces={offers}
             onPlaceCardNameClick={this._handlePlaceCardNameClick}
           />
         );
@@ -79,7 +80,7 @@ class App extends PureComponent {
           <Route exact path="/offer">
             {offers.length && <Offer
               place={offers[0]}
-              nearbyPlaces={offers.slice(1, 4)}
+              allPlaces={offers.slice(0, 4)}
               onPlaceCardNameClick={this._handlePlaceCardNameClick}
             />}
           </Route>
@@ -92,12 +93,14 @@ class App extends PureComponent {
 App.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  sortType: PropTypes.string.isRequired,
   onCityChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: getCityOffers(state.city, state.offers),
+  sortType: state.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({

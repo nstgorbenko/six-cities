@@ -16,7 +16,9 @@ export const CityNameToCoords = {
 
 export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 
-export const MapType = {
-  CITY: `city`,
-  OFFER: `offer`,
+export const SortType = {
+  POPULAR: `Popular`,
+  PRICE_TO_HIGH: `Price: low to high`,
+  PRICE_TO_LOW: `Price: high to low`,
+  TOP_RATED: `Top rated first`,
 };

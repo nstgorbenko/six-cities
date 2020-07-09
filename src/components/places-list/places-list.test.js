@@ -10,7 +10,9 @@ describe(`PlacesList Component rendering`, () => {
       .create(<PlacesList
         type="cities"
         places={testPlaces}
+        sortType="Popular"
         onPlaceCardNameClick={() => {}}
+        onPlaceCardHover={() => {}}
       />)
       .toJSON();
 
