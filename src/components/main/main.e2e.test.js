@@ -25,10 +25,12 @@ describe(`Places names click test`, () => {
       <Main
         activeCity="Amsterdam"
         cities={testCities}
-        offers = {testPlaces}
+        offers={testPlaces}
         sortType="Popular"
+        activeOffer=""
         onPlaceCardNameClick={onPlaceCardNameClick}
         onCityNameClick={() => {}}
+        onPlaceCardHover={() => {}}
       />
     </Provider>);
 

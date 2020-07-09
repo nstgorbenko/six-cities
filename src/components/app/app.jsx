@@ -21,7 +21,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {city, offers, sortType, screen, activeOffer, onCityChange, onScreenChange} = this.props;
+    const {city, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
 
     switch (screen) {
       case ScreenType.DEFAULT:
@@ -31,9 +31,11 @@ class App extends PureComponent {
             cities={CITIES}
             offers={offers}
             sortType={sortType}
+            activeOffer={activeOffer}
 
             onPlaceCardNameClick={onScreenChange}
             onCityNameClick={onCityChange}
+            onPlaceCardHover={onActiveOfferChange}
           />
         );
       case ScreenType.OFFER:
@@ -81,6 +83,7 @@ App.propTypes = {
   activeOffer: PropTypes.string.isRequired,
   onCityChange: PropTypes.func.isRequired,
   onScreenChange: PropTypes.func.isRequired,
+  onActiveOfferChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -95,9 +98,12 @@ const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
     dispatch(ActionCreator.changeCity(city));
   },
-  onScreenChange(screenType, activeOffer) {
-    dispatch(ActionCreator.changeActiveOffer(activeOffer));
+  onScreenChange(screenType, activeOfferId) {
+    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
     dispatch(ActionCreator.changeScreenType(screenType));
+  },
+  onActiveOfferChange(activeOfferId) {
+    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
   },
 });
 

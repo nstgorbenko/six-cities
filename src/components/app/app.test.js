@@ -25,6 +25,7 @@ describe(`App Component rendering`, () => {
           activeOffer=""
           onCityChange={() => {}}
           onScreenChange={() => {}}
+          onActiveOfferChange={() => {}}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)
