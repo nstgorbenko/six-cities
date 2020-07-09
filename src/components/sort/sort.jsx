@@ -9,39 +9,28 @@ class Sort extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isOpen: false,
-    };
-
-    this._handleSortListClick = this._handleSortListClick.bind(this);
-    this._handleSortTypeClick = this._handleSortTypeClick.bind(this);
+    this._handleSortItemClick = this._handleSortItemClick.bind(this);
   }
 
-  _handleSortListClick() {
-    this.setState((prevState) => ({
-      isOpen: !prevState.isOpen,
-    }));
-  }
+  _handleSortItemClick(evt) {
+    const {onSortTypeChange, onActiveChange: onMenuToggle} = this.props;
 
-  _handleSortTypeClick(evt) {
-    const {onChange} = this.props;
-    onChange(evt.target.dataset.sortType);
-    this._handleSortListClick();
+    onSortTypeChange(evt.target.dataset.sortType);
+    onMenuToggle();
   }
 
   render() {
-    const {isOpen} = this.state;
-    const {activeType} = this.props;
+    const {activeSortType, isActive: isMenuOpen, onActiveChange: onMenuToggle} = this.props;
 
-    const openListClassName = isOpen ? `places__options--opened` : ``;
+    const openListClassName = isMenuOpen ? `places__options--opened` : ``;
 
     return (
       <form className="places__sorting" action="#" method="get">
         <span className="places__sorting-caption">Sort by</span>
         <span className="places__sorting-type" tabIndex="0"
-          onClick={() => this._handleSortListClick()}
+          onClick={onMenuToggle}
         >
-          {activeType}
+          {activeSortType}
           <svg className="places__sorting-arrow" width="7" height="4">
             <use xlinkHref="#icon-arrow-select"></use>
           </svg>
@@ -50,9 +39,9 @@ class Sort extends PureComponent {
           {Object.values(SortType).map((sortType) =>
             <li tabIndex="0"
               key={sortType}
-              className={`places__option ${sortType === activeType ? `places__option--active` : ``}`}
+              className={`places__option ${sortType === activeSortType ? `places__option--active` : ``}`}
               data-sort-type={sortType}
-              onClick={(evt) => this._handleSortTypeClick(evt)}
+              onClick={(evt) => this._handleSortItemClick(evt)}
             >{sortType}</li>
           )}
         </ul>
@@ -62,16 +51,18 @@ class Sort extends PureComponent {
 }
 
 Sort.propTypes = {
-  activeType: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
+  activeSortType: PropTypes.string.isRequired,
+  onSortTypeChange: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired,
+  onActiveChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  activeType: state.sortType,
+  activeSortType: state.sortType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onChange(sortType) {
+  onSortTypeChange(sortType) {
     dispatch(ActionCreator.changeSortType(sortType));
   },
 });

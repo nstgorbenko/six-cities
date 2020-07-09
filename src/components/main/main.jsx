@@ -8,9 +8,11 @@ import NoPlaces from "../no-places/no-places.jsx";
 import {offerType} from "../../types.js";
 import PlacesList from "../places-list/places-list.jsx";
 import Sort from "../sort/sort.jsx";
+import withActiveFlag from "../../hocs/with-active-flag/with-active-flag.js";
 
 const Main = (props) => {
   const {activeCity, cities, offers, sortType, activeOffer, onPlaceCardNameClick, onCityNameClick, onPlaceCardHover} = props;
+  const SortWrapped = withActiveFlag(Sort);
 
   return (
     <div className="page page--gray page--main">
@@ -51,7 +53,7 @@ const Main = (props) => {
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
                 <b className="places__found">{offers.length} places to stay in {activeCity}</b>
-                <Sort />
+                <SortWrapped />
                 <PlacesList
                   type={CardType.CITIES}
                   places={offers}

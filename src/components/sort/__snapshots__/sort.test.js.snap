@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Sort Component rendering Sort Component should render correctly 1`] = `
+exports[`Sort Component rendering should render correctly 1`] = `
 <form
   action="#"
   className="places__sorting"

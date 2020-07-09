@@ -1,14 +1,16 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import {Sort} from "./sort.jsx";
+import withActiveFlag from "./with-active-flag.js";
 
-describe(`Sort Component rendering`, () => {
+const MockComponent = () => <div />;
+
+describe(`withActiveFlag HOC rendering`, () => {
   it(`should render correctly`, () => {
+    const MockComponentWrapped = withActiveFlag(MockComponent);
+
     const tree = renderer
-      .create(<Sort
-        activeSortType="Popular"
-        onSortTypeChange={() => {}}
+      .create(<MockComponentWrapped
         isActive={false}
         onActiveChange={() => {}}
       />)
