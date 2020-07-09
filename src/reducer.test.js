@@ -5,16 +5,18 @@ const testInitialState = {
   city: `Paris`,
   offers,
   sortType: `Popular`,
+  screen: `default`,
+  activeOffer: ``,
 };
 
 describe(`Reducer work properly`, () => {
-  it(`Reducer should return initial state without additional parameters`, () => {
+  it(`returns initial state without additional parameters`, () => {
     const initialReducer = reducer(undefined, {});
 
     expect(initialReducer).toEqual(testInitialState);
   });
 
-  it(`Reducer should change city with given value`, () => {
+  it(`change city with given value`, () => {
     expect(reducer(testInitialState, {
       type: ActionType.CHANGE_CITY,
       payload: `Amsterdam`,
@@ -22,10 +24,12 @@ describe(`Reducer work properly`, () => {
       city: `Amsterdam`,
       offers,
       sortType: `Popular`,
+      screen: `default`,
+      activeOffer: ``,
     });
   });
 
-  it(`Reducer should change sort type with given value`, () => {
+  it(`change sort type with given value`, () => {
     expect(reducer(testInitialState, {
       type: ActionType.CHANGE_SORT_TYPE,
       payload: `Top rated first`,
@@ -33,22 +37,38 @@ describe(`Reducer work properly`, () => {
       city: `Paris`,
       offers,
       sortType: `Top rated first`,
+      screen: `default`,
+      activeOffer: ``,
     });
   });
 });
 
 describe(`Action creators work properly`, () => {
-  it(`Action creator changing city returns action with city in payload`, () => {
+  it(`returns action with city in payload`, () => {
     expect(ActionCreator.changeCity(`Amsterdam`)).toEqual({
       type: ActionType.CHANGE_CITY,
       payload: `Amsterdam`,
     });
   });
 
-  it(`Action creator changing sort type returns action with sort type in payload`, () => {
+  it(`returns action with sort type in payload`, () => {
     expect(ActionCreator.changeSortType(`Top rated first`)).toEqual({
       type: ActionType.CHANGE_SORT_TYPE,
       payload: `Top rated first`,
+    });
+  });
+
+  it(`returns action with offer id in payload`, () => {
+    expect(ActionCreator.changeActiveOffer(`101`)).toEqual({
+      type: ActionType.CHANGE_ACTIVE_OFFER,
+      payload: `101`,
+    });
+  });
+
+  it(`returns action with screen type in payload`, () => {
+    expect(ActionCreator.changeScreenType(`OFFER`)).toEqual({
+      type: ActionType.CHANGE_SCREEN_TYPE,
+      payload: `OFFER`,
     });
   });
 });

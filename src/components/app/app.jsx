@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
 import {ActionCreator} from "../../reducer.js";
-import {CITIES} from "../../const.js";
+import {CITIES, ScreenType} from "../../const.js";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
 import {offerType} from "../../types.js";
@@ -13,16 +13,11 @@ const getCityOffers = (chosenCity, offers) => {
   return offers.filter(({city}) => city === chosenCity);
 };
 
-const Screen = {
-  DEFAULT: `default`,
-  OFFER: `offer`
-};
-
 class App extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      screen: Screen.DEFAULT,
+      screen: ScreenType.DEFAULT,
       id: ``
     };
 
@@ -32,7 +27,7 @@ class App extends PureComponent {
 
   _handlePlaceCardNameClick(id) {
     this.setState({
-      screen: `offer`,
+      screen: ScreenType.OFFER,
       id
     });
   }
@@ -41,7 +36,7 @@ class App extends PureComponent {
     const {city, offers, sortType, onCityChange} = this.props;
 
     switch (this.state.screen) {
-      case Screen.DEFAULT:
+      case ScreenType.DEFAULT:
         return (
           <Main
             activeCity={city}
@@ -53,7 +48,7 @@ class App extends PureComponent {
             onCityNameClick={onCityChange}
           />
         );
-      case Screen.OFFER:
+      case ScreenType.OFFER:
         const currentOffer = offers.find(({id}) => id === this.state.id);
 
         return (
