@@ -21,7 +21,10 @@ describe(`App Component rendering`, () => {
           city="Amsterdam"
           offers={testPlaces}
           sortType="Popular"
+          screen="default"
+          activeOffer=""
           onCityChange={() => {}}
+          onScreenChange={() => {}}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)

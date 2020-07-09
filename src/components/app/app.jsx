@@ -16,26 +16,14 @@ const getCityOffers = (chosenCity, offers) => {
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      screen: ScreenType.DEFAULT,
-      id: ``
-    };
 
-    this._handlePlaceCardNameClick = this._handlePlaceCardNameClick.bind(this);
     this._renderApp = this._renderApp.bind(this);
   }
 
-  _handlePlaceCardNameClick(id) {
-    this.setState({
-      screen: ScreenType.OFFER,
-      id
-    });
-  }
-
   _renderApp() {
-    const {city, offers, sortType, onCityChange} = this.props;
+    const {city, offers, sortType, screen, activeOffer, onCityChange, onScreenChange} = this.props;
 
-    switch (this.state.screen) {
+    switch (screen) {
       case ScreenType.DEFAULT:
         return (
           <Main
@@ -44,18 +32,18 @@ class App extends PureComponent {
             offers={offers}
             sortType={sortType}
 
-            onPlaceCardNameClick={this._handlePlaceCardNameClick}
+            onPlaceCardNameClick={onScreenChange}
             onCityNameClick={onCityChange}
           />
         );
       case ScreenType.OFFER:
-        const currentOffer = offers.find(({id}) => id === this.state.id);
+        const currentOffer = offers.find(({id}) => id === activeOffer);
 
         return (
           <Offer
             place={currentOffer}
             allPlaces={offers}
-            onPlaceCardNameClick={this._handlePlaceCardNameClick}
+            onPlaceCardNameClick={onScreenChange}
           />
         );
       default:
@@ -64,7 +52,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, onScreenChange} = this.props;
 
     return (
       <BrowserRouter>
@@ -76,7 +64,7 @@ class App extends PureComponent {
             {offers.length && <Offer
               place={offers[0]}
               allPlaces={offers.slice(0, 4)}
-              onPlaceCardNameClick={this._handlePlaceCardNameClick}
+              onPlaceCardNameClick={onScreenChange}
             />}
           </Route>
         </Switch>
@@ -89,18 +77,27 @@ App.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
+  screen: PropTypes.string.isRequired,
+  activeOffer: PropTypes.string.isRequired,
   onCityChange: PropTypes.func.isRequired,
+  onScreenChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: getCityOffers(state.city, state.offers),
   sortType: state.sortType,
+  screen: state.screen,
+  activeOffer: state.activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
     dispatch(ActionCreator.changeCity(city));
+  },
+  onScreenChange(screenType, activeOffer) {
+    dispatch(ActionCreator.changeActiveOffer(activeOffer));
+    dispatch(ActionCreator.changeScreenType(screenType));
   },
 });
 
