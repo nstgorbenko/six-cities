@@ -27,7 +27,7 @@ class Main extends PureComponent {
   }
 
   render() {
-    const {activeCity, cities, offers, sortType, onPlaceCardNameClick, onCityNameClick, onSortTypeChange} = this.props;
+    const {activeCity, cities, offers, sortType, onPlaceCardNameClick, onCityNameClick} = this.props;
     const {activeCard} = this.state;
 
     return (
@@ -69,10 +69,7 @@ class Main extends PureComponent {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{offers.length} places to stay in {activeCity}</b>
-                  <Sort
-                    activeType={sortType}
-                    onChange={onSortTypeChange}
-                  />
+                  <Sort />
                   <PlacesList
                     type={CardType.CITIES}
                     places={offers}
@@ -106,7 +103,6 @@ Main.propTypes = {
   sortType: PropTypes.string.isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,
   onCityNameClick: PropTypes.func.isRequired,
-  onSortTypeChange: PropTypes.func.isRequired,
 };
 
 export default Main;

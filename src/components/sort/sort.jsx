@@ -1,6 +1,8 @@
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
+import {ActionCreator} from "../../reducer.js";
 import {SortType} from "../../const.js";
 
 class Sort extends PureComponent {
@@ -64,4 +66,15 @@ Sort.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default Sort;
+const mapStateToProps = (state) => ({
+  activeType: state.sortType,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onChange(sortType) {
+    dispatch(ActionCreator.changeSortType(sortType));
+  },
+});
+
+export {Sort};
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

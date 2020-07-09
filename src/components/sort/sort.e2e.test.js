@@ -2,7 +2,7 @@ import React from "react";
 import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import Sort from "./sort.jsx";
+import {Sort} from "./sort.jsx";
 import {SortType} from "../../const.js";
 
 configure({
