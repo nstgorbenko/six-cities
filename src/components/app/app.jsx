@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
 import {ActionCreator} from "../../reducer.js";
-import {CITIES} from "../../const.js";
+import {CITIES, ScreenType} from "../../const.js";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
 import {offerType} from "../../types.js";
@@ -13,54 +13,39 @@ const getCityOffers = (chosenCity, offers) => {
   return offers.filter(({city}) => city === chosenCity);
 };
 
-const Screen = {
-  DEFAULT: `default`,
-  OFFER: `offer`
-};
-
 class App extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = {
-      screen: Screen.DEFAULT,
-      id: ``
-    };
 
-    this._handlePlaceCardNameClick = this._handlePlaceCardNameClick.bind(this);
     this._renderApp = this._renderApp.bind(this);
   }
 
-  _handlePlaceCardNameClick(id) {
-    this.setState({
-      screen: `offer`,
-      id
-    });
-  }
-
   _renderApp() {
-    const {city, offers, sortType, onCityChange} = this.props;
+    const {city, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
 
-    switch (this.state.screen) {
-      case Screen.DEFAULT:
+    switch (screen) {
+      case ScreenType.DEFAULT:
         return (
           <Main
             activeCity={city}
             cities={CITIES}
             offers={offers}
             sortType={sortType}
+            activeOffer={activeOffer}
 
-            onPlaceCardNameClick={this._handlePlaceCardNameClick}
+            onPlaceCardNameClick={onScreenChange}
             onCityNameClick={onCityChange}
+            onPlaceCardHover={onActiveOfferChange}
           />
         );
-      case Screen.OFFER:
-        const currentOffer = offers.find(({id}) => id === this.state.id);
+      case ScreenType.OFFER:
+        const currentOffer = offers.find(({id}) => id === activeOffer);
 
         return (
           <Offer
             place={currentOffer}
             allPlaces={offers}
-            onPlaceCardNameClick={this._handlePlaceCardNameClick}
+            onPlaceCardNameClick={onScreenChange}
           />
         );
       default:
@@ -69,7 +54,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {offers} = this.props;
+    const {offers, onScreenChange} = this.props;
 
     return (
       <BrowserRouter>
@@ -81,7 +66,7 @@ class App extends PureComponent {
             {offers.length && <Offer
               place={offers[0]}
               allPlaces={offers.slice(0, 4)}
-              onPlaceCardNameClick={this._handlePlaceCardNameClick}
+              onPlaceCardNameClick={onScreenChange}
             />}
           </Route>
         </Switch>
@@ -94,18 +79,31 @@ App.propTypes = {
   city: PropTypes.string.isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
+  screen: PropTypes.string.isRequired,
+  activeOffer: PropTypes.string.isRequired,
   onCityChange: PropTypes.func.isRequired,
+  onScreenChange: PropTypes.func.isRequired,
+  onActiveOfferChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   city: state.city,
   offers: getCityOffers(state.city, state.offers),
   sortType: state.sortType,
+  screen: state.screen,
+  activeOffer: state.activeOffer,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
     dispatch(ActionCreator.changeCity(city));
+  },
+  onScreenChange(screenType, activeOfferId) {
+    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
+    dispatch(ActionCreator.changeScreenType(screenType));
+  },
+  onActiveOfferChange(activeOfferId) {
+    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
   },
 });
 

@@ -16,6 +16,11 @@ export const CityNameToCoords = {
 
 export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 
+export const ScreenType = {
+  DEFAULT: `default`,
+  OFFER: `offer`
+};
+
 export const SortType = {
   POPULAR: `Popular`,
   PRICE_TO_HIGH: `Price: low to high`,

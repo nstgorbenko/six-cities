@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {CardType} from "../../const.js";
+import {CardType, ScreenType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import {offerType} from "../../types.js";
 
@@ -56,7 +56,7 @@ const PlaceCard = (props) => {
         <h2 className="place-card__name">
           <a
             href="#"
-            onClick={() => onNameClick(id)}
+            onClick={() => onNameClick(ScreenType.OFFER, id)}
           >{name}</a>
         </h2>
         <p className="place-card__type">{placeType}</p>

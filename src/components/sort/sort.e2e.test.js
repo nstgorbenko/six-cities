@@ -11,18 +11,20 @@ configure({
 
 describe(`Sort working test`, () => {
   it(`Sort pass sort type name to callback when user click on this name`, () => {
-    const onChange = jest.fn();
+    const onSortTypeChange = jest.fn();
     const sortTypes = Object.assign(SortType);
 
     const sort = shallow(<Sort
-      activeType="Popular"
-      onChange={onChange}
+      activeSortType="Popular"
+      onSortTypeChange={onSortTypeChange}
+      isActive={false}
+      onActiveChange={() => {}}
     />);
 
     const secondSortTypeName = sort.find(`li`).at(1);
     secondSortTypeName.simulate(`click`, {target: {dataset: {sortType: sortTypes[1]}}});
 
-    expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith(sortTypes[1]);
+    expect(onSortTypeChange).toHaveBeenCalledTimes(1);
+    expect(onSortTypeChange).toHaveBeenCalledWith(sortTypes[1]);
   });
 });
