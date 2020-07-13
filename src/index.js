@@ -7,7 +7,7 @@ import thunk from "redux-thunk";
 
 import App from "./components/app/app.jsx";
 import createAPI from "./api.js";
-import {reducer} from "./reducer.js";
+import {reducer, Operation as DataOperation} from "./reducer.js";
 
 const api = createAPI(() => {});
 
@@ -16,6 +16,8 @@ const store = createStore(
     composeWithDevTools(
         applyMiddleware(thunk.withExtraArgument(api)))
 );
+
+store.dispatch(DataOperation.loadOffers());
 
 ReactDOM.render(
     <Provider store={store}>

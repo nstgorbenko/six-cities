@@ -1,11 +1,10 @@
-import allOffers from "./mocks/offers.js";
 import {SortType, ScreenType} from "./const.js";
 
 const initialCity = `Paris`;
 
 const initialState = {
   city: initialCity,
-  offers: allOffers,
+  offers: [],
   sortType: SortType.POPULAR,
   screen: ScreenType.DEFAULT,
   activeOffer: ``,
@@ -16,6 +15,7 @@ export const ActionType = {
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
   CHANGE_SCREEN_TYPE: `CHANGE_SCREEN_TYPE`,
+  LOAD_OFFERS: `LOAD_OFFERS`,
 };
 
 export const ActionCreator = {
@@ -38,6 +38,23 @@ export const ActionCreator = {
     type: ActionType.CHANGE_SCREEN_TYPE,
     payload: type,
   }),
+
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
+};
+
+export const Operation = {
+  loadOffers: () => (dispatch, getState, api) => {
+    return api.get(`/hotels`)
+      .then(({data}) => {
+        dispatch(ActionCreator.loadOffers(data));
+      })
+      .catch((error) => {
+        throw error;
+      });
+  },
 };
 
 export const reducer = (state = initialState, action) => {
@@ -57,6 +74,10 @@ export const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_SCREEN_TYPE:
       return Object.assign({}, state, {
         screen: action.payload,
+      });
+    case ActionType.LOAD_OFFERS:
+      return Object.assign({}, state, {
+        offers: action.payload,
       });
     default:
       return state;
