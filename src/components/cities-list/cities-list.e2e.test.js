@@ -3,7 +3,7 @@ import {configure, shallow} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import CitiesList from "./cities-list.jsx";
-import {testCities} from "../../test-data.js";
+import {testCity, testCities} from "../../test-data.js";
 
 configure({
   adapter: new Adapter()
@@ -14,7 +14,7 @@ describe(`CitiesList working test`, () => {
     const onClick = jest.fn();
 
     const citiesList = shallow(<CitiesList
-      activeCity="Paris"
+      activeCity={testCity}
       cities={testCities}
       onCityNameClick={onClick}
     />);

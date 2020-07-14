@@ -2,9 +2,8 @@ import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
-import {offerType} from "../../types.js";
+import {locationType, offerType} from "../../types.js";
 
-const MAP_ZOOM = 12;
 const MarkerSettings = {
   DEFAULT: {
     iconUrl: `img/pin.svg`,
@@ -26,12 +25,12 @@ class Map extends PureComponent {
   }
 
   componentDidMount() {
-    const {center} = this.props;
+    const {coordinates: center, zoom} = this.props.center;
     const mapContainer = this._mapRef.current;
 
     this._map = leaflet.map(mapContainer, {
       center,
-      zoom: MAP_ZOOM,
+      zoom,
       zoomControl: false,
       layers: [
         leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -61,7 +60,7 @@ class Map extends PureComponent {
 
     offers.forEach(({id, location}) => {
       const iconType = id === activeOffer ? mainIcon : icon;
-      const marker = leaflet.marker(location, {icon: iconType});
+      const marker = leaflet.marker(location.coordinates, {icon: iconType});
       marker.addTo(this._map);
       this._markers.push(marker);
     });
@@ -72,7 +71,7 @@ class Map extends PureComponent {
   }
 
   _updateMap() {
-    const {center} = this.props;
+    const {coordinates: center} = this.props.center;
 
     this._map.setView(center);
     this._removeMarkers();
@@ -89,9 +88,9 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  center: PropTypes.shape(locationType).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  activeOffer: PropTypes.string.isRequired,
+  activeOffer: PropTypes.number.isRequired,
 };
 
 export default Map;

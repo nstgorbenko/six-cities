@@ -1,13 +1,18 @@
-import {SortType, ScreenType} from "./const.js";
-
-const initialCity = `Paris`;
+import {SortType} from "./const.js";
+import {getOffers} from "./utils/adapter.js";
 
 const initialState = {
-  city: initialCity,
+  city: {
+    name: ``,
+    location: {
+      coordinates: [0, 0],
+      zoom: 0,
+    }
+  },
   offers: [],
   sortType: SortType.POPULAR,
-  screen: ScreenType.DEFAULT,
-  activeOffer: ``,
+  screen: ``,
+  activeOffer: 0,
 };
 
 export const ActionType = {
@@ -49,7 +54,9 @@ export const Operation = {
   loadOffers: () => (dispatch, getState, api) => {
     return api.get(`/hotels`)
       .then(({data}) => {
-        dispatch(ActionCreator.loadOffers(data));
+        const adaptedOffers = getOffers(data);
+        dispatch(ActionCreator.loadOffers(adaptedOffers));
+        return adaptedOffers;
       })
       .catch((error) => {
         throw error;

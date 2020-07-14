@@ -8,7 +8,7 @@ describe(`Map Component rendering`, () => {
   it(`Map Component should render correctly`, () => {
     const tree = renderer
       .create(<Map
-        center={[53.3, 4.872]}
+        center={testPlaces[0].location}
         offers={testPlaces}
         activeOffer={testPlaces[0].id}
       />, {

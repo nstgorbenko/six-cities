@@ -4,14 +4,11 @@ import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
 import {ActionCreator} from "../../reducer.js";
-import {CITIES, ScreenType} from "../../const.js";
+import {cityType, offerType} from "../../types.js";
+import {getCities, getCityOffers} from "../../utils/common.js";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
-import {offerType} from "../../types.js";
-
-const getCityOffers = (chosenCity, offers) => {
-  return offers.filter(({city}) => city === chosenCity);
-};
+import {ScreenType} from "../../const.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -21,14 +18,14 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {city, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
+    const {city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
 
     switch (screen) {
       case ScreenType.DEFAULT:
         return (
           <Main
             activeCity={city}
-            cities={CITIES}
+            cities={cities}
             offers={offers}
             sortType={sortType}
             activeOffer={activeOffer}
@@ -76,11 +73,12 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  city: PropTypes.string.isRequired,
+  city: PropTypes.shape(cityType).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
   screen: PropTypes.string.isRequired,
-  activeOffer: PropTypes.string.isRequired,
+  activeOffer: PropTypes.number.isRequired,
   onCityChange: PropTypes.func.isRequired,
   onScreenChange: PropTypes.func.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
@@ -88,7 +86,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   city: state.city,
-  offers: getCityOffers(state.city, state.offers),
+  cities: getCities(state.offers),
+  offers: getCityOffers(state.city.name, state.offers),
   sortType: state.sortType,
   screen: state.screen,
   activeOffer: state.activeOffer,

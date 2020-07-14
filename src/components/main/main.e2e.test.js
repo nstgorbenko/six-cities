@@ -5,7 +5,7 @@ import {Provider} from "react-redux";
 import React from "react";
 
 import Main from "./main.jsx";
-import {testPlaces, testCities} from "../../test-data.js";
+import {testCity, testCities, testPlaces} from "../../test-data.js";
 
 configure({
   adapter: new Adapter()
@@ -23,11 +23,11 @@ describe(`Places names click test`, () => {
 
     const main = mount(<Provider store={store}>
       <Main
-        activeCity="Amsterdam"
+        activeCity={testCity}
         cities={testCities}
         offers={testPlaces}
         sortType="Popular"
-        activeOffer=""
+        activeOffer={0}
         onPlaceCardNameClick={onPlaceCardNameClick}
         onCityNameClick={() => {}}
         onPlaceCardHover={() => {}}

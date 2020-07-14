@@ -1,15 +1,21 @@
 import {ActionCreator, ActionType, Operation, reducer} from "./reducer.js";
-import {testPlaces} from "./test-data.js";
+import {testPlaces, testServerData} from "./test-data.js";
 
 import createAPI from "./api.js";
 import MockAdapter from "axios-mock-adapter";
 
 const testInitialState = {
-  city: `Paris`,
+  city: {
+    name: ``,
+    location: {
+      coordinates: [0, 0],
+      zoom: 0,
+    }
+  },
   offers: [],
   sortType: `Popular`,
-  screen: `default`,
-  activeOffer: ``,
+  screen: ``,
+  activeOffer: 0,
 };
 
 describe(`Reducer working test`, () => {
@@ -22,13 +28,25 @@ describe(`Reducer working test`, () => {
   it(`changes city with given value`, () => {
     expect(reducer(testInitialState, {
       type: ActionType.CHANGE_CITY,
-      payload: `Amsterdam`,
+      payload: {
+        name: `Amsterdam`,
+        location: {
+          coordinates: [55.5, 22.2],
+          zoom: 10,
+        }
+      },
     })).toEqual({
-      city: `Amsterdam`,
+      city: {
+        name: `Amsterdam`,
+        location: {
+          coordinates: [55.5, 22.2],
+          zoom: 10,
+        }
+      },
       offers: [],
       sortType: `Popular`,
-      screen: `default`,
-      activeOffer: ``,
+      screen: ``,
+      activeOffer: 0,
     });
   });
 
@@ -37,11 +55,17 @@ describe(`Reducer working test`, () => {
       type: ActionType.LOAD_OFFERS,
       payload: testPlaces,
     })).toEqual({
-      city: `Paris`,
+      city: {
+        name: ``,
+        location: {
+          coordinates: [0, 0],
+          zoom: 0,
+        }
+      },
       offers: testPlaces,
       sortType: `Popular`,
-      screen: `default`,
-      activeOffer: ``,
+      screen: ``,
+      activeOffer: 0,
     });
   });
 
@@ -50,11 +74,17 @@ describe(`Reducer working test`, () => {
       type: ActionType.CHANGE_SORT_TYPE,
       payload: `Top rated first`,
     })).toEqual({
-      city: `Paris`,
+      city: {
+        name: ``,
+        location: {
+          coordinates: [0, 0],
+          zoom: 0,
+        }
+      },
       offers: [],
       sortType: `Top rated first`,
-      screen: `default`,
-      activeOffer: ``,
+      screen: ``,
+      activeOffer: 0,
     });
   });
 
@@ -63,33 +93,57 @@ describe(`Reducer working test`, () => {
       type: ActionType.CHANGE_SCREEN_TYPE,
       payload: `offer`,
     })).toEqual({
-      city: `Paris`,
+      city: {
+        name: ``,
+        location: {
+          coordinates: [0, 0],
+          zoom: 0,
+        }
+      },
       offers: [],
       sortType: `Popular`,
       screen: `offer`,
-      activeOffer: ``,
+      activeOffer: 0,
     });
   });
 
   it(`changes active offer with given value`, () => {
     expect(reducer(testInitialState, {
       type: ActionType.CHANGE_ACTIVE_OFFER,
-      payload: `offer-id`,
+      payload: 100,
     })).toEqual({
-      city: `Paris`,
+      city: {
+        name: ``,
+        location: {
+          coordinates: [0, 0],
+          zoom: 0,
+        }
+      },
       offers: [],
       sortType: `Popular`,
-      screen: `default`,
-      activeOffer: `offer-id`,
+      screen: ``,
+      activeOffer: 100,
     });
   });
 });
 
 describe(`Action creators working test`, () => {
   it(`returns action with city in payload`, () => {
-    expect(ActionCreator.changeCity(`Amsterdam`)).toEqual({
+    expect(ActionCreator.changeCity({
+      name: `Amsterdam`,
+      location: {
+        coordinates: [55.5, 22.2],
+        zoom: 10,
+      }
+    })).toEqual({
       type: ActionType.CHANGE_CITY,
-      payload: `Amsterdam`,
+      payload: {
+        name: `Amsterdam`,
+        location: {
+          coordinates: [55.5, 22.2],
+          zoom: 10,
+        }
+      }
     });
   });
 
@@ -122,9 +176,9 @@ describe(`Action creators working test`, () => {
   });
 
   it(`returns action with offer id in payload`, () => {
-    expect(ActionCreator.changeActiveOffer(`101`)).toEqual({
+    expect(ActionCreator.changeActiveOffer(100)).toEqual({
       type: ActionType.CHANGE_ACTIVE_OFFER,
-      payload: `101`,
+      payload: 100,
     });
   });
 });
@@ -138,14 +192,14 @@ describe(`Operation working test`, () => {
 
     apiMock
       .onGet(`/hotels`)
-      .reply(200, [{fake: true}]);
+      .reply(200, testServerData);
 
     return questionLoader(dispatch, () => {}, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
           type: ActionType.LOAD_OFFERS,
-          payload: [{fake: true}],
+          payload: testPlaces,
         });
       });
   });

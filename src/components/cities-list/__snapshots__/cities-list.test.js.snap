@@ -19,45 +19,6 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           onClick={[Function]}
         >
           <span>
-            Paris
-          </span>
-        </a>
-      </li>
-      <li
-        className="locations__item"
-      >
-        <a
-          className="locations__item-link tabs__item "
-          href="#"
-          onClick={[Function]}
-        >
-          <span>
-            Cologne
-          </span>
-        </a>
-      </li>
-      <li
-        className="locations__item"
-      >
-        <a
-          className="locations__item-link tabs__item "
-          href="#"
-          onClick={[Function]}
-        >
-          <span>
-            Brussels
-          </span>
-        </a>
-      </li>
-      <li
-        className="locations__item"
-      >
-        <a
-          className="locations__item-link tabs__item "
-          href="#"
-          onClick={[Function]}
-        >
-          <span>
             Amsterdam
           </span>
         </a>
@@ -71,7 +32,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           onClick={[Function]}
         >
           <span>
-            Hamburg
+            Paris
           </span>
         </a>
       </li>
@@ -84,7 +45,7 @@ exports[`PlacesList Component rendering PlacesList Component should render corre
           onClick={[Function]}
         >
           <span>
-            Dusseldorf
+            Hamburg
           </span>
         </a>
       </li>

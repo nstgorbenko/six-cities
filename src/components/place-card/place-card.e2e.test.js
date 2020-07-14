@@ -10,7 +10,7 @@ configure({
 });
 
 describe(`PlaceCard working test`, () => {
-  it(`PlaceCard pass its id to callback when mouseEnter occur and empty string - when mouseLeave`, () => {
+  it(`PlaceCard pass its id to callback when mouseEnter occur and 0 - when mouseLeave`, () => {
     const onHover = jest.fn();
 
     const placeCard = shallow(<PlaceCard
@@ -26,6 +26,6 @@ describe(`PlaceCard working test`, () => {
 
     placeCard.simulate(`mouseleave`);
     expect(onHover).toHaveBeenCalledTimes(2);
-    expect(onHover).toHaveBeenCalledWith(``);
+    expect(onHover).toHaveBeenCalledWith(0);
   });
 });

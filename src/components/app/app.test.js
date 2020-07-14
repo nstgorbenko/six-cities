@@ -4,7 +4,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import {App} from "./app.jsx";
-import {testPlaces} from "../../test-data.js";
+import {testCity, testCities, testPlaces} from "../../test-data.js";
 
 const testStore = configureStore([]);
 
@@ -18,11 +18,12 @@ describe(`App Component rendering`, () => {
     const tree = renderer
       .create(<Provider store={store}>
         <App
-          city="Amsterdam"
+          city={testCity}
+          cities={testCities}
           offers={testPlaces}
-          sortType="Popular"
-          screen="default"
-          activeOffer=""
+          sortType={`Popular`}
+          screen={`default`}
+          activeOffer={0}
           onCityChange={() => {}}
           onScreenChange={() => {}}
           onActiveOfferChange={() => {}}
