@@ -7,6 +7,7 @@ export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 
 export const ScreenType = {
   DEFAULT: `default`,
+  ERROR: `ERROR`,
   OFFER: `offer`
 };
 

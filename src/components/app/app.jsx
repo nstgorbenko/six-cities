@@ -5,6 +5,7 @@ import React, {PureComponent} from "react";
 
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
 import {cityType, offerType} from "../../types.js";
+import Error from "../error/error.jsx";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
 import {ScreenType} from "../../const.js";
@@ -22,6 +23,11 @@ class App extends PureComponent {
     const {city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
 
     switch (screen) {
+      case ScreenType.ERROR:
+        return (
+          <Error />
+        );
+
       case ScreenType.DEFAULT:
         return (
           <Main
@@ -36,6 +42,7 @@ class App extends PureComponent {
             onPlaceCardHover={onActiveOfferChange}
           />
         );
+
       case ScreenType.OFFER:
         const currentOffer = offers.find(({id}) => id === activeOffer);
 

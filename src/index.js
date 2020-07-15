@@ -13,7 +13,11 @@ import {getFirstCity} from "./utils/common.js";
 import reducer from "./reducer/reducer.js";
 import {ScreenType} from "./const.js";
 
-const api = createAPI(() => {});
+const onDataError = () => {
+  store.dispatch(AppActionCreator.changeScreenType(ScreenType.ERROR));
+};
+
+const api = createAPI(onDataError);
 
 const store = createStore(
     reducer,
