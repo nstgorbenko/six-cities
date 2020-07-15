@@ -15,6 +15,7 @@ const createAPI = () => {
   });
 
   const onSuccess = (response) => response;
+
   const onFail = (error) => {
     const response = {error};
 

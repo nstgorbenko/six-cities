@@ -11,8 +11,7 @@ const testStore = configureStore([]);
 describe(`App Component rendering`, () => {
   it(`App Component should render correctly`, () => {
     const store = testStore({
-      sortType: `Popular`,
-      onChange: () => {}
+      APP: {sortType: `Popular`}
     });
 
     const tree = renderer

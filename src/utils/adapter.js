@@ -1,4 +1,4 @@
-export const getOffers = (offers) => {
+export const adaptOffers = (offers) => {
   return offers.map((offer) => ({
     id: offer.id,
     city: {

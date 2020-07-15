@@ -69,13 +69,7 @@ export const testPlaces = [{
   isFavorite: true,
 }, {
   id: 11,
-  city: {
-    name: `Amsterdam`,
-    location: {
-      coordinates: [55.5, 22.2],
-      zoom: 10,
-    },
-  },
+  city: testCity,
   location: {
     coordinates: [55.3709553943505, 5.90309666406196],
     zoom: 15,
@@ -166,4 +160,13 @@ export const testServerData = [{
   "rating": 4.2,
   "is_premium": true,
   "is_favorite": false,
+}];
+
+export const testGroupedPlaces = [{
+  name: `Amsterdam`,
+  location: {
+    coordinates: [55.5, 22.2],
+    zoom: 10,
+  },
+  offers: testPlaces
 }];

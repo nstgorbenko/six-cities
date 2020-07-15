@@ -17,8 +17,7 @@ describe(`Places names click test`, () => {
   it(`Places names should be clicked`, () => {
     const onPlaceCardNameClick = jest.fn();
     const store = testStore({
-      sortType: `Popular`,
-      onChange: () => {}
+      APP: {sortType: `Popular`}
     });
 
     const main = mount(<Provider store={store}>

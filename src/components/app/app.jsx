@@ -3,12 +3,13 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
 import {cityType, offerType} from "../../types.js";
-import {getCities, getCityOffers} from "../../utils/common.js";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
 import {ScreenType} from "../../const.js";
+import {getActiveOffer, getCity, getScreen, getSortType} from "../../reducer/app/selectors.js";
+import {getCities, getCityOffers} from "../../reducer/data/selectors.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -85,24 +86,24 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  cities: getCities(state.offers),
-  offers: getCityOffers(state.city.name, state.offers),
-  sortType: state.sortType,
-  screen: state.screen,
-  activeOffer: state.activeOffer,
+  city: getCity(state),
+  cities: getCities(state),
+  offers: getCityOffers(state),
+  sortType: getSortType(state),
+  screen: getScreen(state),
+  activeOffer: getActiveOffer(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(AppActionCreator.changeCity(city));
   },
   onScreenChange(screenType, activeOfferId) {
-    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
-    dispatch(ActionCreator.changeScreenType(screenType));
+    dispatch(AppActionCreator.changeActiveOffer(activeOfferId));
+    dispatch(AppActionCreator.changeScreenType(screenType));
   },
   onActiveOfferChange(activeOfferId) {
-    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
+    dispatch(AppActionCreator.changeActiveOffer(activeOfferId));
   },
 });
 

@@ -6,10 +6,12 @@ import ReactDOM from "react-dom";
 import thunk from "redux-thunk";
 
 import App from "./components/app/app.jsx";
+import {ActionCreator as AppActionCreator} from "./reducer/app/app.js";
 import createAPI from "./api.js";
-import {ActionCreator, reducer, Operation as DataOperation} from "./reducer.js";
-import {ScreenType} from "./const.js";
+import {Operation as DataOperation} from "./reducer/data/data.js";
 import {getFirstCity} from "./utils/common.js";
+import reducer from "./reducer/reducer.js";
+import {ScreenType} from "./const.js";
 
 const api = createAPI(() => {});
 
@@ -20,8 +22,8 @@ const store = createStore(
 );
 
 store.dispatch(DataOperation.loadOffers())
-  .then((offers) => store.dispatch(ActionCreator.changeCity(getFirstCity(offers))))
-  .then(() => store.dispatch(ActionCreator.changeScreenType(ScreenType.DEFAULT)));
+  .then((offers) => store.dispatch(AppActionCreator.changeCity(getFirstCity(offers))))
+  .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
 
 ReactDOM.render(
     <Provider store={store}>
