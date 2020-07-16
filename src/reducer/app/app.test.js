@@ -1,4 +1,5 @@
 import {ActionCreator, ActionType, reducer} from "./app.js";
+import {getActiveOffer, getCity, getScreen, getSortType} from "./selectors.js";
 
 const testInitialState = {
   city: {
@@ -11,6 +12,24 @@ const testInitialState = {
   sortType: `Popular`,
   screen: ``,
   activeOffer: 0,
+};
+
+const testStore = {
+  APP: {
+    city: {
+      name: `Amsterdam`,
+      location: {
+        coordinates: [55.5, 22.2],
+        zoom: 10,
+      }
+    },
+    sortType: `Top rated first`,
+    screen: `offer`,
+    activeOffer: 10,
+  },
+  DATA: {
+    offers: []
+  }
 };
 
 describe(`Reducer working test`, () => {
@@ -138,5 +157,29 @@ describe(`Action creators working test`, () => {
       type: ActionType.CHANGE_ACTIVE_OFFER,
       payload: 100,
     });
+  });
+});
+
+describe(`Selectors working test`, () => {
+  it(`returns active offer value`, () => {
+    expect(getActiveOffer(testStore)).toEqual(10);
+  });
+
+  it(`returns city value`, () => {
+    expect(getCity(testStore)).toEqual({
+      name: `Amsterdam`,
+      location: {
+        coordinates: [55.5, 22.2],
+        zoom: 10,
+      }
+    });
+  });
+
+  it(`returns screen value`, () => {
+    expect(getScreen(testStore)).toEqual(`offer`);
+  });
+
+  it(`returns sort type value`, () => {
+    expect(getSortType(testStore)).toEqual(`Top rated first`);
   });
 });

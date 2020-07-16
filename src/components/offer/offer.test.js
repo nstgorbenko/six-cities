@@ -5,7 +5,7 @@ import Offer from "./offer.jsx";
 import {testPlaces} from "../../test-data.js";
 
 describe(`Offer Component rendering`, () => {
-  it(`Offer Component should render correctly`, () => {
+  it(`renders correctly`, () => {
     const tree = renderer
       .create(<Offer
         place={testPlaces[0]}

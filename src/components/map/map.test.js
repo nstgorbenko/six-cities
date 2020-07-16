@@ -5,7 +5,7 @@ import Map from "./map.jsx";
 import {testPlaces} from "../../test-data.js";
 
 describe(`Map Component rendering`, () => {
-  it(`Map Component should render correctly`, () => {
+  it(`renders correctly`, () => {
     const tree = renderer
       .create(<Map
         center={testPlaces[0].location}

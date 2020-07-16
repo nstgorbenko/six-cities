@@ -5,7 +5,7 @@ import PlacesList from "./places-list.jsx";
 import {testPlaces} from "../../test-data.js";
 
 describe(`PlacesList Component rendering`, () => {
-  it(`PlacesList Component should render correctly`, () => {
+  it(`renders correctly`, () => {
     const tree = renderer
       .create(<PlacesList
         type="cities"

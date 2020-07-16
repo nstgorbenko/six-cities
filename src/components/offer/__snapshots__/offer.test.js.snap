@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Offer Component rendering Offer Component should render correctly 1`] = `
+exports[`Offer Component rendering renders correctly 1`] = `
 <div
   className="page"
 >

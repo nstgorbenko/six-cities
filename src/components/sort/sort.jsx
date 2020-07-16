@@ -63,7 +63,7 @@ const mapStateToProps = (state) => ({
   activeSortType: getSortType(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   onSortTypeChange(sortType) {
     dispatch(ActionCreator.changeSortType(sortType));
   },

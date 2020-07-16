@@ -9,7 +9,7 @@ import {testCity, testCities, testPlaces} from "../../test-data.js";
 const testStore = configureStore([]);
 
 describe(`Main Component rendering`, () => {
-  it(`Main Component should render correctly`, () => {
+  it(`renders correctly`, () => {
     const store = testStore({
       APP: {sortType: `Popular`}
     });

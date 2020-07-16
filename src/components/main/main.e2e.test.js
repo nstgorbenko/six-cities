@@ -1,5 +1,4 @@
-import Adapter from "enzyme-adapter-react-16";
-import {configure, mount} from "enzyme";
+import {mount} from "enzyme";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import React from "react";
@@ -7,14 +6,10 @@ import React from "react";
 import Main from "./main.jsx";
 import {testCity, testCities, testPlaces} from "../../test-data.js";
 
-configure({
-  adapter: new Adapter()
-});
-
 const testStore = configureStore([]);
 
 describe(`Places names click test`, () => {
-  it(`Places names should be clicked`, () => {
+  it(`should be clicked`, () => {
     const onPlaceCardNameClick = jest.fn();
     const store = testStore({
       APP: {sortType: `Popular`}

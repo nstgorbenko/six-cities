@@ -5,7 +5,7 @@ import Review from "./review.jsx";
 import {testReviews} from "../../test-data.js";
 
 describe(`Review Component rendering`, () => {
-  it(`Review Component should render correctly`, () => {
+  it(`renders correctly`, () => {
     const tree = renderer
       .create(<Review
         info={testReviews[0]}

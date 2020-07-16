@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App Component rendering App Component should render correctly 1`] = `
+exports[`App Component rendering renders default screen correctly 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -424,6 +424,611 @@ exports[`App Component rendering App Component should render correctly 1`] = `
           </section>
         </div>
       </div>
+    </div>
+  </main>
+</div>
+`;
+
+exports[`App Component rendering renders error screen correctly 1`] = `
+<div
+  className="page page--gray page--main"
+>
+  <main
+    className="page__main page__main--index page__main--index-empty"
+  >
+    <div
+      className="cities"
+    >
+      <div
+        className="cities__places-container cities__places-container--empty container"
+      >
+        <section
+          className="cities__no-places"
+        >
+          <div
+            className="cities__status-wrapper tabs__content"
+          >
+            <b
+              className="cities__status"
+            >
+              Oops!
+            </b>
+            <p
+              className="cities__status-description"
+            >
+              Something went wrong.
+            </p>
+            <p
+              className="cities__status-description"
+            >
+              Please refresh page to load data.
+            </p>
+          </div>
+        </section>
+        <div
+          className="cities__right-section"
+        />
+      </div>
+    </div>
+  </main>
+</div>
+`;
+
+exports[`App Component rendering renders null when screen value is undefined 1`] = `null`;
+
+exports[`App Component rendering renders offer screen correctly 1`] = `
+<div
+  className="page"
+>
+  <header
+    className="header"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="header__wrapper"
+      >
+        <div
+          className="header__left"
+        >
+          <a
+            className="header__logo-link"
+            href="main.html"
+          >
+            <img
+              alt="6 cities logo"
+              className="header__logo"
+              height="41"
+              src="img/logo.svg"
+              width="81"
+            />
+          </a>
+        </div>
+        <nav
+          className="header__nav"
+        >
+          <ul
+            className="header__nav-list"
+          >
+            <li
+              className="header__nav-item user"
+            >
+              <a
+                className="header__nav-link header__nav-link--profile"
+                href="#"
+              >
+                <div
+                  className="header__avatar-wrapper user__avatar-wrapper"
+                />
+                <span
+                  className="header__user-name user__name"
+                >
+                  Oliver.conner@gmail.com
+                </span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  <main
+    className="page__main page__main--property"
+  >
+    <section
+      className="property"
+    >
+      <div
+        className="property__gallery-container container"
+      >
+        <div
+          className="property__gallery"
+        >
+          <div
+            className="property__image-wrapper"
+          >
+            <img
+              alt="Photo studio"
+              className="property__image"
+              src="img/apartment-01.jpg"
+            />
+          </div>
+          <div
+            className="property__image-wrapper"
+          >
+            <img
+              alt="Photo studio"
+              className="property__image"
+              src="img/apartment-01.jpg"
+            />
+          </div>
+          <div
+            className="property__image-wrapper"
+          >
+            <img
+              alt="Photo studio"
+              className="property__image"
+              src="img/apartment-01.jpg"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="property__container container"
+      >
+        <div
+          className="property__wrapper"
+        >
+          <div
+            className="property__name-wrapper"
+          >
+            <h1
+              className="property__name"
+            >
+              Stylish apartment in the citycenter
+            </h1>
+            <button
+              className="property__bookmark-button property__bookmark-button--active button"
+              type="button"
+            >
+              <svg
+                className="property__bookmark-icon"
+                height="33"
+                width="31"
+              >
+                <use
+                  xlinkHref="#icon-bookmark"
+                />
+              </svg>
+              <span
+                className="visually-hidden"
+              >
+                To bookmarks
+              </span>
+            </button>
+          </div>
+          <div
+            className="property__rating rating"
+          >
+            <div
+              className="property__stars rating__stars"
+            >
+              <span
+                style={
+                  Object {
+                    "width": "100%",
+                  }
+                }
+              />
+              <span
+                className="visually-hidden"
+              >
+                Rating
+              </span>
+            </div>
+            <span
+              className="property__rating-value rating__value"
+            >
+              4.5
+            </span>
+          </div>
+          <ul
+            className="property__features"
+          >
+            <li
+              className="property__feature property__feature--entire"
+            >
+              Room
+            </li>
+            <li
+              className="property__feature property__feature--bedrooms"
+            >
+              1
+               Bedrooms
+            </li>
+            <li
+              className="property__feature property__feature--adults"
+            >
+              Max 
+              2
+               adults
+            </li>
+          </ul>
+          <div
+            className="property__price"
+          >
+            <b
+              className="property__price-value"
+            >
+              €
+              136
+            </b>
+            <span
+              className="property__price-text"
+            >
+               night
+            </span>
+          </div>
+          <div
+            className="property__inside"
+          >
+            <h2
+              className="property__inside-title"
+            >
+              What's inside
+            </h2>
+            <ul
+              className="property__inside-list"
+            >
+              <li
+                className="property__inside-item"
+              >
+                Dishwasher
+              </li>
+              <li
+                className="property__inside-item"
+              >
+                Cabel TV
+              </li>
+              <li
+                className="property__inside-item"
+              >
+                Fridge
+              </li>
+            </ul>
+          </div>
+          <div
+            className="property__host"
+          >
+            <h2
+              className="property__host-title"
+            >
+              Meet the host
+            </h2>
+            <div
+              className="property__host-user user"
+            >
+              <div
+                className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper"
+              >
+                <img
+                  alt="Host avatar"
+                  className="property__avatar user__avatar"
+                  height="74"
+                  src="img/avatar-angelina.jpg"
+                  width="74"
+                />
+              </div>
+              <span
+                className="property__user-name"
+              >
+                Lucy
+              </span>
+            </div>
+            <div
+              className="property__description"
+            >
+              <p
+                className="property__text"
+              >
+                Located in the City Center, close to all important attractions.
+              </p>
+            </div>
+          </div>
+          <section
+            className="property__reviews reviews"
+          >
+            <form
+              action="#"
+              className="reviews__form form"
+              method="post"
+            >
+              <label
+                className="reviews__label form__label"
+                htmlFor="review"
+              >
+                Your review
+              </label>
+              <div
+                className="reviews__rating-form form__rating"
+              >
+                <input
+                  className="form__rating-input visually-hidden"
+                  id="5-stars"
+                  name="rating"
+                  type="radio"
+                  value="5"
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="5-stars"
+                  title="perfect"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
+                  >
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+                <input
+                  className="form__rating-input visually-hidden"
+                  id="4-stars"
+                  name="rating"
+                  type="radio"
+                  value="4"
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="4-stars"
+                  title="good"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
+                  >
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+                <input
+                  className="form__rating-input visually-hidden"
+                  id="3-stars"
+                  name="rating"
+                  type="radio"
+                  value="3"
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="3-stars"
+                  title="not bad"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
+                  >
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+                <input
+                  className="form__rating-input visually-hidden"
+                  id="2-stars"
+                  name="rating"
+                  type="radio"
+                  value="2"
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="2-stars"
+                  title="badly"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
+                  >
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+                <input
+                  className="form__rating-input visually-hidden"
+                  id="1-star"
+                  name="rating"
+                  type="radio"
+                  value="1"
+                />
+                <label
+                  className="reviews__rating-label form__rating-label"
+                  htmlFor="1-star"
+                  title="terribly"
+                >
+                  <svg
+                    className="form__star-image"
+                    height="33"
+                    width="37"
+                  >
+                    <use
+                      xlinkHref="#icon-star"
+                    />
+                  </svg>
+                </label>
+              </div>
+              <textarea
+                className="reviews__textarea form__textarea"
+                id="review"
+                name="review"
+                placeholder="Tell how was your stay, what you like and what can be improved"
+              />
+              <div
+                className="reviews__button-wrapper"
+              >
+                <p
+                  className="reviews__help"
+                >
+                  To submit review please make sure to set 
+                  <span
+                    className="reviews__star"
+                  >
+                    rating
+                  </span>
+                   and describe your stay with at least 
+                  <b
+                    className="reviews__text-amount"
+                  >
+                    50 characters
+                  </b>
+                  .
+                </p>
+                <button
+                  className="reviews__submit form__submit button"
+                  disabled=""
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
+      <section
+        className="property__map map"
+      >
+        <div
+          id="map"
+          style={
+            Object {
+              "height": "100%",
+            }
+          }
+        />
+      </section>
+    </section>
+    <div
+      className="container"
+    >
+      <section
+        className="near-places places"
+      >
+        <h2
+          className="near-places__title"
+        >
+          Other places in the neighbourhood
+        </h2>
+        <div
+          className="near-places__list places__list"
+        >
+          <article
+            className="near-places__card place-card"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
+          >
+            <div
+              className="near-places__image-wrapper place-card__image-wrapper"
+            >
+              <a
+                href="#"
+              >
+                <img
+                  alt="Private Attic Studio"
+                  className="place-card__image"
+                  height="200"
+                  src="img/apartment-02.jpg"
+                  width="260"
+                />
+              </a>
+            </div>
+            <div
+              className="place-card__info"
+            >
+              <div
+                className="place-card__price-wrapper"
+              >
+                <div
+                  className="place-card__price"
+                >
+                  <b
+                    className="place-card__price-value"
+                  >
+                    €
+                    230
+                  </b>
+                  <span
+                    className="place-card__price-text"
+                  >
+                    / night
+                  </span>
+                </div>
+                <button
+                  className="place-card__bookmark-button false button"
+                  type="button"
+                >
+                  <svg
+                    className="place-card__bookmark-icon"
+                    height="19"
+                    width="18"
+                  >
+                    <use
+                      xlinkHref="#icon-bookmark"
+                    />
+                  </svg>
+                  <span
+                    className="visually-hidden"
+                  >
+                    To bookmarks
+                  </span>
+                </button>
+              </div>
+              <div
+                className="place-card__rating rating"
+              >
+                <div
+                  className="place-card__stars rating__stars"
+                >
+                  <span
+                    style={
+                      Object {
+                        "width": "80%",
+                      }
+                    }
+                  />
+                  <span
+                    className="visually-hidden"
+                  >
+                    Rating
+                  </span>
+                </div>
+              </div>
+              <h2
+                className="place-card__name"
+              >
+                <a
+                  href="#"
+                  onClick={[Function]}
+                >
+                  Private Attic Studio
+                </a>
+              </h2>
+              <p
+                className="place-card__type"
+              >
+                Apartment
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
     </div>
   </main>
 </div>

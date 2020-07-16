@@ -1,17 +1,12 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 
 import withActiveFlag from "./with-active-flag.js";
-
-configure({
-  adapter: new Adapter()
-});
 
 const MockComponent = () => <div />;
 
 describe(`withActiveFlag HOC working test`, () => {
-  it(`should change flag state`, () => {
+  it(`changes flag state`, () => {
     const MockComponentWrapped = withActiveFlag(MockComponent);
 
     const mockComponentWrapped = shallow(<MockComponentWrapped />);

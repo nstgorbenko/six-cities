@@ -1,10 +1,10 @@
 import {SortType} from "../const.js";
 
-const sortEventsByPriceToHigh = (a, b) => a.price - b.price;
+export const sortEventsByPriceToHigh = (a, b) => a.price - b.price;
 
-const sortEventsByPriceToLow = (a, b) => b.price - a.price;
+export const sortEventsByPriceToLow = (a, b) => b.price - a.price;
 
-const sortEventsByRating = (a, b) => b.rating - a.rating;
+export const sortEventsByRating = (a, b) => b.rating - a.rating;
 
 export const getSortedPlaces = ([...places], sortType) => {
   switch (sortType) {

@@ -1,16 +1,11 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 
 import CitiesList from "./cities-list.jsx";
 import {testCity, testCities} from "../../test-data.js";
 
-configure({
-  adapter: new Adapter()
-});
-
 describe(`CitiesList working test`, () => {
-  it(`CitiesList pass city name to callback when user click on this name`, () => {
+  it(`passes city name to callback when user click on this name`, () => {
     const onClick = jest.fn();
 
     const citiesList = shallow(<CitiesList

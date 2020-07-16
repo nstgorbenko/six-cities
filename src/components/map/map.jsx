@@ -21,7 +21,7 @@ class Map extends PureComponent {
 
     this._mapRef = React.createRef();
     this._map = null;
-    this._markers = [];
+    this._markers = null;
   }
 
   componentDidMount() {
@@ -48,8 +48,9 @@ class Map extends PureComponent {
   }
 
   componentWillUnmount() {
-    this._map.remove();
-    this._mapRef = null;
+    this._mapRef.current = null;
+    this._map = null;
+    this._markers = null;
   }
 
   _addMarkers() {
@@ -58,16 +59,19 @@ class Map extends PureComponent {
     const icon = leaflet.icon(MarkerSettings.DEFAULT);
     const mainIcon = leaflet.icon(MarkerSettings.ACTIVE);
 
+    this._markers = leaflet.layerGroup();
+
     offers.forEach(({id, location}) => {
       const iconType = id === activeOffer ? mainIcon : icon;
       const marker = leaflet.marker(location.coordinates, {icon: iconType});
-      marker.addTo(this._map);
-      this._markers.push(marker);
+      marker.addTo(this._markers);
     });
+
+    this._markers.addTo(this._map);
   }
 
   _removeMarkers() {
-    this._markers.forEach((marker) => marker.remove());
+    this._markers.clearLayers();
   }
 
   _updateMap() {

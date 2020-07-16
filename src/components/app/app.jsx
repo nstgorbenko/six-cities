@@ -101,7 +101,7 @@ const mapStateToProps = (state) => ({
   activeOffer: getActiveOffer(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
     dispatch(AppActionCreator.changeCity(city));
   },

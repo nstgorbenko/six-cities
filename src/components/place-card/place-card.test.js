@@ -5,7 +5,7 @@ import PlaceCard from "./place-card.jsx";
 import {testPlaces} from "../../test-data.js";
 
 describe(`PlaceCard Component rendering`, () => {
-  it(`PlaceCard Component should render correctly`, () => {
+  it(`renders correctly`, () => {
     const tree = renderer
       .create(<PlaceCard
         cardType="cities"
