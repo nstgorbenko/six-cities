@@ -2,9 +2,8 @@ import leaflet from 'leaflet';
 import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 
-import {offerType} from "../../types.js";
+import {locationType, offerType} from "../../types.js";
 
-const MAP_ZOOM = 12;
 const MarkerSettings = {
   DEFAULT: {
     iconUrl: `img/pin.svg`,
@@ -22,16 +21,16 @@ class Map extends PureComponent {
 
     this._mapRef = React.createRef();
     this._map = null;
-    this._markers = [];
+    this._markers = null;
   }
 
   componentDidMount() {
-    const {center} = this.props;
+    const {coordinates: center, zoom} = this.props.center;
     const mapContainer = this._mapRef.current;
 
     this._map = leaflet.map(mapContainer, {
       center,
-      zoom: MAP_ZOOM,
+      zoom,
       zoomControl: false,
       layers: [
         leaflet.tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
@@ -49,8 +48,9 @@ class Map extends PureComponent {
   }
 
   componentWillUnmount() {
-    this._map.remove();
-    this._mapRef = null;
+    this._mapRef.current = null;
+    this._map = null;
+    this._markers = null;
   }
 
   _addMarkers() {
@@ -59,20 +59,23 @@ class Map extends PureComponent {
     const icon = leaflet.icon(MarkerSettings.DEFAULT);
     const mainIcon = leaflet.icon(MarkerSettings.ACTIVE);
 
+    this._markers = leaflet.layerGroup();
+
     offers.forEach(({id, location}) => {
       const iconType = id === activeOffer ? mainIcon : icon;
-      const marker = leaflet.marker(location, {icon: iconType});
-      marker.addTo(this._map);
-      this._markers.push(marker);
+      const marker = leaflet.marker(location.coordinates, {icon: iconType});
+      marker.addTo(this._markers);
     });
+
+    this._markers.addTo(this._map);
   }
 
   _removeMarkers() {
-    this._markers.forEach((marker) => marker.remove());
+    this._markers.clearLayers();
   }
 
   _updateMap() {
-    const {center} = this.props;
+    const {coordinates: center} = this.props.center;
 
     this._map.setView(center);
     this._removeMarkers();
@@ -89,9 +92,9 @@ class Map extends PureComponent {
 }
 
 Map.propTypes = {
-  center: PropTypes.arrayOf(PropTypes.number).isRequired,
+  center: PropTypes.shape(locationType).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  activeOffer: PropTypes.string.isRequired,
+  activeOffer: PropTypes.number.isRequired,
 };
 
 export default Map;

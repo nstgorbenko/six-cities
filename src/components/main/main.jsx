@@ -1,17 +1,18 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-import {CardType, CityNameToCoords} from "../../const.js";
+import {CardType} from "../../const.js";
 import CitiesList from "../cities-list/cities-list.jsx";
 import Map from '../map/map.jsx';
 import NoPlaces from "../no-places/no-places.jsx";
-import {offerType} from "../../types.js";
+import {cityType, offerType} from "../../types.js";
 import PlacesList from "../places-list/places-list.jsx";
 import Sort from "../sort/sort.jsx";
 import withActiveFlag from "../../hocs/with-active-flag/with-active-flag.js";
 
 const Main = (props) => {
   const {activeCity, cities, offers, sortType, activeOffer, onPlaceCardNameClick, onCityNameClick, onPlaceCardHover} = props;
+  const {name: cityName, location: cityLocation} = activeCity;
   const SortWrapped = withActiveFlag(Sort);
 
   return (
@@ -52,7 +53,7 @@ const Main = (props) => {
             ? <div className="cities__places-container container">
               <section className="cities__places places">
                 <h2 className="visually-hidden">Places</h2>
-                <b className="places__found">{offers.length} places to stay in {activeCity}</b>
+                <b className="places__found">{offers.length} places to stay in {cityName}</b>
                 <SortWrapped />
                 <PlacesList
                   type={CardType.CITIES}
@@ -65,14 +66,14 @@ const Main = (props) => {
               <div className="cities__right-section">
                 <section className="cities__map map">
                   <Map
-                    center={CityNameToCoords[activeCity]}
+                    center={cityLocation}
                     offers={offers}
                     activeOffer={activeOffer}
                   />
                 </section>
               </div>
             </div>
-            : <NoPlaces activeCity={activeCity}/>}
+            : <NoPlaces activeCity={cityName}/>}
         </div>
       </main>
     </div>
@@ -80,11 +81,11 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeCity: PropTypes.shape(cityType).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
-  activeOffer: PropTypes.string.isRequired,
+  activeOffer: PropTypes.number.isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,
   onCityNameClick: PropTypes.func.isRequired,
   onPlaceCardHover: PropTypes.func.isRequired,

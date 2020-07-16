@@ -3,15 +3,14 @@ import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
-import {ActionCreator} from "../../reducer.js";
-import {CITIES, ScreenType} from "../../const.js";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
+import {cityType, offerType} from "../../types.js";
+import Error from "../error/error.jsx";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
-import {offerType} from "../../types.js";
-
-const getCityOffers = (chosenCity, offers) => {
-  return offers.filter(({city}) => city === chosenCity);
-};
+import {ScreenType} from "../../const.js";
+import {getActiveOffer, getCity, getScreen, getSortType} from "../../reducer/app/selectors.js";
+import {getCities, getCityOffers} from "../../reducer/data/selectors.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -21,14 +20,19 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {city, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
+    const {city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
 
     switch (screen) {
+      case ScreenType.ERROR:
+        return (
+          <Error />
+        );
+
       case ScreenType.DEFAULT:
         return (
           <Main
             activeCity={city}
-            cities={CITIES}
+            cities={cities}
             offers={offers}
             sortType={sortType}
             activeOffer={activeOffer}
@@ -38,6 +42,7 @@ class App extends PureComponent {
             onPlaceCardHover={onActiveOfferChange}
           />
         );
+
       case ScreenType.OFFER:
         const currentOffer = offers.find(({id}) => id === activeOffer);
 
@@ -76,34 +81,36 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  city: PropTypes.string.isRequired,
+  city: PropTypes.shape(cityType).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
   screen: PropTypes.string.isRequired,
-  activeOffer: PropTypes.string.isRequired,
+  activeOffer: PropTypes.number.isRequired,
   onCityChange: PropTypes.func.isRequired,
   onScreenChange: PropTypes.func.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  city: state.city,
-  offers: getCityOffers(state.city, state.offers),
-  sortType: state.sortType,
-  screen: state.screen,
-  activeOffer: state.activeOffer,
+  city: getCity(state),
+  cities: getCities(state),
+  offers: getCityOffers(state),
+  sortType: getSortType(state),
+  screen: getScreen(state),
+  activeOffer: getActiveOffer(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   onCityChange(city) {
-    dispatch(ActionCreator.changeCity(city));
+    dispatch(AppActionCreator.changeCity(city));
   },
   onScreenChange(screenType, activeOfferId) {
-    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
-    dispatch(ActionCreator.changeScreenType(screenType));
+    dispatch(AppActionCreator.changeActiveOffer(activeOfferId));
+    dispatch(AppActionCreator.changeScreenType(screenType));
   },
   onActiveOfferChange(activeOfferId) {
-    dispatch(ActionCreator.changeActiveOffer(activeOfferId));
+    dispatch(AppActionCreator.changeActiveOffer(activeOfferId));
   },
 });
 

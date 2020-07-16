@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`NoPlaces Component rendering NoPlaces Component should render correctly 1`] = `
+exports[`NoPlaces Component rendering renders correctly 1`] = `
 <div
   className="cities__places-container cities__places-container--empty container"
 >

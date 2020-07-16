@@ -1,14 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import NoPlaces from "./no-places.jsx";
+import Error from "./error.jsx";
 
-describe(`NoPlaces Component rendering`, () => {
+describe(`Error Component rendering`, () => {
   it(`renders correctly`, () => {
     const tree = renderer
-      .create(<NoPlaces
-        activeCity="Amsterdam"
-      />)
+      .create(<Error />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

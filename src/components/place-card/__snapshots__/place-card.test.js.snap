@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PlaceCard Component rendering PlaceCard Component should render correctly 1`] = `
+exports[`PlaceCard Component rendering renders correctly 1`] = `
 <article
   className="cities__place-card place-card"
   onMouseEnter={[Function]}

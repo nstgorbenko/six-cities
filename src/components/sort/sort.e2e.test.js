@@ -1,16 +1,11 @@
 import React from "react";
-import {configure, shallow} from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
+import {shallow} from "enzyme";
 
-import {Sort} from "./sort.jsx";
+import {mapDispatchToProps, Sort} from "./sort.jsx";
 import {SortType} from "../../const.js";
 
-configure({
-  adapter: new Adapter()
-});
-
 describe(`Sort working test`, () => {
-  it(`Sort pass sort type name to callback when user click on this name`, () => {
+  it(`passes sort type name to callback when user click on this name`, () => {
     const onSortTypeChange = jest.fn();
     const sortTypes = Object.assign(SortType);
 
@@ -26,5 +21,14 @@ describe(`Sort working test`, () => {
 
     expect(onSortTypeChange).toHaveBeenCalledTimes(1);
     expect(onSortTypeChange).toHaveBeenCalledWith(sortTypes[1]);
+  });
+});
+
+describe(`Sort mapDispatchToProps working test`, () => {
+  it(`calls changing sort type action`, () => {
+    const dispatch = jest.fn();
+
+    mapDispatchToProps(dispatch).onSortTypeChange(`Top rated first`);
+    expect(dispatch).toHaveBeenCalledWith({type: `CHANGE_SORT_TYPE`, payload: `Top rated first`});
   });
 });

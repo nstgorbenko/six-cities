@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import React from "react";
 
+import {cityType} from "../../types.js";
+
 const CitiesList = (props) => {
   const {activeCity, cities, onCityNameClick} = props;
 
@@ -9,11 +11,11 @@ const CitiesList = (props) => {
       <section className="locations container">
         <ul className="locations__list tabs__list">
           {cities.map((city) =>
-            <li key={city} className="locations__item">
-              <a className={`locations__item-link tabs__item ${city === activeCity ? `tabs__item--active` : ``}`} href="#"
+            <li key={city.name} className="locations__item">
+              <a className={`locations__item-link tabs__item ${city.name === activeCity.name ? `tabs__item--active` : ``}`} href="#"
                 onClick={() => onCityNameClick(city)}
               >
-                <span>{city}</span>
+                <span>{city.name}</span>
               </a>
             </li>
           )}
@@ -24,8 +26,8 @@ const CitiesList = (props) => {
 };
 
 CitiesList.propTypes = {
-  activeCity: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.string).isRequired,
+  activeCity: PropTypes.shape(cityType).isRequired,
+  cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   onCityNameClick: PropTypes.func.isRequired,
 };
 

@@ -7,7 +7,7 @@ import {offerType} from "../../types.js";
 
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
-import ReviewsList from "../reviews-list/reviews-list.jsx";
+// import ReviewsList from "../reviews-list/reviews-list.jsx";
 
 const ClassName = {
   FAVORITE: `property__bookmark-button--active`,
@@ -16,7 +16,7 @@ const ClassName = {
 
 const Offer = (props) => {
   const {place, allPlaces, onPlaceCardNameClick} = props;
-  const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, reviews, isPremium, isFavorite} = place;
+  const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, isPremium, isFavorite} = place;
   const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
   const nearbyPlaces = allPlaces.filter((currentPlace) => currentPlace.id !== id);
@@ -113,9 +113,9 @@ const Offer = (props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <ReviewsList
+                {/* <ReviewsList
                   reviews={reviews}
-                />
+                /> */}
                 <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">

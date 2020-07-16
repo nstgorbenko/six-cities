@@ -4,25 +4,24 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import Main from "./main.jsx";
-import {testPlaces, testCities} from "../../test-data.js";
+import {testCity, testCities, testPlaces} from "../../test-data.js";
 
 const testStore = configureStore([]);
 
 describe(`Main Component rendering`, () => {
-  it(`Main Component should render correctly`, () => {
+  it(`renders correctly`, () => {
     const store = testStore({
-      sortType: `Popular`,
-      onChange: () => {}
+      APP: {sortType: `Popular`}
     });
 
     const tree = renderer
       .create(<Provider store={store}>
         <Main
-          activeCity="Amsterdam"
+          activeCity={testCity}
           cities={testCities}
           offers={testPlaces}
           sortType="Popular"
-          activeOffer=""
+          activeOffer={0}
           onPlaceCardNameClick={() => {}}
           onCityNameClick={() => {}}
           onPlaceCardHover={() => {}}

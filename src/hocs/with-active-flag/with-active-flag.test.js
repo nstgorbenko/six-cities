@@ -6,7 +6,7 @@ import withActiveFlag from "./with-active-flag.js";
 const MockComponent = () => <div />;
 
 describe(`withActiveFlag HOC rendering`, () => {
-  it(`should render correctly`, () => {
+  it(`renders correctly`, () => {
     const MockComponentWrapped = withActiveFlag(MockComponent);
 
     const tree = renderer
