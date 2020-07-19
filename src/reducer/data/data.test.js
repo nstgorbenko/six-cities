@@ -24,6 +24,9 @@ const testStore = {
   },
   DATA: {
     offers: testGroupedPlaces
+  },
+  USER: {
+    authorizationStatus: `NO_AUTH`
   }
 };
 
