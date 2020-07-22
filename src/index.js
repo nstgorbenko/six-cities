@@ -20,6 +20,7 @@ const onDataError = () => {
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.updateAuthStatus(AuthorizationStatus.NO_AUTH));
+  store.dispatch(AppActionCreator.changeScreenType(ScreenType.LOGIN));
 };
 
 const api = createAPI(onDataError, onUnauthorized);
@@ -32,7 +33,6 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers())
   .then((offers) => store.dispatch(AppActionCreator.changeCity(getFirstCity(offers))))
-  .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.LOGIN)))
   .then(() => store.dispatch(UserOperation.checkAuthStatus()))
   .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
 

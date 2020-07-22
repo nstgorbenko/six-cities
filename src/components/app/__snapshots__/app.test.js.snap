@@ -17,7 +17,8 @@ exports[`App Component rendering renders default screen correctly 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link header__logo-link--active"
+            className="header__logo-link"
+            href="main.html"
           >
             <img
               alt="6 cities logo"
@@ -658,11 +659,15 @@ exports[`App Component rendering renders offer screen correctly 1`] = `
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
-                />
+                >
+                  <img
+                    src="https://4.react.pages.academy/six-cities"
+                  />
+                </div>
                 <span
                   className="header__user-name user__name"
                 >
-                  Sign In
+                  
                 </span>
               </a>
             </li>

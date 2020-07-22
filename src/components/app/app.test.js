@@ -46,7 +46,7 @@ describe(`App Component rendering`, () => {
     const tree = renderer
       .create(<Provider store={store}>
         <App
-          authorizationStatus={`NO_AUTH`}
+          authorizationStatus={`AUTH`}
           userInfo={testUserInfo}
           city={testCity}
           cities={testCities}
@@ -156,13 +156,6 @@ describe(`App Component rendering`, () => {
 });
 
 describe(`App mapDispatchToProps working test`, () => {
-  it(`calls changing user info and screen type`, () => {
-    const dispatch = jest.fn();
-
-    mapDispatchToProps(dispatch).login();
-    expect(dispatch).toHaveBeenCalledWith({type: `CHANGE_SCREEN_TYPE`, payload: `default`});
-  });
-
   it(`calls changing city action`, () => {
     const dispatch = jest.fn();
 

@@ -8,7 +8,7 @@ describe(`Offer Component rendering`, () => {
   it(`renders correctly`, () => {
     const tree = renderer
       .create(<Offer
-        authorizationStatus={`NO_AUTH`}
+        authorizationStatus={`AUTH`}
         userInfo={testUserInfo}
         place={testPlaces[0]}
         allPlaces={testPlaces}
