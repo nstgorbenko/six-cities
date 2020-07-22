@@ -48,7 +48,7 @@ exports[`Offer Component rendering renders correctly 1`] = `
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  Sign In
                 </span>
               </a>
             </li>

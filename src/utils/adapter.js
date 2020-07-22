@@ -32,3 +32,11 @@ export const adaptOffers = (offers) => {
     isFavorite: offer.is_favorite,
   }));
 };
+
+export const adaptUserInfo = (info) => ({
+  id: info.id,
+  name: info.name,
+  email: info.email,
+  avatar: info.avatar_url,
+  isSuper: info.is_pro,
+});

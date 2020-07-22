@@ -1,3 +1,5 @@
+import {adaptUserInfo} from "../../utils/adapter.js";
+
 const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
   AUTH: `AUTH`,
@@ -5,10 +7,18 @@ const AuthorizationStatus = {
 
 const initialState = {
   authorizationStatus: AuthorizationStatus.NO_AUTH,
+  info: {
+    id: 0,
+    name: ``,
+    email: ``,
+    avatar: ``,
+    isSuper: true,
+  }
 };
 
 const ActionType = {
   UPDATE_AUTH_STATUS: `UPDATE_AUTH_STATUS`,
+  SET_INFO: `SET_INFO`,
 };
 
 const ActionCreator = {
@@ -16,13 +26,18 @@ const ActionCreator = {
     type: ActionType.UPDATE_AUTH_STATUS,
     payload: status
   }),
+  setInfo: (info) => ({
+    type: ActionType.SET_INFO,
+    payload: info
+  }),
 };
 
 const Operation = {
   checkAuthStatus: () => (dispatch, getState, api) => {
     return api.get(`/login`)
-      .then(() => {
+      .then(({data}) => {
         dispatch(ActionCreator.updateAuthStatus(AuthorizationStatus.AUTH));
+        dispatch(ActionCreator.setInfo(adaptUserInfo(data)));
       })
       .catch((error) => {
         throw error;
@@ -33,8 +48,9 @@ const Operation = {
       email: authData.login,
       password: authData.password,
     })
-    .then(() => {
+    .then(({data}) => {
       dispatch(ActionCreator.updateAuthStatus(AuthorizationStatus.AUTH));
+      dispatch(ActionCreator.setInfo(adaptUserInfo(data)));
     })
     .catch((error) => {
       throw error;
@@ -47,6 +63,10 @@ const reducer = (state = initialState, action) => {
     case (ActionType.UPDATE_AUTH_STATUS) :
       return Object.assign({}, state, {
         authorizationStatus: action.payload
+      });
+    case (ActionType.SET_INFO) :
+      return Object.assign({}, state, {
+        info: action.payload
       });
   }
   return state;

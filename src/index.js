@@ -32,8 +32,9 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers())
   .then((offers) => store.dispatch(AppActionCreator.changeCity(getFirstCity(offers))))
+  .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.LOGIN)))
+  .then(() => store.dispatch(UserOperation.checkAuthStatus()))
   .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
-store.dispatch(UserOperation.checkAuthStatus());
 
 ReactDOM.render(
     <Provider store={store}>

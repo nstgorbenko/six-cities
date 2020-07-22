@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {CardType, SortType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
-import {offerType} from "../../types.js";
+import {offerType, userType} from "../../types.js";
 
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
@@ -15,10 +16,11 @@ const ClassName = {
 };
 
 const Offer = (props) => {
-  const {place, allPlaces, onPlaceCardNameClick} = props;
+  const {authorizationStatus, userInfo, place, allPlaces, onPlaceCardNameClick} = props;
   const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, isPremium, isFavorite} = place;
   const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
+  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
   const nearbyPlaces = allPlaces.filter((currentPlace) => currentPlace.id !== id);
   const ratingPercent = getRatingPercent(rating);
   const placeType = capitalizeWord(type);
@@ -39,7 +41,7 @@ const Offer = (props) => {
                   <a className="header__nav-link header__nav-link--profile" href="#">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <span className="header__user-name user__name">{isAuth ? userInfo.email : `Sign In`}</span>
                   </a>
                 </li>
               </ul>
@@ -116,7 +118,7 @@ const Offer = (props) => {
                 {/* <ReviewsList
                   reviews={reviews}
                 /> */}
-                <form className="reviews__form form" action="#" method="post">
+                {isAuth && <form className="reviews__form form" action="#" method="post">
                   <label className="reviews__label form__label" htmlFor="review">Your review</label>
                   <div className="reviews__rating-form form__rating">
                     <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio"/>
@@ -161,7 +163,7 @@ const Offer = (props) => {
                     </p>
                     <button className="reviews__submit form__submit button" type="submit" disabled="">Submit</button>
                   </div>
-                </form>
+                </form>}
               </section>
             </div>
           </div>
@@ -191,6 +193,8 @@ const Offer = (props) => {
 };
 
 Offer.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  userInfo: PropTypes.shape(userType).isRequired,
   place: PropTypes.shape(offerType).isRequired,
   allPlaces: PropTypes.arrayOf(PropTypes.shape).isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,

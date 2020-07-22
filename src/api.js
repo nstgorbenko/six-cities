@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const Error = {
+  BAD_REQUEST: 400,
   UNAUTHORIZED: 401
 };
 
@@ -19,12 +20,13 @@ const createAPI = (onDataError, onUnauthorized) => {
   const onFail = (error) => {
     const {response} = error;
 
-    if (response.status === Error.UNAUTHORIZED) {
-      onUnauthorized();
-      throw error;
-    } else {
-      onDataError();
-      throw error;
+    switch (response.status) {
+      case Error.BAD_REQUEST:
+        onDataError();
+        throw error;
+      case Error.UNAUTHORIZED:
+        onUnauthorized();
+        throw error;
     }
   };
 

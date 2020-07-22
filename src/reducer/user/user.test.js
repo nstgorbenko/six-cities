@@ -1,24 +1,37 @@
 import {ActionCreator, ActionType, Operation, reducer} from "./user.js";
 import createAPI from "../../api.js";
-import {getAuthorizationStatus} from "./selectors.js";
+import {getAuthorizationStatus, getUserInfo} from "./selectors.js";
 
 import MockAdapter from "axios-mock-adapter";
 
 const testInitialState = {
-  authorizationStatus: `NO_AUTH`
+  authorizationStatus: `NO_AUTH`,
+  info: {
+    id: 0,
+    name: ``,
+    email: ``,
+    avatar: ``,
+    isSuper: true,
+  }
 };
 
 const testStore = {
   APP: {},
   DATA: {},
-  USER: {
-    authorizationStatus: `NO_AUTH`,
-  }
+  USER: testInitialState
 };
 
 const testAuthData = {
-  login: `user@yandex.ru`,
+  login: `Oliver.conner@gmail.com`,
   password: 111111,
+};
+
+const testUserInfo = {
+  id: 1,
+  name: `Oliver.conner`,
+  email: `Oliver.conner@gmail.com`,
+  avatar: undefined,
+  isSuper: undefined,
 };
 
 const api = createAPI(() => {});
@@ -37,6 +50,35 @@ describe(`Reducer working test`, () => {
       payload: `AUTH`,
     })).toEqual({
       authorizationStatus: `AUTH`,
+      info: {
+        id: 0,
+        name: ``,
+        email: ``,
+        avatar: ``,
+        isSuper: true,
+      }
+    });
+  });
+
+  it(`updates user info with given value`, () => {
+    expect(reducer(testInitialState, {
+      type: ActionType.SET_INFO,
+      payload: {
+        id: 1,
+        name: `Oliver.conner`,
+        email: `Oliver.conner@gmail.com`,
+        avatar: `img/1.png`,
+        isSuper: false,
+      },
+    })).toEqual({
+      authorizationStatus: `NO_AUTH`,
+      info: {
+        id: 1,
+        name: `Oliver.conner`,
+        email: `Oliver.conner@gmail.com`,
+        avatar: `img/1.png`,
+        isSuper: false,
+      }
     });
   });
 });
@@ -48,6 +90,25 @@ describe(`Action creators working test`, () => {
       payload: `AUTH`,
     });
   });
+
+  it(`returns action with user info in payload`, () => {
+    expect(ActionCreator.setInfo({
+      id: 1,
+      name: `Oliver.conner`,
+      email: `Oliver.conner@gmail.com`,
+      avatar: `img/1.png`,
+      isSuper: false,
+    })).toEqual({
+      type: ActionType.SET_INFO,
+      payload: {
+        id: 1,
+        name: `Oliver.conner`,
+        email: `Oliver.conner@gmail.com`,
+        avatar: `img/1.png`,
+        isSuper: false,
+      },
+    });
+  });
 });
 
 describe(`Operation working test`, () => {
@@ -57,14 +118,18 @@ describe(`Operation working test`, () => {
 
     apiMock
       .onGet(`/login`)
-      .reply(200);
+      .reply(200, testUserInfo);
 
     return authorizationChecker(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenCalledWith({
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.UPDATE_AUTH_STATUS,
           payload: `AUTH`,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.SET_INFO,
+          payload: testUserInfo,
         });
       });
   });
@@ -75,14 +140,18 @@ describe(`Operation working test`, () => {
 
     apiMock
       .onPost(`/login`)
-      .reply(200);
+      .reply(200, testUserInfo);
 
     return authorization(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatch).toHaveBeenCalledWith({
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.UPDATE_AUTH_STATUS,
           payload: `AUTH`,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.SET_INFO,
+          payload: testUserInfo,
         });
       });
   });
@@ -91,5 +160,15 @@ describe(`Operation working test`, () => {
 describe(`Selectors working test`, () => {
   it(`returns authorization status value`, () => {
     expect(getAuthorizationStatus(testStore)).toEqual(`NO_AUTH`);
+  });
+
+  it(`returns user info value`, () => {
+    expect(getUserInfo(testStore)).toEqual({
+      id: 0,
+      name: ``,
+      email: ``,
+      avatar: ``,
+      isSuper: true,
+    });
   });
 });
