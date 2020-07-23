@@ -170,3 +170,11 @@ export const testGroupedPlaces = [{
   },
   offers: testPlaces
 }];
+
+export const testUserInfo = {
+  id: 0,
+  name: ``,
+  email: ``,
+  avatar: ``,
+  isSuper: true,
+};

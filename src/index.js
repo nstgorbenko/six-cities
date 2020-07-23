@@ -7,6 +7,7 @@ import thunk from "redux-thunk";
 
 import App from "./components/app/app.jsx";
 import {ActionCreator as AppActionCreator} from "./reducer/app/app.js";
+import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from "./reducer/user/user.js";
 import createAPI from "./api.js";
 import {Operation as DataOperation} from "./reducer/data/data.js";
 import {getFirstCity} from "./utils/common.js";
@@ -17,7 +18,12 @@ const onDataError = () => {
   store.dispatch(AppActionCreator.changeScreenType(ScreenType.ERROR));
 };
 
-const api = createAPI(onDataError);
+const onUnauthorized = () => {
+  store.dispatch(UserActionCreator.updateAuthStatus(AuthorizationStatus.NO_AUTH));
+  store.dispatch(AppActionCreator.changeScreenType(ScreenType.LOGIN));
+};
+
+const api = createAPI(onDataError, onUnauthorized);
 
 const store = createStore(
     reducer,
@@ -27,6 +33,7 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers())
   .then((offers) => store.dispatch(AppActionCreator.changeCity(getFirstCity(offers))))
+  .then(() => store.dispatch(UserOperation.checkAuthStatus()))
   .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
 
 ReactDOM.render(

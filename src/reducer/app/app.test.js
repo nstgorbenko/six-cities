@@ -29,6 +29,9 @@ const testStore = {
   },
   DATA: {
     offers: []
+  },
+  USER: {
+    authorizationStatus: `NO_AUTH`
   }
 };
 

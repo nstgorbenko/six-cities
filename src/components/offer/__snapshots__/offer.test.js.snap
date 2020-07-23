@@ -44,11 +44,15 @@ exports[`Offer Component rendering renders correctly 1`] = `
               >
                 <div
                   className="header__avatar-wrapper user__avatar-wrapper"
-                />
+                >
+                  <img
+                    src="https://4.react.pages.academy/six-cities"
+                  />
+                </div>
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  
                 </span>
               </a>
             </li>

@@ -4,7 +4,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import Main from "./main.jsx";
-import {testCity, testCities, testPlaces} from "../../test-data.js";
+import {testCity, testCities, testPlaces, testUserInfo} from "../../test-data.js";
 
 const testStore = configureStore([]);
 
@@ -17,6 +17,8 @@ describe(`Main Component rendering`, () => {
     const tree = renderer
       .create(<Provider store={store}>
         <Main
+          authorizationStatus={`NO_AUTH`}
+          userInfo={testUserInfo}
           activeCity={testCity}
           cities={testCities}
           offers={testPlaces}

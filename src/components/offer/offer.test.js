@@ -2,12 +2,14 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import Offer from "./offer.jsx";
-import {testPlaces} from "../../test-data.js";
+import {testPlaces, testUserInfo} from "../../test-data.js";
 
 describe(`Offer Component rendering`, () => {
   it(`renders correctly`, () => {
     const tree = renderer
       .create(<Offer
+        authorizationStatus={`AUTH`}
+        userInfo={testUserInfo}
         place={testPlaces[0]}
         allPlaces={testPlaces}
         onPlaceCardNameClick={() => {}}

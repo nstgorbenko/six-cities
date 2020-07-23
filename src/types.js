@@ -43,3 +43,11 @@ export const offerType = {
   isPremium: PropTypes.bool.isRequired,
   isFavorite: PropTypes.bool.isRequired
 };
+
+export const userType = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  avatar: PropTypes.string.isRequired,
+  isSuper: PropTypes.bool.isRequired,
+};

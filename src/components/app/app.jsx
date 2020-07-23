@@ -4,13 +4,16 @@ import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
-import {cityType, offerType} from "../../types.js";
+import {cityType, offerType, userType} from "../../types.js";
 import Error from "../error/error.jsx";
+import Login from "../login/login.jsx";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
 import {ScreenType} from "../../const.js";
 import {getActiveOffer, getCity, getScreen, getSortType} from "../../reducer/app/selectors.js";
+import {getAuthorizationStatus, getUserInfo} from "../../reducer/user/selectors.js";
 import {getCities, getCityOffers} from "../../reducer/data/selectors.js";
+import {Operation as UserOperation} from "../../reducer/user/user.js";
 
 class App extends PureComponent {
   constructor(props) {
@@ -20,7 +23,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
+    const {authorizationStatus, userInfo, city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange, login} = this.props;
 
     switch (screen) {
       case ScreenType.ERROR:
@@ -28,9 +31,18 @@ class App extends PureComponent {
           <Error />
         );
 
+      case ScreenType.LOGIN:
+        return (
+          <Login
+            onSubmit={login}
+          />
+        );
+
       case ScreenType.DEFAULT:
         return (
           <Main
+            authorizationStatus={authorizationStatus}
+            userInfo={userInfo}
             activeCity={city}
             cities={cities}
             offers={offers}
@@ -48,6 +60,8 @@ class App extends PureComponent {
 
         return (
           <Offer
+            authorizationStatus={authorizationStatus}
+            userInfo={userInfo}
             place={currentOffer}
             allPlaces={offers}
             onPlaceCardNameClick={onScreenChange}
@@ -59,7 +73,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {offers, onScreenChange} = this.props;
+    // const {offers, onScreenChange} = this.props;
 
     return (
       <BrowserRouter>
@@ -67,13 +81,13 @@ class App extends PureComponent {
           <Route exact path="/">
             {this._renderApp}
           </Route>
-          <Route exact path="/offer">
+          {/* <Route exact path="/offer">
             {offers.length && <Offer
               place={offers[0]}
               allPlaces={offers.slice(0, 4)}
               onPlaceCardNameClick={onScreenChange}
             />}
-          </Route>
+          </Route> */}
         </Switch>
       </BrowserRouter>
     );
@@ -81,6 +95,8 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
+  userInfo: PropTypes.shape(userType).isRequired,
   city: PropTypes.shape(cityType).isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
@@ -90,9 +106,12 @@ App.propTypes = {
   onCityChange: PropTypes.func.isRequired,
   onScreenChange: PropTypes.func.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
+  authorizationStatus: getAuthorizationStatus(state),
+  userInfo: getUserInfo(state),
   city: getCity(state),
   cities: getCities(state),
   offers: getCityOffers(state),
@@ -102,6 +121,10 @@ const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
+  login(authData) {
+    dispatch(UserOperation.login(authData))
+      .then(() => dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
+  },
   onCityChange(city) {
     dispatch(AppActionCreator.changeCity(city));
   },

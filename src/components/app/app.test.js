@@ -4,7 +4,7 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import {App, mapDispatchToProps} from "./app.jsx";
-import {testCity, testCities, testPlaces} from "../../test-data.js";
+import {testCity, testCities, testPlaces, testUserInfo} from "../../test-data.js";
 
 const testStore = configureStore([]);
 
@@ -17,6 +17,8 @@ describe(`App Component rendering`, () => {
     const tree = renderer
       .create(<Provider store={store}>
         <App
+          authorizationStatus={`NO_AUTH`}
+          userInfo={testUserInfo}
           city={testCity}
           cities={testCities}
           offers={testPlaces}
@@ -26,6 +28,7 @@ describe(`App Component rendering`, () => {
           onCityChange={() => {}}
           onScreenChange={() => {}}
           onActiveOfferChange={() => {}}
+          login={() => {}}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)
@@ -43,6 +46,8 @@ describe(`App Component rendering`, () => {
     const tree = renderer
       .create(<Provider store={store}>
         <App
+          authorizationStatus={`AUTH`}
+          userInfo={testUserInfo}
           city={testCity}
           cities={testCities}
           offers={testPlaces}
@@ -52,6 +57,7 @@ describe(`App Component rendering`, () => {
           onCityChange={() => {}}
           onScreenChange={() => {}}
           onActiveOfferChange={() => {}}
+          login={() => {}}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)
@@ -69,6 +75,8 @@ describe(`App Component rendering`, () => {
     const tree = renderer
       .create(<Provider store={store}>
         <App
+          authorizationStatus={`NO_AUTH`}
+          userInfo={testUserInfo}
           city={testCity}
           cities={testCities}
           offers={testPlaces}
@@ -78,6 +86,36 @@ describe(`App Component rendering`, () => {
           onCityChange={() => {}}
           onScreenChange={() => {}}
           onActiveOfferChange={() => {}}
+          login={() => {}}
+        />
+      </Provider>, {
+        createNodeMock: () => document.createElement(`div`)
+      })
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it(`renders login screen correctly`, () => {
+    const store = testStore({
+      APP: {sortType: `Popular`}
+    });
+
+    const tree = renderer
+      .create(<Provider store={store}>
+        <App
+          authorizationStatus={`NO_AUTH`}
+          userInfo={testUserInfo}
+          city={testCity}
+          cities={testCities}
+          offers={testPlaces}
+          sortType={`Popular`}
+          screen={`login`}
+          activeOffer={0}
+          onCityChange={() => {}}
+          onScreenChange={() => {}}
+          onActiveOfferChange={() => {}}
+          login={() => {}}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)
@@ -95,6 +133,8 @@ describe(`App Component rendering`, () => {
     const tree = renderer
       .create(<Provider store={store}>
         <App
+          authorizationStatus={`NO_AUTH`}
+          userInfo={testUserInfo}
           city={testCity}
           cities={testCities}
           offers={testPlaces}
@@ -104,6 +144,7 @@ describe(`App Component rendering`, () => {
           onCityChange={() => {}}
           onScreenChange={() => {}}
           onActiveOfferChange={() => {}}
+          login={() => {}}
         />
       </Provider>, {
         createNodeMock: () => document.createElement(`div`)

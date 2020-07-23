@@ -17,7 +17,8 @@ exports[`Main Component rendering renders correctly 1`] = `
           className="header__left"
         >
           <a
-            className="header__logo-link header__logo-link--active"
+            className="header__logo-link"
+            href="main.html"
           >
             <img
               alt="6 cities logo"
@@ -47,7 +48,7 @@ exports[`Main Component rendering renders correctly 1`] = `
                 <span
                   className="header__user-name user__name"
                 >
-                  Oliver.conner@gmail.com
+                  Sign In
                 </span>
               </a>
             </li>

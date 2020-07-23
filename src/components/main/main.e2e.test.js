@@ -4,7 +4,7 @@ import {Provider} from "react-redux";
 import React from "react";
 
 import Main from "./main.jsx";
-import {testCity, testCities, testPlaces} from "../../test-data.js";
+import {testCity, testCities, testPlaces, testUserInfo} from "../../test-data.js";
 
 const testStore = configureStore([]);
 
@@ -17,6 +17,8 @@ describe(`Places names click test`, () => {
 
     const main = mount(<Provider store={store}>
       <Main
+        authorizationStatus={`NO_AUTH`}
+        userInfo={testUserInfo}
         activeCity={testCity}
         cities={testCities}
         offers={testPlaces}
