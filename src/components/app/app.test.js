@@ -8,12 +8,13 @@ import {testCity, testCities, testPlaces, testUserInfo} from "../../test-data.js
 
 const testStore = configureStore([]);
 
+const store = testStore({
+  APP: {sortType: `Popular`},
+  DATA: {loadStatus: `SUCCESS`}
+});
+
 describe(`App Component rendering`, () => {
   it(`renders default screen correctly`, () => {
-    const store = testStore({
-      APP: {sortType: `Popular`}
-    });
-
     const tree = renderer
       .create(<Provider store={store}>
         <App
@@ -39,10 +40,6 @@ describe(`App Component rendering`, () => {
   });
 
   it(`renders offer screen correctly`, () => {
-    const store = testStore({
-      APP: {sortType: `Popular`}
-    });
-
     const tree = renderer
       .create(<Provider store={store}>
         <App
@@ -68,10 +65,6 @@ describe(`App Component rendering`, () => {
   });
 
   it(`renders error screen correctly`, () => {
-    const store = testStore({
-      APP: {sortType: `Popular`}
-    });
-
     const tree = renderer
       .create(<Provider store={store}>
         <App
@@ -97,10 +90,6 @@ describe(`App Component rendering`, () => {
   });
 
   it(`renders login screen correctly`, () => {
-    const store = testStore({
-      APP: {sortType: `Popular`}
-    });
-
     const tree = renderer
       .create(<Provider store={store}>
         <App
@@ -126,10 +115,6 @@ describe(`App Component rendering`, () => {
   });
 
   it(`renders null when screen value is undefined`, () => {
-    const store = testStore({
-      APP: {sortType: `Popular`}
-    });
-
     const tree = renderer
       .create(<Provider store={store}>
         <App

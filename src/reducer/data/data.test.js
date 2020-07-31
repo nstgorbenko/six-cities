@@ -1,11 +1,12 @@
 import {ActionCreator, ActionType, Operation, reducer} from "./data.js";
 import createAPI from "../../api.js";
-import {getOffers, getCities, getCityOffers} from "./selectors.js";
+import {getOffers, getCities, getCityOffers, getLoadStatus} from "./selectors.js";
 import {testGroupedPlaces, testPlaces, testServerData} from "../../test-data.js";
 
 import MockAdapter from "axios-mock-adapter";
 
 const testInitialState = {
+  loadStatus: `SUCCESS`,
   offers: [],
 };
 
@@ -23,7 +24,8 @@ const testStore = {
     activeOffer: 10,
   },
   DATA: {
-    offers: testGroupedPlaces
+    loadStatus: `SUCCESS`,
+    offers: testGroupedPlaces,
   },
   USER: {
     authorizationStatus: `NO_AUTH`
@@ -34,6 +36,15 @@ const emptyStore = Object.assign({}, testStore, {
   APP: {city: {name: ``}},
   DATA: {offers: []},
 });
+
+const testReviewData = {
+  hotelId: 1,
+  comment: `Nice`,
+  rating: 5,
+};
+
+const api = createAPI(() => {});
+const apiMock = new MockAdapter(api);
 
 describe(`Reducer working test`, () => {
   it(`returns initial state without additional parameters`, () => {
@@ -47,7 +58,18 @@ describe(`Reducer working test`, () => {
       type: ActionType.LOAD_OFFERS,
       payload: testPlaces,
     })).toEqual({
+      loadStatus: `SUCCESS`,
       offers: testPlaces,
+    });
+  });
+
+  it(`updates loadStatus with given value`, () => {
+    expect(reducer(testInitialState, {
+      type: ActionType.UPDATE_LOAD_STATUS,
+      payload: `LOADING`,
+    })).toEqual({
+      loadStatus: `LOADING`,
+      offers: [],
     });
   });
 });
@@ -59,12 +81,17 @@ describe(`Action creators working test`, () => {
       payload: testPlaces,
     });
   });
+
+  it(`returns action with loadStatus in payload`, () => {
+    expect(ActionCreator.updateLoadStatus(`LOADING`)).toEqual({
+      type: ActionType.UPDATE_LOAD_STATUS,
+      payload: `LOADING`,
+    });
+  });
 });
 
 describe(`Operation working test`, () => {
-  it(`makes a correct API call to /questions`, () => {
-    const api = createAPI(() => {});
-    const apiMock = new MockAdapter(api);
+  it(`makes a correct API GET call to /hotels`, () => {
     const dispatch = jest.fn();
     const questionLoader = Operation.loadOffers();
 
@@ -78,6 +105,28 @@ describe(`Operation working test`, () => {
         expect(dispatch).toHaveBeenCalledWith({
           type: ActionType.LOAD_OFFERS,
           payload: testGroupedPlaces,
+        });
+      });
+  });
+
+  it(`makes a correct API POST call to /comments`, () => {
+    const dispatch = jest.fn();
+    const reviewSender = Operation.postReview(testReviewData);
+
+    apiMock
+      .onPost(`/comments/${testReviewData.hotelId}`)
+      .reply(200);
+
+    return reviewSender(dispatch, () => {}, api)
+      .then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenNthCalledWith(1, {
+          type: ActionType.UPDATE_LOAD_STATUS,
+          payload: `LOADING`,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.UPDATE_LOAD_STATUS,
+          payload: `SUCCESS`,
         });
       });
   });
@@ -108,5 +157,9 @@ describe(`Selectors working test`, () => {
 
   it(`returns empty array if store offers length < 0 and city name is empty string`, () => {
     expect(getCityOffers(emptyStore)).toEqual([]);
+  });
+
+  it(`returns loadStatus value`, () => {
+    expect(getLoadStatus(testStore)).toEqual(`SUCCESS`);
   });
 });

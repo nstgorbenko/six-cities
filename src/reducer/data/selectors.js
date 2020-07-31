@@ -22,3 +22,5 @@ export const getCityOffers = createSelector(getOffers, getCity,
       }
       return [];
     });
+
+export const getLoadStatus = (state) => state[NAME_SPACE].loadStatus;

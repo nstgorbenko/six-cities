@@ -23,11 +23,12 @@ const createAPI = (onDataError, onUnauthorized) => {
     switch (response.status) {
       case Error.BAD_REQUEST:
         onDataError();
-        throw error;
+        break;
       case Error.UNAUTHORIZED:
         onUnauthorized();
-        throw error;
+        break;
     }
+    throw error;
   };
 
   api.interceptors.response.use(onSuccess, onFail);

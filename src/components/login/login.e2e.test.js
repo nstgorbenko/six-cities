@@ -16,8 +16,8 @@ describe(`Login working test`, () => {
     loginRef.current = {value: `Oliver.conner@gmail.com`};
     passwordRef.current = {value: 11111};
 
-    const submitButton = login.find(`form`);
-    submitButton.simulate(`submit`, {preventDefault() {}});
+    const form = login.find(`form`);
+    form.simulate(`submit`, {preventDefault() {}});
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith({

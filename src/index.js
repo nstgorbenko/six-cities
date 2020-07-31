@@ -20,7 +20,6 @@ const onDataError = () => {
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.updateAuthStatus(AuthorizationStatus.NO_AUTH));
-  store.dispatch(AppActionCreator.changeScreenType(ScreenType.LOGIN));
 };
 
 const api = createAPI(onDataError, onUnauthorized);
