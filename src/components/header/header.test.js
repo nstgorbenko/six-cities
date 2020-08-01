@@ -1,7 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Header from "./header.jsx";
+import {Header} from "./header.jsx";
 import {testUserInfo} from "../../test-data.js";
 
 describe(`Header Component rendering`, () => {

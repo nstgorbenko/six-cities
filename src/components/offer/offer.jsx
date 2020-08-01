@@ -5,7 +5,7 @@ import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {CardType, SortType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import Header from "../header/header.jsx";
-import {offerType, userType} from "../../types.js";
+import {offerType} from "../../types.js";
 
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
@@ -19,7 +19,7 @@ const ClassName = {
 };
 
 const Offer = (props) => {
-  const {authorizationStatus, userInfo, place, allPlaces, onPlaceCardNameClick} = props;
+  const {authorizationStatus, place, allPlaces, onPlaceCardNameClick} = props;
   const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, isPremium, isFavorite} = place;
   const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
@@ -32,10 +32,7 @@ const Offer = (props) => {
 
   return (
     <div className="page">
-      <Header
-        authorizationStatus={authorizationStatus}
-        userInfo={userInfo}
-      />
+      <Header />
 
       <main className="page__main page__main--property">
         <section className="property">
@@ -139,7 +136,6 @@ const Offer = (props) => {
 
 Offer.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  userInfo: PropTypes.shape(userType).isRequired,
   place: PropTypes.shape(offerType).isRequired,
   allPlaces: PropTypes.arrayOf(PropTypes.shape).isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,

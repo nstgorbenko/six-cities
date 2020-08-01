@@ -1,3 +1,10 @@
+export const AppRoute = {
+  FAVORITES: `/favorites`,
+  LOGIN: `/login`,
+  MAIN: `/`,
+  OFFER: `/offer`,
+};
+
 export const CardType = {
   CITIES: `cities`,
   NEAR_PLACES: `near-places`
@@ -8,6 +15,7 @@ export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 export const ScreenType = {
   DEFAULT: `default`,
   ERROR: `error`,
+  FAVORITES: `favorites`,
   LOGIN: `login`,
   OFFER: `offer`
 };

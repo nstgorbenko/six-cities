@@ -6,7 +6,7 @@ const AuthorizationStatus = {
 };
 
 const initialState = {
-  authorizationStatus: AuthorizationStatus.NO_AUTH,
+  authorizationStatus: ``,
   info: {
     id: 0,
     name: ``,

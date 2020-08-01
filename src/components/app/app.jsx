@@ -1,19 +1,22 @@
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import React, {PureComponent} from "react";
 
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
-import {cityType, offerType, userType} from "../../types.js";
+import {AuthorizationStatus} from "../../reducer/user/user.js";
+import {cityType, offerType} from "../../types.js";
 import Error from "../error/error.jsx";
+import Favorites from "../favorites/favorites.jsx";
 import Login from "../login/login.jsx";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
-import {ScreenType} from "../../const.js";
+import {AppRoute, ScreenType} from "../../const.js";
 import {getActiveOffer, getCity, getScreen, getSortType} from "../../reducer/app/selectors.js";
-import {getAuthorizationStatus, getUserInfo} from "../../reducer/user/selectors.js";
+import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {getCities, getCityOffers} from "../../reducer/data/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
+import PrivateRoute from "../private-route/private-route.jsx";
 
 class App extends PureComponent {
   constructor(props) {
@@ -23,7 +26,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {authorizationStatus, userInfo, city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange, login} = this.props;
+    const {authorizationStatus, city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
 
     switch (screen) {
       case ScreenType.ERROR:
@@ -32,17 +35,11 @@ class App extends PureComponent {
         );
 
       case ScreenType.LOGIN:
-        return (
-          <Login
-            onSubmit={login}
-          />
-        );
+        return <Redirect to={AppRoute.LOGIN}/>;
 
       case ScreenType.DEFAULT:
         return (
           <Main
-            authorizationStatus={authorizationStatus}
-            userInfo={userInfo}
             activeCity={city}
             cities={cities}
             offers={offers}
@@ -55,13 +52,15 @@ class App extends PureComponent {
           />
         );
 
+      case ScreenType.FAVORITES:
+        return <Redirect to={AppRoute.FAVORITES}/>;
+
       case ScreenType.OFFER:
         const currentOffer = offers.find(({id}) => id === activeOffer);
 
         return (
           <Offer
             authorizationStatus={authorizationStatus}
-            userInfo={userInfo}
             place={currentOffer}
             allPlaces={offers}
             onPlaceCardNameClick={onScreenChange}
@@ -73,21 +72,35 @@ class App extends PureComponent {
   }
 
   render() {
-    // const {offers, onScreenChange} = this.props;
+    const {authorizationStatus, login} = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/">
+          <Route exact path={AppRoute.MAIN}>
             {this._renderApp}
           </Route>
-          {/* <Route exact path="/offer">
-            {offers.length && <Offer
-              place={offers[0]}
-              allPlaces={offers.slice(0, 4)}
-              onPlaceCardNameClick={onScreenChange}
-            />}
-          </Route> */}
+
+          <Route exact path={AppRoute.LOGIN}
+            render={() => {
+              switch (authorizationStatus) {
+                case AuthorizationStatus.AUTH:
+                  return <Redirect to={AppRoute.MAIN} />;
+                case AuthorizationStatus.NO_AUTH:
+                  return <Login onSubmit = {login} />;
+                default:
+                  return null;
+              }
+            }}>
+          </Route>
+
+          <PrivateRoute exact path={AppRoute.FAVORITES}
+            render={() => <Favorites />}
+          />
+
+          <Route>
+            <Error />
+          </Route>
         </Switch>
       </BrowserRouter>
     );
@@ -96,7 +109,6 @@ class App extends PureComponent {
 
 App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
-  userInfo: PropTypes.shape(userType).isRequired,
   city: PropTypes.shape(cityType).isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
@@ -111,7 +123,6 @@ App.propTypes = {
 
 const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
-  userInfo: getUserInfo(state),
   city: getCity(state),
   cities: getCities(state),
   offers: getCityOffers(state),

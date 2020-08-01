@@ -6,23 +6,20 @@ import CitiesList from "../cities-list/cities-list.jsx";
 import Header from "../header/header.jsx";
 import Map from '../map/map.jsx';
 import NoPlaces from "../no-places/no-places.jsx";
-import {cityType, offerType, userType} from "../../types.js";
+import {cityType, offerType} from "../../types.js";
 import PlacesList from "../places-list/places-list.jsx";
 import Sort from "../sort/sort.jsx";
 import withActiveFlag from "../../hocs/with-active-flag/with-active-flag.js";
 
 const Main = (props) => {
-  const {authorizationStatus, userInfo, activeCity, cities, offers, sortType, activeOffer, onPlaceCardNameClick, onCityNameClick, onPlaceCardHover} = props;
+  const {activeCity, cities, offers, sortType, activeOffer, onPlaceCardNameClick, onCityNameClick, onPlaceCardHover} = props;
   const {name: cityName, location: cityLocation} = activeCity;
 
   const SortWrapped = withActiveFlag(Sort);
 
   return (
     <div className="page page--gray page--main">
-      <Header
-        authorizationStatus={authorizationStatus}
-        userInfo={userInfo}
-      />
+      <Header />
 
       <main className={`page__main page__main--index ${offers.length === 0 ? `page__main--index-empty` : ``}`}>
         <h1 className="visually-hidden">Cities</h1>
@@ -65,8 +62,6 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  userInfo: PropTypes.shape(userType).isRequired,
   activeCity: PropTypes.shape(cityType).isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
