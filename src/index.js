@@ -33,6 +33,7 @@ const store = createStore(
 
 store.dispatch(DataOperation.loadOffers())
   .then((offers) => store.dispatch(AppActionCreator.changeCity(getFirstCity(offers))))
+  .then(() => store.dispatch(DataOperation.loadFavorites()))
   .then(() => store.dispatch(UserOperation.checkAuthStatus()))
   .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
 

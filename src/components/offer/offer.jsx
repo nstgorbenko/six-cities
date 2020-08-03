@@ -1,8 +1,9 @@
+import {Link} from "react-router-dom";
 import React from "react";
 import PropTypes from "prop-types";
 
 import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {CardType, SortType} from "../../const.js";
+import {AppRoute, CardType, SortType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import Header from "../header/header.jsx";
 import {offerType} from "../../types.js";
@@ -18,8 +19,10 @@ const ClassName = {
   SUPER_HOST: `property__avatar-wrapper--pro`
 };
 
+const MAX_PHOTOS_COUNT = 6;
+
 const Offer = (props) => {
-  const {authorizationStatus, place, allPlaces, onPlaceCardNameClick} = props;
+  const {authorizationStatus, place, allPlaces, onPlaceCardNameClick, addToFavorites} = props;
   const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, isPremium, isFavorite} = place;
   const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
@@ -27,6 +30,7 @@ const Offer = (props) => {
   const nearbyPlaces = allPlaces.filter((currentPlace) => currentPlace.id !== id);
   const ratingPercent = getRatingPercent(rating);
   const placeType = capitalizeWord(type);
+  const photos = allPhotos.slice(0, MAX_PHOTOS_COUNT);
 
   const ReviewFormWrapped = withReview(ReviewForm);
 
@@ -38,7 +42,7 @@ const Offer = (props) => {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {allPhotos.map((photo, index) =>
+              {photos.map((photo, index) =>
                 <div className="property__image-wrapper" key={photo + index}>
                   <img className="property__image" src={photo} alt="Photo studio"/>
                 </div>
@@ -53,12 +57,29 @@ const Offer = (props) => {
                 </div> : null}
               <div className="property__name-wrapper">
                 <h1 className="property__name">{name}</h1>
-                <button className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`} type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden">To bookmarks</span>
-                </button>
+                {isAuth
+                  ? <button
+                    className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`} type="button"
+                    onClick={() => addToFavorites({
+                      hotelId: id,
+                      status: Number(!isFavorite)
+                    })}
+                  >
+                    <svg className="property__bookmark-icon" width="31" height="33">
+                      <use xlinkHref="#icon-bookmark"></use>
+                    </svg>
+                    <span className="visually-hidden">To bookmarks</span>
+                  </button>
+                  : <Link
+                    className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`}
+                    to={AppRoute.LOGIN}
+                  >
+                    <svg className="property__bookmark-icon" width="31" height="33">
+                      <use xlinkHref="#icon-bookmark"></use>
+                    </svg>
+                    <span className="visually-hidden">To bookmarks</span>
+                  </Link>
+                }
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -69,10 +90,8 @@ const Offer = (props) => {
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">{placeType}</li>
-                <li className="property__feature property__feature--bedrooms">{bedrooms} Bedrooms</li>
-                <li className="property__feature property__feature--adults">
-                  Max {adults} adults
-                </li>
+                <li className="property__feature property__feature--bedrooms">{bedrooms} {bedrooms === 1 ? `Bedroom` : `Bedrooms`}</li>
+                <li className="property__feature property__feature--adults">Max {adults} {adults === 1 ? `adult` : `adults`}</li>
               </ul>
               <div className="property__price">
                 <b className="property__price-value">&euro;{price}</b>
@@ -138,7 +157,9 @@ Offer.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   place: PropTypes.shape(offerType).isRequired,
   allPlaces: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  addToFavorites: PropTypes.func.isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,
+  // goToLogin: PropTypes.func.isRequired,
 };
 
 export default Offer;

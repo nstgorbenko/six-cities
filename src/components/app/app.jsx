@@ -6,6 +6,7 @@ import React, {PureComponent} from "react";
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {cityType, offerType} from "../../types.js";
+import {Operation as DataOperation} from "../../reducer/data/data.js";
 import Error from "../error/error.jsx";
 import Favorites from "../favorites/favorites.jsx";
 import Login from "../login/login.jsx";
@@ -26,7 +27,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {authorizationStatus, city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange} = this.props;
+    const {authorizationStatus, city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange, addToFavorites} = this.props;
 
     switch (screen) {
       case ScreenType.ERROR:
@@ -64,6 +65,7 @@ class App extends PureComponent {
             place={currentOffer}
             allPlaces={offers}
             onPlaceCardNameClick={onScreenChange}
+            addToFavorites={addToFavorites}
           />
         );
       default:
@@ -115,6 +117,7 @@ App.propTypes = {
   sortType: PropTypes.string.isRequired,
   screen: PropTypes.string.isRequired,
   activeOffer: PropTypes.number.isRequired,
+  addToFavorites: PropTypes.func.isRequired,
   onCityChange: PropTypes.func.isRequired,
   onScreenChange: PropTypes.func.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
@@ -132,9 +135,13 @@ const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
+  addToFavorites(favoriteData) {
+    dispatch(DataOperation.addToFavorites(favoriteData));
+  },
   login(authData) {
     dispatch(UserOperation.login(authData))
-      .then(() => dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
+      .then(() => dispatch(DataOperation.loadOffers()))
+      .then(() => dispatch(DataOperation.loadFavorites()));
   },
   onCityChange(city) {
     dispatch(AppActionCreator.changeCity(city));

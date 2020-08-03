@@ -24,3 +24,5 @@ export const getCityOffers = createSelector(getOffers, getCity,
     });
 
 export const getLoadStatus = (state) => state[NAME_SPACE].loadStatus;
+
+export const getFavorites = (state) => state[NAME_SPACE].favorites;
