@@ -2,7 +2,8 @@ import axios from "axios";
 
 const Error = {
   BAD_REQUEST: 400,
-  UNAUTHORIZED: 401
+  UNAUTHORIZED: 401,
+  NOT_FOUND: 404,
 };
 
 const LOADING_TIME = 5000;
@@ -22,6 +23,7 @@ const createAPI = (onDataError, onUnauthorized) => {
 
     switch (response.status) {
       case Error.BAD_REQUEST:
+      case Error.NOT_FOUND:
         onDataError();
         break;
       case Error.UNAUTHORIZED:

@@ -6,11 +6,11 @@ import {locationType, offerType} from "../../types.js";
 
 const MarkerSettings = {
   DEFAULT: {
-    iconUrl: `img/pin.svg`,
+    iconUrl: `/img/pin.svg`,
     iconSize: [30, 30]
   },
   ACTIVE: {
-    iconUrl: `img/pin-active.svg`,
+    iconUrl: `/img/pin-active.svg`,
     iconSize: [30, 30]
   },
 };

@@ -5,9 +5,18 @@ import NameSpace from "../name-space.js";
 
 const NAME_SPACE = NameSpace.DATA;
 
-export const getOffers = (state) => state[NAME_SPACE].offers;
+const getGroupedOffers = (state) => state[NAME_SPACE].offers;
 
-export const getCities = createSelector(getOffers,
+export const getOffers = createSelector(getGroupedOffers,
+    (offers) => {
+      if (offers.length > 0) {
+        return offers.map((group) => group.offers)
+          .reduce((a, b) => a.concat(b));
+      }
+      return [];
+    });
+
+export const getCities = createSelector(getGroupedOffers,
     (offers) => {
       if (offers.length > 0) {
         return offers.map(({name, location}) => ({name, location}));
@@ -15,7 +24,7 @@ export const getCities = createSelector(getOffers,
       return [];
     });
 
-export const getCityOffers = createSelector(getOffers, getCity,
+export const getCityOffers = createSelector(getGroupedOffers, getCity,
     (allOffers, city) => {
       if (allOffers.length > 0 && city.name !== ``) {
         return allOffers.find(({name}) => name === city.name).offers;

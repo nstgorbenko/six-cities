@@ -10,6 +10,11 @@ export const CardType = {
   NEAR_PLACES: `near-places`
 };
 
+export const ErrorMessage = {
+  FAIL_LOAD: [`Oops!`, `Something went wrong.`, `Please refresh page to load data.`],
+  NOT_FOUND: [`404`, `Page not found.`]
+};
+
 export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 
 export const ScreenType = {

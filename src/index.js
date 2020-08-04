@@ -31,15 +31,19 @@ const store = createStore(
         applyMiddleware(thunk.withExtraArgument(api)))
 );
 
+const init = () => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+};
+
 store.dispatch(DataOperation.loadOffers())
   .then((offers) => store.dispatch(AppActionCreator.changeCity(getFirstCity(offers))))
   .then(() => store.dispatch(DataOperation.loadFavorites()))
   .then(() => store.dispatch(UserOperation.checkAuthStatus()))
-  .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
+  .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)))
+  .finally(() => init());
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.querySelector(`#root`)
-);

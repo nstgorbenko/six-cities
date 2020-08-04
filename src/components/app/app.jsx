@@ -12,10 +12,10 @@ import Favorites from "../favorites/favorites.jsx";
 import Login from "../login/login.jsx";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
-import {AppRoute, ScreenType} from "../../const.js";
+import {AppRoute, ErrorMessage, ScreenType} from "../../const.js";
 import {getActiveOffer, getCity, getScreen, getSortType} from "../../reducer/app/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {getCities, getCityOffers} from "../../reducer/data/selectors.js";
+import {getCities, getCityOffers, getOffers} from "../../reducer/data/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 
@@ -27,12 +27,14 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {authorizationStatus, city, cities, offers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange, addToFavorites} = this.props;
+    const {authorizationStatus, city, cities, cityOffers, sortType, screen, activeOffer, onCityChange, onScreenChange, onActiveOfferChange, addToFavorites} = this.props;
 
     switch (screen) {
       case ScreenType.ERROR:
         return (
-          <Error />
+          <Error
+            text={ErrorMessage.FAIL_LOAD}
+          />
         );
 
       case ScreenType.LOGIN:
@@ -43,7 +45,7 @@ class App extends PureComponent {
           <Main
             activeCity={city}
             cities={cities}
-            offers={offers}
+            offers={cityOffers}
             sortType={sortType}
             activeOffer={activeOffer}
 
@@ -57,13 +59,13 @@ class App extends PureComponent {
         return <Redirect to={AppRoute.FAVORITES}/>;
 
       case ScreenType.OFFER:
-        const currentOffer = offers.find(({id}) => id === activeOffer);
+        const currentOffer = cityOffers.find(({id}) => id === activeOffer);
 
         return (
           <Offer
             authorizationStatus={authorizationStatus}
             place={currentOffer}
-            allPlaces={offers}
+            allPlaces={cityOffers}
             onPlaceCardNameClick={onScreenChange}
             addToFavorites={addToFavorites}
           />
@@ -74,13 +76,32 @@ class App extends PureComponent {
   }
 
   render() {
-    const {authorizationStatus, login} = this.props;
+    const {authorizationStatus, allOffers, cityOffers, login, addToFavorites, onScreenChange} = this.props;
 
     return (
       <BrowserRouter>
         <Switch>
           <Route exact path={AppRoute.MAIN}>
             {this._renderApp}
+          </Route>
+
+          <Route exact path={`${AppRoute.OFFER}/:id`}
+            render={(props) => {
+              const id = Number(props.match.params.id);
+              const currentOffer = allOffers.find((offer) => offer.id === id);
+
+              return currentOffer
+                ? <Offer
+                  authorizationStatus={authorizationStatus}
+                  place={currentOffer}
+                  allPlaces={cityOffers}
+                  onPlaceCardNameClick={onScreenChange}
+                  addToFavorites={addToFavorites}
+                />
+                : <Error
+                  text={ErrorMessage.NOT_FOUND}
+                />;
+            }}>
           </Route>
 
           <Route exact path={AppRoute.LOGIN}
@@ -101,7 +122,9 @@ class App extends PureComponent {
           />
 
           <Route>
-            <Error />
+            <Error
+              text={ErrorMessage.NOT_FOUND}
+            />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -113,7 +136,8 @@ App.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   city: PropTypes.shape(cityType).isRequired,
   cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  cityOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  allOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
   screen: PropTypes.string.isRequired,
   activeOffer: PropTypes.number.isRequired,
@@ -128,7 +152,8 @@ const mapStateToProps = (state) => ({
   authorizationStatus: getAuthorizationStatus(state),
   city: getCity(state),
   cities: getCities(state),
-  offers: getCityOffers(state),
+  cityOffers: getCityOffers(state),
+  allOffers: getOffers(state),
   sortType: getSortType(state),
   screen: getScreen(state),
   activeOffer: getActiveOffer(state),
