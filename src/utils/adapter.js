@@ -41,3 +41,19 @@ export const adaptUserInfo = (info) => ({
   avatar: info.avatar_url,
   isSuper: info.is_pro,
 });
+
+const adaptReview = (review) => ({
+  id: review.id,
+  user: {
+    id: review.user.id,
+    name: review.user.name,
+    avatar: review.user.avatar_url,
+    isSuper: review.user.is_pro,
+  },
+  rating: review.rating,
+  text: review.comment,
+  time: review.date,
+});
+
+export const adaptReviews = (reviews) =>
+  reviews.map((review) => adaptReview(review));

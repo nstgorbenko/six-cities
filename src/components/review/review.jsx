@@ -7,7 +7,8 @@ import {reviewType} from "../../types.js";
 
 const Review = (props) => {
   const {info} = props;
-  const {userName, userAvatar, rating, text, time} = info;
+  const {user, rating, text, time} = info;
+  const {name, avatar} = user;
 
   const ratingPercent = getRatingPercent(rating);
   const datetime = formatDateToDatetime(time);
@@ -17,9 +18,9 @@ const Review = (props) => {
     <li className="reviews__item">
       <div className="reviews__user user">
         <div className="reviews__avatar-wrapper user__avatar-wrapper">
-          <img className="reviews__avatar user__avatar" src={userAvatar} width="54" height="54" alt="Reviews avatar"/>
+          <img className="reviews__avatar user__avatar" src={avatar} width="54" height="54" alt="Reviews avatar"/>
         </div>
-        <span className="reviews__user-name">{userName}</span>
+        <span className="reviews__user-name">{name}</span>
       </div>
       <div className="reviews__info">
         <div className="reviews__rating rating">

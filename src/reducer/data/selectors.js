@@ -7,15 +7,6 @@ const NAME_SPACE = NameSpace.DATA;
 
 const getGroupedOffers = (state) => state[NAME_SPACE].offers;
 
-export const getOffers = createSelector(getGroupedOffers,
-    (offers) => {
-      if (offers.length > 0) {
-        return offers.map((group) => group.offers)
-          .reduce((a, b) => a.concat(b));
-      }
-      return [];
-    });
-
 export const getCities = createSelector(getGroupedOffers,
     (offers) => {
       if (offers.length > 0) {
@@ -32,6 +23,17 @@ export const getCityOffers = createSelector(getGroupedOffers, getCity,
       return [];
     });
 
+export const getFavorites = (state) => state[NAME_SPACE].favorites;
+
 export const getLoadStatus = (state) => state[NAME_SPACE].loadStatus;
 
-export const getFavorites = (state) => state[NAME_SPACE].favorites;
+export const getOffers = createSelector(getGroupedOffers,
+    (offers) => {
+      if (offers.length > 0) {
+        return offers.map((group) => group.offers)
+          .reduce((a, b) => a.concat(b));
+      }
+      return [];
+    });
+
+export const getReviews = (state) => state[NAME_SPACE].reviews;

@@ -1,4 +1,4 @@
-import {adaptOffer, adaptOffers} from "../../utils/adapter.js";
+import {adaptOffer, adaptOffers, adaptReviews} from "../../utils/adapter.js";
 import {groupOffersByCities, updateOffers, updateFavorites} from "../../utils/common.js";
 import {getOffers, getFavorites} from "./selectors.js";
 
@@ -12,11 +12,13 @@ const initialState = {
   favorites: [],
   loadStatus: LoadStatus.SUCCESS,
   offers: [],
+  reviews: [],
 };
 
 const ActionType = {
   LOAD_FAVORITES: `LOAD_FAVORITES`,
   LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   UPDATE_LOAD_STATUS: `UPDATE_LOAD_STATUS`,
 };
 
@@ -28,6 +30,10 @@ const ActionCreator = {
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
     payload: offers,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
   }),
   updateLoadStatus: (loadStatus) => ({
     type: ActionType.UPDATE_LOAD_STATUS,
@@ -58,6 +64,17 @@ const Operation = {
       .catch((error) => {
         throw error;
       });
+  },
+
+  loadReviews: (hotelId) => (dispatch, getState, api) => {
+    return api.get(`/comments/${hotelId}`)
+    .then(({data}) => {
+      const adaptedReview = adaptReviews(data);
+      dispatch(ActionCreator.loadReviews(adaptedReview));
+    })
+    .catch((error) => {
+      throw error;
+    });
   },
 
   addToFavorites: (favoriteOffer) => (dispatch, getState, api) => {
@@ -105,6 +122,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_OFFERS:
       return Object.assign({}, state, {
         offers: action.payload,
+      });
+    case ActionType.LOAD_REVIEWS:
+      return Object.assign({}, state, {
+        reviews: action.payload,
       });
     case ActionType.UPDATE_LOAD_STATUS:
       return Object.assign({}, state, {

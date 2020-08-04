@@ -8,8 +8,13 @@ export const locationType = {
 };
 
 export const reviewType = {
-  userName: PropTypes.string.isRequired,
-  userAvatar: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
+  user: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+    isSuper: PropTypes.bool.isRequired,
+  }),
   rating: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,

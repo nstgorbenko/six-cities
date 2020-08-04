@@ -1,9 +1,10 @@
+import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import React from "react";
-import {connect} from "react-redux";
 
 import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {CardType, ScreenType} from "../../const.js";
+import {AppRoute, CardType, ScreenType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
@@ -64,10 +65,10 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a
-            href="#"
+          <Link
+            to={`${AppRoute.OFFER}/${id}`}
             onClick={() => onNameClick(ScreenType.OFFER, id)}
-          >{name}</a>
+          >{name}</Link>
         </h2>
         <p className="place-card__type">{placeType}</p>
       </div>
