@@ -1,6 +1,6 @@
 import {Link} from "react-router-dom";
-import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import React, {PureComponent} from "react";
 
 import {AuthorizationStatus} from "../../reducer/user/user.js";
 import {AppRoute, CardType, SortType} from "../../const.js";
@@ -11,41 +11,43 @@ import Header from "../header/header.jsx";
 import Map from '../map/map.jsx';
 import PlacesList from "../places-list/places-list.jsx";
 import ReviewForm from "../review-form/review-form.jsx";
-import withReview from "../../hocs/with-review/with-review.js";
 import ReviewsList from "../reviews-list/reviews-list.jsx";
+import withReview from "../../hocs/with-review/with-review.js";
 
 const ClassName = {
   FAVORITE: `property__bookmark-button--active`,
   SUPER_HOST: `property__avatar-wrapper--pro`
 };
 
+const MAX_NEARBY_OFFERS_COUNT = 3;
 const MAX_PHOTOS_COUNT = 6;
 
 class Offer extends PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
-    const {loadReviews, place} = this.props;
-    loadReviews(place.id);
+    this._updateData();
   }
 
   componentDidUpdate(prevProps) {
-    const {loadReviews, place} = this.props;
-
-    if (prevProps.place.id !== place.id) {
-      loadReviews(place.id);
+    if (prevProps.place.id !== this.props.place.id) {
+      this._updateData();
     }
   }
 
+  _updateData() {
+    const {loadNearbyOffers, loadReviews, place} = this.props;
+
+    loadNearbyOffers(place.id);
+    loadReviews(place.id);
+  }
+
   render() {
-    const {authorizationStatus, place, allPlaces, reviews, onPlaceCardNameClick, addToFavorites} = this.props;
+    const {authorizationStatus, place, nearbyOffers, reviews, onPlaceCardNameClick, addToFavorites} = this.props;
     const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, isPremium, isFavorite} = place;
     const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
     const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
-    const nearbyPlaces = allPlaces.filter((currentPlace) => currentPlace.id !== id);
+    const shownNearbyPlaces = nearbyOffers.slice(0, MAX_NEARBY_OFFERS_COUNT);
+    const mapPlaces = shownNearbyPlaces.concat(place);
     const ratingPercent = getRatingPercent(rating);
     const placeType = capitalizeWord(type);
     const photos = allPhotos.slice(0, MAX_PHOTOS_COUNT);
@@ -149,7 +151,7 @@ class Offer extends PureComponent {
             <section className="property__map map">
               <Map
                 center={location}
-                offers={allPlaces}
+                offers={mapPlaces}
                 activeOffer={id}
               />
             </section>
@@ -159,7 +161,7 @@ class Offer extends PureComponent {
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlacesList
                 type={CardType.NEAR_PLACES}
-                places={nearbyPlaces}
+                places={shownNearbyPlaces}
                 sortType={SortType.POPULAR}
                 onPlaceCardNameClick={onPlaceCardNameClick}
                 onPlaceCardHover={() => {}}
@@ -175,9 +177,10 @@ class Offer extends PureComponent {
 Offer.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   place: PropTypes.shape(offerType).isRequired,
-  allPlaces: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  nearbyOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape(reviewType)).isRequired,
   addToFavorites: PropTypes.func.isRequired,
+  loadNearbyOffers: PropTypes.func.isRequired,
   loadReviews: PropTypes.func.isRequired,
   onPlaceCardNameClick: PropTypes.func.isRequired,
 };

@@ -11,12 +11,14 @@ export const LoadStatus = {
 const initialState = {
   favorites: [],
   loadStatus: LoadStatus.SUCCESS,
+  nearbyOffers: [],
   offers: [],
   reviews: [],
 };
 
 const ActionType = {
   LOAD_FAVORITES: `LOAD_FAVORITES`,
+  LOAD_NEARBY_OFFERS: `LOAD_NEARBY_OFFERS`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   UPDATE_LOAD_STATUS: `UPDATE_LOAD_STATUS`,
@@ -26,6 +28,10 @@ const ActionCreator = {
   loadFavorites: (favoriteOffers) => ({
     type: ActionType.LOAD_FAVORITES,
     payload: favoriteOffers,
+  }),
+  loadNearbyOffers: (nearbyOffers) => ({
+    type: ActionType.LOAD_NEARBY_OFFERS,
+    payload: nearbyOffers,
   }),
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,
@@ -51,6 +57,17 @@ const Operation = {
       .catch((error) => {
         throw error;
       });
+  },
+
+  loadNearbyOffers: (hotelId) => (dispatch, getState, api) => {
+    return api.get(`/hotels/${hotelId}/nearby`)
+    .then(({data}) => {
+      const adaptedOffers = adaptOffers(data);
+      dispatch(ActionCreator.loadNearbyOffers(adaptedOffers));
+    })
+    .catch((error) => {
+      throw error;
+    });
   },
 
   loadOffers: () => (dispatch, getState, api) => {
@@ -118,6 +135,10 @@ const reducer = (state = initialState, action) => {
     case ActionType.LOAD_FAVORITES:
       return Object.assign({}, state, {
         favorites: action.payload,
+      });
+    case ActionType.LOAD_NEARBY_OFFERS:
+      return Object.assign({}, state, {
+        nearbyOffers: action.payload,
       });
     case ActionType.LOAD_OFFERS:
       return Object.assign({}, state, {

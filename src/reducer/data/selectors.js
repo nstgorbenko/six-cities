@@ -27,6 +27,8 @@ export const getFavorites = (state) => state[NAME_SPACE].favorites;
 
 export const getLoadStatus = (state) => state[NAME_SPACE].loadStatus;
 
+export const getNearbyOffers = (state) => state[NAME_SPACE].nearbyOffers;
+
 export const getOffers = createSelector(getGroupedOffers,
     (offers) => {
       if (offers.length > 0) {

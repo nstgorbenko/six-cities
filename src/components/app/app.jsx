@@ -15,7 +15,7 @@ import Offer from "../offer/offer.jsx";
 import {AppRoute, ErrorMessage, ScreenType} from "../../const.js";
 import {getActiveOffer, getCity, getScreen, getSortType} from "../../reducer/app/selectors.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {getCities, getCityOffers, getOffers, getReviews} from "../../reducer/data/selectors.js";
+import {getCities, getCityOffers, getNearbyOffers, getOffers, getReviews} from "../../reducer/data/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 
@@ -44,14 +44,14 @@ class App extends PureComponent {
         return (
           <Main
             activeCity={city}
+            activeOffer={activeOffer}
             cities={cities}
             offers={cityOffers}
             sortType={sortType}
-            activeOffer={activeOffer}
 
-            onPlaceCardNameClick={onScreenChange}
             onCityNameClick={onCityChange}
             onPlaceCardHover={onActiveOfferChange}
+            onPlaceCardNameClick={onScreenChange}
           />
         );
 
@@ -67,7 +67,7 @@ class App extends PureComponent {
   }
 
   render() {
-    const {allOffers, authorizationStatus, cityOffers, reviews, addToFavorites, loadReviews, login, onScreenChange} = this.props;
+    const {allOffers, authorizationStatus, nearbyOffers, reviews, addToFavorites, loadNearbyOffers, loadReviews, login, onScreenChange} = this.props;
 
     return (
       <BrowserRouter>
@@ -84,12 +84,14 @@ class App extends PureComponent {
               return currentOffer
                 ? <Offer
                   authorizationStatus={authorizationStatus}
+                  nearbyOffers={nearbyOffers}
                   place={currentOffer}
-                  allPlaces={cityOffers}
-                  onPlaceCardNameClick={onScreenChange}
-                  addToFavorites={addToFavorites}
-                  loadReviews={loadReviews}
                   reviews={reviews}
+
+                  addToFavorites={addToFavorites}
+                  loadNearbyOffers={loadNearbyOffers}
+                  loadReviews={loadReviews}
+                  onPlaceCardNameClick={onScreenChange}
                 />
                 : <Error
                   text={ErrorMessage.NOT_FOUND}
@@ -132,11 +134,13 @@ App.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   city: PropTypes.shape(cityType).isRequired,
   cityOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  nearbyOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape(reviewType)).isRequired,
   screen: PropTypes.string.isRequired,
   sortType: PropTypes.string.isRequired,
 
   addToFavorites: PropTypes.func.isRequired,
+  loadNearbyOffers: PropTypes.func.isRequired,
   loadReviews: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
@@ -151,6 +155,7 @@ const mapStateToProps = (state) => ({
   cities: getCities(state),
   city: getCity(state),
   cityOffers: getCityOffers(state),
+  nearbyOffers: getNearbyOffers(state),
   reviews: getReviews(state),
   screen: getScreen(state),
   sortType: getSortType(state),
@@ -162,6 +167,9 @@ export const mapDispatchToProps = (dispatch) => ({
   },
   loadReviews(id) {
     dispatch(DataOperation.loadReviews(id));
+  },
+  loadNearbyOffers(id) {
+    dispatch(DataOperation.loadNearbyOffers(id));
   },
   login(authData) {
     dispatch(UserOperation.login(authData))

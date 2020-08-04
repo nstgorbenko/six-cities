@@ -42,7 +42,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.center !== prevProps.center || this.props.activeOffer !== prevProps.activeOffer) {
+    if (this.props.center !== prevProps.center || this.props.activeOffer !== prevProps.activeOffer || this.props.offers !== prevProps.offers) {
       this._updateMap();
     }
   }
