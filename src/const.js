@@ -7,6 +7,7 @@ export const AppRoute = {
 
 export const CardType = {
   CITIES: `cities`,
+  FAVORITES: `favorites`,
   NEAR_PLACES: `near-places`
 };
 

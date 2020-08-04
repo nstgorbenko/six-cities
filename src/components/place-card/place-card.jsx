@@ -11,6 +11,16 @@ import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
 import {offerType} from "../../types.js";
 
 const FAVORITE_CLASS = `place-card__bookmark-button--active`;
+const ImageSize = {
+  DEFAULT: {
+    width: 260,
+    height: 200
+  },
+  FAVORITES: {
+    width: 150,
+    height: 110
+  }
+};
 
 const PlaceCard = (props) => {
   const {authorizationStatus, cardType, place, onNameClick, onHover, addToFavorites} = props;
@@ -24,6 +34,7 @@ const PlaceCard = (props) => {
   const bookmarkName = `${isFavorite ? `In` : `To`} bookmarks`;
 
   const articleClassName = cardType === CardType.CITIES ? `${cardType}__place-card` : `${cardType}__card`;
+  const imageSize = cardType === CardType.FAVORITES ? ImageSize.FAVORITES : ImageSize.DEFAULT;
   const isCardMark = cardType === CardType.CITIES && isPremium;
 
   return (
@@ -37,7 +48,7 @@ const PlaceCard = (props) => {
         </div>}
       <div className={`${cardType}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={photo} width="260" height="200" alt={name}/>
+          <img className="place-card__image" src={photo} width={imageSize.width} height={imageSize.height} alt={name}/>
         </a>
       </div>
       <div className="place-card__info">

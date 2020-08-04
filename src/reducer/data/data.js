@@ -1,6 +1,6 @@
 import {adaptOffer, adaptOffers, adaptReviews} from "../../utils/adapter.js";
 import {groupOffersByCities, updateOffers, updateFavorites} from "../../utils/common.js";
-import {getOffers, getFavorites} from "./selectors.js";
+import {getGroupedOffers, getFavorites} from "./selectors.js";
 
 export const LoadStatus = {
   ERROR: `ERROR`,
@@ -99,14 +99,14 @@ const Operation = {
     .then(({data}) => {
       const adaptedFavoriteOffer = adaptOffer(data);
 
-      const oldOffers = getOffers(getState());
+      const oldOffers = getGroupedOffers(getState());
       const oldFavorites = getFavorites(getState());
 
       const groupedOffers = updateOffers(oldOffers, adaptedFavoriteOffer);
-      const groupedFavoriteOffers = updateFavorites(oldFavorites, adaptedFavoriteOffer);
+      const favoriteOffers = updateFavorites(oldFavorites, adaptedFavoriteOffer);
 
       dispatch(ActionCreator.loadOffers(groupedOffers));
-      dispatch(ActionCreator.loadFavorites(groupedFavoriteOffers));
+      dispatch(ActionCreator.loadFavorites(favoriteOffers));
     })
     .catch((error) => {
       throw error;

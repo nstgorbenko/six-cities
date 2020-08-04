@@ -113,7 +113,7 @@ class App extends PureComponent {
           </Route>
 
           <PrivateRoute exact path={AppRoute.FAVORITES}
-            render={() => <Favorites />}
+            render={() => <Favorites onPlaceCardNameClick={onScreenChange}/>}
           />
 
           <Route>

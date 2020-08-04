@@ -5,7 +5,7 @@ import NameSpace from "../name-space.js";
 
 const NAME_SPACE = NameSpace.DATA;
 
-const getGroupedOffers = (state) => state[NAME_SPACE].offers;
+export const getGroupedOffers = (state) => state[NAME_SPACE].offers;
 
 export const getCities = createSelector(getGroupedOffers,
     (offers) => {
