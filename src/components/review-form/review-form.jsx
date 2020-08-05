@@ -33,8 +33,8 @@ class ReviewForm extends PureComponent {
 
   render() {
     const {rating, review, loadStatus, onChange} = this.props;
-    const isDisabledButton = rating === 0 || review.length < 50 || review.length > 300 || loadStatus === LoadStatus.LOADING;
     const isDisabledInput = loadStatus === LoadStatus.LOADING;
+    const isDisabledButton = rating === 0 || review.length < 50 || review.length > 300 || isDisabledInput;
 
     return (
       <form className="reviews__form form" action="#" method="post"
@@ -98,7 +98,7 @@ const mapStateToProps = (state) => ({
   loadStatus: getLoadStatus(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = (dispatch) => ({
   onSubmit(reviewData) {
     return dispatch(DataOperation.postReview(reviewData));
   }

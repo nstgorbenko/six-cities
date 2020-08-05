@@ -27,17 +27,21 @@ export const getRatingPercent = (rating) => {
   return Math.round(rating) * 20;
 };
 
-export const updateOffers = ([...oldOffers], newOffer) => {
+export const updateOffers = (oldOffers, newOffer) => {
   const city = newOffer.city.name;
 
-  const cityOffers = oldOffers.filter(({name}) => name === city)[0].offers;
-  const thisOfferIndex = cityOffers.findIndex(({id}) => id === newOffer.id);
-  cityOffers[thisOfferIndex] = newOffer;
+  if (oldOffers.length > 0) {
+    const cityOffers = oldOffers.filter(({name}) => name === city)[0].offers;
+    const thisOfferIndex = cityOffers.findIndex(({id}) => id === newOffer.id);
+    cityOffers[thisOfferIndex] = newOffer;
 
-  return oldOffers;
+    return oldOffers;
+  }
+
+  return groupOffersByCities([newOffer]);
 };
 
-export const updateFavorites = ([...oldFavorites], newFavorite) => {
+export const updateFavorites = (oldFavorites, newFavorite) => {
   const isFavorite = newFavorite.isFavorite;
 
   if (isFavorite) {

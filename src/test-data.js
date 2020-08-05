@@ -26,23 +26,55 @@ export const testCities = [{
   }
 }];
 
+export const testServerReviews = [{
+  "comment": `Just perfect.`,
+  "date": `2020-03-15T22:55:56.845Z`,
+  "id": 101,
+  "rating": 3.4,
+  "user": {
+    "avatar_url": `img/avatar-max.jpg`,
+    "id": 5,
+    "is_pro": true,
+    "name": `Alex`
+  }
+}, {
+  "comment": `Great hospitality, and the breakfast in the morning was a nice touch.`,
+  "date": `2019-12-05T22:55:56.845Z`,
+  "id": 102,
+  "rating": 5.0,
+  "user": {
+    "avatar_url": `img/avatar-max.jpg`,
+    "id": 5,
+    "is_pro": false,
+    "name": `Luke`
+  }
+}];
+
 export const testReviews = [{
-  id: `101`,
-  userName: `Alex`,
-  userAvatar: `img/avatar-max.jpg`,
+  id: 101,
+  user: {
+    id: 5,
+    name: `Alex`,
+    avatar: `img/avatar-max.jpg`,
+    isSuper: true,
+  },
   rating: 3.4,
   text: `Just perfect.`,
   time: `2020-03-15T22:55:56.845Z`,
 }, {
-  id: `102`,
-  userName: `Luke`,
-  userAvatar: `img/avatar-max.jpg`,
+  id: 102,
+  user: {
+    id: 5,
+    name: `Luke`,
+    avatar: `img/avatar-max.jpg`,
+    isSuper: false,
+  },
   rating: 5.0,
   text: `Great hospitality, and the breakfast in the morning was a nice touch.`,
   time: `2019-12-05T22:55:56.845Z`,
 }];
 
-export const testPlaces = [{
+export const testPlace = {
   id: 10,
   city: testCity,
   location: {
@@ -56,7 +88,7 @@ export const testPlaces = [{
   photo: `img/apartment-01.jpg`,
   allPhotos: [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
   bedrooms: 1,
-  adults: 2,
+  adults: 1,
   amenities: [`Dishwasher`, `Cabel TV`, `Fridge`],
   host: {
     id: 222,
@@ -67,7 +99,9 @@ export const testPlaces = [{
   rating: 4.5,
   isPremium: false,
   isFavorite: true,
-}, {
+};
+
+export const testPlaces = [testPlace, {
   id: 11,
   city: testCity,
   location: {
@@ -94,7 +128,7 @@ export const testPlaces = [{
   isFavorite: false,
 }];
 
-export const testServerData = [{
+export const testServerOffers = [{
   "id": 10,
   "city": {
     "location": {
@@ -116,7 +150,7 @@ export const testServerData = [{
   "preview_image": `img/apartment-01.jpg`,
   "images": [`img/apartment-01.jpg`, `img/apartment-01.jpg`, `img/apartment-01.jpg`],
   "bedrooms": 1,
-  "max_adults": 2,
+  "max_adults": 1,
   "goods": [`Dishwasher`, `Cabel TV`, `Fridge`],
   "host": {
     "id": 222,
@@ -160,6 +194,15 @@ export const testServerData = [{
   "rating": 4.2,
   "is_premium": true,
   "is_favorite": false,
+}];
+
+export const testGroupedPlace = [{
+  name: `Amsterdam`,
+  location: {
+    coordinates: [55.5, 22.2],
+    zoom: 10,
+  },
+  offers: [testPlace]
 }];
 
 export const testGroupedPlaces = [{

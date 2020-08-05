@@ -4,136 +4,49 @@ import React from "react";
 import renderer from "react-test-renderer";
 
 import {App, mapDispatchToProps} from "./app.jsx";
-import {testCity, testCities, testPlaces, testUserInfo} from "../../test-data.js";
+import {testCity, testCities, testPlaces, testUserInfo, testReviews} from "../../test-data.js";
 
 const testStore = configureStore([]);
-
 const store = testStore({
   APP: {sortType: `Popular`},
-  DATA: {loadStatus: `SUCCESS`}
+  DATA: {loadStatus: `SUCCESS`},
+  USER: {
+    authorizationStatus: `AUTH`,
+    info: testUserInfo
+  }
 });
+
+const testProps = {
+  activeOffer: 0,
+  allOffers: testPlaces,
+  authorizationStatus: `AUTH`,
+  cities: testCities,
+  city: testCity,
+  cityOffers: testPlaces,
+  nearbyOffers: testPlaces,
+  reviews: testReviews,
+  screen: `default`,
+  sortType: `Popular`,
+  addToFavorites: () => {},
+  loadNearbyOffers: () => {},
+  loadReviews: () => {},
+  login: () => {},
+  onActiveOfferChange: () => {},
+  onCityChange: () => {},
+  onScreenChange: () => {},
+};
 
 describe(`App Component rendering`, () => {
   it(`renders default screen correctly`, () => {
+    const props = testProps;
+
     const tree = renderer
-      .create(<Provider store={store}>
-        <App
-          authorizationStatus={`NO_AUTH`}
-          userInfo={testUserInfo}
-          city={testCity}
-          cities={testCities}
-          offers={testPlaces}
-          sortType={`Popular`}
-          screen={`default`}
-          activeOffer={0}
-          onCityChange={() => {}}
-          onScreenChange={() => {}}
-          onActiveOfferChange={() => {}}
-          login={() => {}}
-        />
-      </Provider>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`renders offer screen correctly`, () => {
-    const tree = renderer
-      .create(<Provider store={store}>
-        <App
-          authorizationStatus={`AUTH`}
-          userInfo={testUserInfo}
-          city={testCity}
-          cities={testCities}
-          offers={testPlaces}
-          sortType={`Popular`}
-          screen={`offer`}
-          activeOffer={10}
-          onCityChange={() => {}}
-          onScreenChange={() => {}}
-          onActiveOfferChange={() => {}}
-          login={() => {}}
-        />
-      </Provider>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`renders error screen correctly`, () => {
-    const tree = renderer
-      .create(<Provider store={store}>
-        <App
-          authorizationStatus={`NO_AUTH`}
-          userInfo={testUserInfo}
-          city={testCity}
-          cities={testCities}
-          offers={testPlaces}
-          sortType={`Popular`}
-          screen={`error`}
-          activeOffer={0}
-          onCityChange={() => {}}
-          onScreenChange={() => {}}
-          onActiveOfferChange={() => {}}
-          login={() => {}}
-        />
-      </Provider>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`renders login screen correctly`, () => {
-    const tree = renderer
-      .create(<Provider store={store}>
-        <App
-          authorizationStatus={`NO_AUTH`}
-          userInfo={testUserInfo}
-          city={testCity}
-          cities={testCities}
-          offers={testPlaces}
-          sortType={`Popular`}
-          screen={`login`}
-          activeOffer={0}
-          onCityChange={() => {}}
-          onScreenChange={() => {}}
-          onActiveOfferChange={() => {}}
-          login={() => {}}
-        />
-      </Provider>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it(`renders null when screen value is undefined`, () => {
-    const tree = renderer
-      .create(<Provider store={store}>
-        <App
-          authorizationStatus={`NO_AUTH`}
-          userInfo={testUserInfo}
-          city={testCity}
-          cities={testCities}
-          offers={testPlaces}
-          sortType={`Popular`}
-          screen={``}
-          activeOffer={0}
-          onCityChange={() => {}}
-          onScreenChange={() => {}}
-          onActiveOfferChange={() => {}}
-          login={() => {}}
-        />
-      </Provider>, {
-        createNodeMock: () => document.createElement(`div`)
-      })
+      .create(
+          <Provider store={store}>
+            <App {...props}/>
+          </Provider>, {
+            createNodeMock: () => document.createElement(`div`)
+          })
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -161,5 +74,33 @@ describe(`App mapDispatchToProps working test`, () => {
     mapDispatchToProps(dispatch).onScreenChange(`offer`, 15);
     expect(dispatch).toHaveBeenCalledWith({type: `CHANGE_ACTIVE_OFFER`, payload: 15});
     expect(dispatch).toHaveBeenCalledWith({type: `CHANGE_SCREEN_TYPE`, payload: `offer`});
+  });
+
+  it(`calls add to favorite action`, () => {
+    const dispatch = jest.fn();
+
+    mapDispatchToProps(dispatch).addToFavorites();
+    expect(dispatch).toHaveBeenCalledTimes(1);
+  });
+
+  it(`calls load reviews action`, () => {
+    const dispatch = jest.fn();
+
+    mapDispatchToProps(dispatch).loadReviews();
+    expect(dispatch).toHaveBeenCalledTimes(1);
+  });
+
+  it(`calls load nearby offers action`, () => {
+    const dispatch = jest.fn();
+
+    mapDispatchToProps(dispatch).loadNearbyOffers();
+    expect(dispatch).toHaveBeenCalledTimes(1);
+  });
+
+  it(`calls login action`, () => {
+    const dispatch = jest.fn().mockImplementation(() => Promise.resolve());
+
+    mapDispatchToProps(dispatch).login();
+    expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });

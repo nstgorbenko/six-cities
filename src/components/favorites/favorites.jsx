@@ -41,7 +41,7 @@ const Favorites = (props) => {
                           cardType={CardType.FAVORITES}
                           place={offer}
                           onNameClick={onPlaceCardNameClick}
-                          onHover={() => {}}/>
+                        />
                       ))}
                     </div>
                   </li>

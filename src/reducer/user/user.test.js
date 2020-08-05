@@ -5,7 +5,7 @@ import {getAuthorizationStatus, getUserInfo} from "./selectors.js";
 import MockAdapter from "axios-mock-adapter";
 
 const testInitialState = {
-  authorizationStatus: `NO_AUTH`,
+  authorizationStatus: ``,
   info: {
     id: 0,
     name: ``,
@@ -71,7 +71,7 @@ describe(`Reducer working test`, () => {
         isSuper: false,
       },
     })).toEqual({
-      authorizationStatus: `NO_AUTH`,
+      authorizationStatus: ``,
       info: {
         id: 1,
         name: `Oliver.conner`,
@@ -159,7 +159,7 @@ describe(`Operation working test`, () => {
 
 describe(`Selectors working test`, () => {
   it(`returns authorization status value`, () => {
-    expect(getAuthorizationStatus(testStore)).toEqual(`NO_AUTH`);
+    expect(getAuthorizationStatus(testStore)).toEqual(``);
   });
 
   it(`returns user info value`, () => {

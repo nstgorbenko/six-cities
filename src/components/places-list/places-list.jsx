@@ -26,6 +26,10 @@ const PlacesList = (props) => {
   );
 };
 
+PlacesList.defaultProps = {
+  onPlaceCardHover: () => {},
+};
+
 PlacesList.propTypes = {
   type: PropTypes.oneOf(Object.values(CardType)).isRequired,
   places: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,

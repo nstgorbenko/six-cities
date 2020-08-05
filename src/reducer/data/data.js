@@ -48,6 +48,25 @@ const ActionCreator = {
 };
 
 const Operation = {
+  addToFavorites: (favoriteOffer) => (dispatch, getState, api) => {
+    return api.post(`/favorite/${favoriteOffer.hotelId}/${favoriteOffer.status}`)
+    .then(({data}) => {
+      const adaptedFavoriteOffer = adaptOffer(data);
+
+      const oldOffers = getGroupedOffers(getState()).slice();
+      const oldFavorites = getFavorites(getState()).slice();
+
+      const groupedOffers = updateOffers(oldOffers, adaptedFavoriteOffer);
+      const favoriteOffers = updateFavorites(oldFavorites, adaptedFavoriteOffer);
+
+      dispatch(ActionCreator.loadOffers(groupedOffers));
+      dispatch(ActionCreator.loadFavorites(favoriteOffers));
+    })
+    .catch((error) => {
+      throw error;
+    });
+  },
+
   loadFavorites: () => (dispatch, getState, api) => {
     return api.get(`/favorite`)
       .then(({data}) => {
@@ -88,25 +107,6 @@ const Operation = {
     .then(({data}) => {
       const adaptedReview = adaptReviews(data);
       dispatch(ActionCreator.loadReviews(adaptedReview));
-    })
-    .catch((error) => {
-      throw error;
-    });
-  },
-
-  addToFavorites: (favoriteOffer) => (dispatch, getState, api) => {
-    return api.post(`/favorite/${favoriteOffer.hotelId}/${favoriteOffer.status}`)
-    .then(({data}) => {
-      const adaptedFavoriteOffer = adaptOffer(data);
-
-      const oldOffers = getGroupedOffers(getState());
-      const oldFavorites = getFavorites(getState());
-
-      const groupedOffers = updateOffers(oldOffers, adaptedFavoriteOffer);
-      const favoriteOffers = updateFavorites(oldFavorites, adaptedFavoriteOffer);
-
-      dispatch(ActionCreator.loadOffers(groupedOffers));
-      dispatch(ActionCreator.loadFavorites(favoriteOffers));
     })
     .catch((error) => {
       throw error;

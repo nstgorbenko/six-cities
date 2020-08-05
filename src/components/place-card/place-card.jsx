@@ -87,6 +87,10 @@ const PlaceCard = (props) => {
   );
 };
 
+PlaceCard.defaultProps = {
+  onHover: () => {},
+};
+
 PlaceCard.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   cardType: PropTypes.oneOf(Object.values(CardType)).isRequired,

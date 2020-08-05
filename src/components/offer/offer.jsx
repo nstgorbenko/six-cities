@@ -23,6 +23,10 @@ const MAX_NEARBY_OFFERS_COUNT = 3;
 const MAX_PHOTOS_COUNT = 6;
 
 class Offer extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
     this._updateData();
   }
@@ -51,6 +55,7 @@ class Offer extends PureComponent {
     const ratingPercent = getRatingPercent(rating);
     const placeType = capitalizeWord(type);
     const photos = allPhotos.slice(0, MAX_PHOTOS_COUNT);
+    const bookmarkName = `${isFavorite ? `In` : `To`} bookmarks`;
 
     const ReviewFormWrapped = withReview(ReviewForm);
 
@@ -77,29 +82,19 @@ class Offer extends PureComponent {
                   </div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{name}</h1>
-                  {isAuth
-                    ? <button
-                      className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`} type="button"
-                      onClick={() => addToFavorites({
-                        hotelId: id,
-                        status: Number(!isFavorite)
-                      })}
-                    >
-                      <svg className="property__bookmark-icon" width="31" height="33">
-                        <use xlinkHref="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </button>
-                    : <Link
-                      className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`}
-                      to={AppRoute.LOGIN}
-                    >
-                      <svg className="property__bookmark-icon" width="31" height="33">
-                        <use xlinkHref="#icon-bookmark"></use>
-                      </svg>
-                      <span className="visually-hidden">To bookmarks</span>
-                    </Link>
-                  }
+                  <Link
+                    className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`}
+                    onClick={() => addToFavorites({
+                      hotelId: id,
+                      status: Number(!isFavorite)
+                    })}
+                    to={isAuth ? `${AppRoute.OFFER}/${id}` : AppRoute.LOGIN}
+                  >
+                    <svg className="property__bookmark-icon" width="31" height="33">
+                      <use xlinkHref="#icon-bookmark"></use>
+                    </svg>
+                    <span className="visually-hidden">{bookmarkName}</span>
+                  </Link>
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -164,7 +159,6 @@ class Offer extends PureComponent {
                 places={shownNearbyPlaces}
                 sortType={SortType.POPULAR}
                 onPlaceCardNameClick={onPlaceCardNameClick}
-                onPlaceCardHover={() => {}}
               />
             </section>
           </div>

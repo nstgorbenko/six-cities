@@ -6,7 +6,10 @@ import Error from "./error.jsx";
 describe(`Error Component rendering`, () => {
   it(`renders correctly`, () => {
     const tree = renderer
-      .create(<Error />)
+      .create(
+          <Error
+            text={[`Oops!`, `Something went wrong.`]}
+          />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

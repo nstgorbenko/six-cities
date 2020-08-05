@@ -33,7 +33,7 @@ const Header = (props) => {
                   onClick={goToFavorites}
                 >
                   <div className="header__avatar-wrapper user__avatar-wrapper">
-                    {isAuth && <img src={`https://4.react.pages.academy/six-cities${userInfo.avatar}`} />}
+                    {isAuth && <img src={`https://4.react.pages.academy/six-cities/${userInfo.avatar}`} />}
                   </div>
                   <span className="header__user-name user__name">{isAuth ? userInfo.email : `Sign In`}</span>
                 </Link>
