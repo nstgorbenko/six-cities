@@ -18,14 +18,6 @@ export const ErrorMessage = {
 
 export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 
-export const ScreenType = {
-  DEFAULT: `default`,
-  ERROR: `error`,
-  FAVORITES: `favorites`,
-  LOGIN: `login`,
-  OFFER: `offer`
-};
-
 export const SortType = {
   POPULAR: `Popular`,
   PRICE_TO_HIGH: `Price: low to high`,

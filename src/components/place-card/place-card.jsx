@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {AppRoute, CardType, ScreenType} from "../../const.js";
+import {AppRoute, CardType} from "../../const.js";
 import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
 import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
@@ -23,7 +23,7 @@ const ImageSize = {
 };
 
 const PlaceCard = (props) => {
-  const {authorizationStatus, cardType, place, onNameClick, onHover, addToFavorites} = props;
+  const {authorizationStatus, cardType, place, onHover, onAddToFavorites} = props;
   const {id, name, type, price, photo, rating, isPremium, isFavorite} = place;
 
   const ratingPercent = getRatingPercent(rating);
@@ -36,11 +36,12 @@ const PlaceCard = (props) => {
   const articleClassName = cardType === CardType.CITIES ? `${cardType}__place-card` : `${cardType}__card`;
   const imageSize = cardType === CardType.FAVORITES ? ImageSize.FAVORITES : ImageSize.DEFAULT;
   const isCardMark = cardType === CardType.CITIES && isPremium;
+  const isCityCardType = cardType === CardType.CITIES;
 
   return (
     <article className={`${articleClassName} place-card`}
-      onMouseEnter={() => onHover(id)}
-      onMouseLeave={() => onHover(0)}
+      onMouseEnter={() => isCityCardType && onHover(id)}
+      onMouseLeave={() => isCityCardType && onHover(0)}
     >
       {isCardMark &&
         <div className="place-card__mark">
@@ -58,7 +59,7 @@ const PlaceCard = (props) => {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           {isAuth && <button className={`place-card__bookmark-button ${bookmarkActiveClass} button`} type="button"
-            onClick={() => addToFavorites({
+            onClick={() => onAddToFavorites({
               hotelId: id,
               status: Number(!isFavorite),
             })}
@@ -76,10 +77,9 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link
-            to={`${AppRoute.OFFER}/${id}`}
-            onClick={() => onNameClick(ScreenType.OFFER, id)}
-          >{name}</Link>
+          <Link to={`${AppRoute.OFFER}/${id}`}>
+            {name}
+          </Link>
         </h2>
         <p className="place-card__type">{placeType}</p>
       </div>
@@ -87,17 +87,12 @@ const PlaceCard = (props) => {
   );
 };
 
-PlaceCard.defaultProps = {
-  onHover: () => {},
-};
-
 PlaceCard.propTypes = {
   authorizationStatus: PropTypes.string.isRequired,
   cardType: PropTypes.oneOf(Object.values(CardType)).isRequired,
   place: PropTypes.shape(offerType).isRequired,
-  onNameClick: PropTypes.func.isRequired,
   onHover: PropTypes.func.isRequired,
-  addToFavorites: PropTypes.func.isRequired,
+  onAddToFavorites: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -105,7 +100,7 @@ const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  addToFavorites(favoriteData) {
+  onAddToFavorites(favoriteData) {
     dispatch(DataOperation.addToFavorites(favoriteData));
   },
 });

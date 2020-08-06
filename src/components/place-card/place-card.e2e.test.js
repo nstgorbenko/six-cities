@@ -15,9 +15,8 @@ describe(`PlaceCard working test`, () => {
             authorizationStatus={`AUTH`}
             cardType={`cities`}
             place={testPlaces[0]}
-            onNameClick={() => {}}
             onHover={onHover}
-            addToFavorites={() => {}}
+            onAddToFavorites={() => {}}
           />
         </BrowserRouter>);
 
@@ -33,7 +32,7 @@ describe(`PlaceCard working test`, () => {
 
 describe(`PlaceCard working test`, () => {
   it(`calls add to favorite action clicking on bookmark button`, () => {
-    const addToFavorites = jest.fn();
+    const onAddToFavorites = jest.fn();
 
     const placeCard = mount(
         <BrowserRouter>
@@ -41,44 +40,19 @@ describe(`PlaceCard working test`, () => {
             authorizationStatus={`AUTH`}
             cardType={`cities`}
             place={testPlaces[0]}
-            onNameClick={() => {}}
             onHover={() => {}}
-            addToFavorites={addToFavorites}
+            onAddToFavorites={onAddToFavorites}
           />
         </BrowserRouter>);
 
     const bookmarkButton = placeCard.find(`.place-card__bookmark-button`);
     bookmarkButton.simulate(`click`);
 
-    expect(addToFavorites).toHaveBeenCalledTimes(1);
-    expect(addToFavorites).toHaveBeenCalledWith({
+    expect(onAddToFavorites).toHaveBeenCalledTimes(1);
+    expect(onAddToFavorites).toHaveBeenCalledWith({
       hotelId: testPlaces[0].id,
       status: Number(!testPlaces[0].isFavorite),
     });
-  });
-});
-
-describe(`PlaceCard working test`, () => {
-  it(`calls change screen action clicking on card name`, () => {
-    const onNameClick = jest.fn();
-
-    const placeCard = mount(
-        <BrowserRouter>
-          <PlaceCard
-            authorizationStatus={`AUTH`}
-            cardType={`cities`}
-            place={testPlaces[0]}
-            onNameClick={onNameClick}
-            onHover={() => {}}
-            addToFavorites={() => {}}
-          />
-        </BrowserRouter>);
-
-    const cardNameLink = placeCard.find(`Link`);
-    cardNameLink.simulate(`click`);
-
-    expect(onNameClick).toHaveBeenCalledTimes(1);
-    expect(onNameClick).toHaveBeenCalledWith(`offer`, testPlaces[0].id);
   });
 });
 
@@ -86,7 +60,7 @@ describe(`PlaceCard mapDispatchToProps working test`, () => {
   it(`calls add to favorite action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).addToFavorites({
+    mapDispatchToProps(dispatch).onAddToFavorites({
       hotelId: testPlaces[0].id,
       status: 1,
     });

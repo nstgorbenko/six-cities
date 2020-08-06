@@ -20,7 +20,7 @@ const store = testStore({
 
 describe(`Offer working test`, () => {
   it(`calls add to favorite action clicking on bookmark button`, () => {
-    const addToFavorites = jest.fn();
+    const onAddToFavorites = jest.fn();
 
     const offer = mount(
         <BrowserRouter>
@@ -30,10 +30,10 @@ describe(`Offer working test`, () => {
               place={testPlaces[0]}
               nearbyOffers={testPlaces}
               reviews={testReviews}
-              addToFavorites={addToFavorites}
-              loadNearbyOffers={() => {}}
-              loadReviews={() => {}}
-              onPlaceCardNameClick={() => {}}
+              onAddToFavorites={onAddToFavorites}
+              onNearbyOffersLoad={() => {}}
+              onReviewsLoad={() => {}}
+              onPlaceCardHover={() => {}}
             />
           </Provider>
         </BrowserRouter>, {
@@ -43,8 +43,8 @@ describe(`Offer working test`, () => {
     const bookmarkButton = offer.find(`.property__bookmark-button`).at(1);
     bookmarkButton.simulate(`click`);
 
-    expect(addToFavorites).toHaveBeenCalledTimes(1);
-    expect(addToFavorites).toHaveBeenCalledWith({
+    expect(onAddToFavorites).toHaveBeenCalledTimes(1);
+    expect(onAddToFavorites).toHaveBeenCalledWith({
       hotelId: testPlaces[0].id,
       status: Number(!testPlaces[0].isFavorite),
     });

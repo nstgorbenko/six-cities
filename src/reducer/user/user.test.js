@@ -1,6 +1,6 @@
 import {ActionCreator, ActionType, Operation, reducer} from "./user.js";
 import createAPI from "../../api.js";
-import {getAuthorizationStatus, getUserInfo} from "./selectors.js";
+import {getAuthorizationStatus, getUserInfo, getErrorStatus} from "./selectors.js";
 
 import MockAdapter from "axios-mock-adapter";
 
@@ -12,7 +12,8 @@ const testInitialState = {
     email: ``,
     avatar: ``,
     isSuper: true,
-  }
+  },
+  isError: false
 };
 
 const testStore = {
@@ -56,7 +57,8 @@ describe(`Reducer working test`, () => {
         email: ``,
         avatar: ``,
         isSuper: true,
-      }
+      },
+      isError: false
     });
   });
 
@@ -78,7 +80,25 @@ describe(`Reducer working test`, () => {
         email: `Oliver.conner@gmail.com`,
         avatar: `img/1.png`,
         isSuper: false,
-      }
+      },
+      isError: false
+    });
+  });
+
+  it(`updates isError with given value`, () => {
+    expect(reducer(testInitialState, {
+      type: ActionType.SET_ERROR,
+      payload: true,
+    })).toEqual({
+      authorizationStatus: ``,
+      info: {
+        id: 0,
+        name: ``,
+        email: ``,
+        avatar: ``,
+        isSuper: true,
+      },
+      isError: true
     });
   });
 });
@@ -107,6 +127,13 @@ describe(`Action creators working test`, () => {
         avatar: `img/1.png`,
         isSuper: false,
       },
+    });
+  });
+
+  it(`returns action with error status in payload`, () => {
+    expect(ActionCreator.setError(true)).toEqual({
+      type: ActionType.SET_ERROR,
+      payload: true,
     });
   });
 });
@@ -144,7 +171,7 @@ describe(`Operation working test`, () => {
 
     return authorization(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.UPDATE_AUTH_STATUS,
           payload: `AUTH`,
@@ -152,6 +179,10 @@ describe(`Operation working test`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.SET_INFO,
           payload: testUserInfo,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.SET_ERROR,
+          payload: false,
         });
       });
   });
@@ -170,5 +201,9 @@ describe(`Selectors working test`, () => {
       avatar: ``,
       isSuper: true,
     });
+  });
+
+  it(`returns error status value`, () => {
+    expect(getErrorStatus(testStore)).toEqual(false);
   });
 });

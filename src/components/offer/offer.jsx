@@ -38,23 +38,27 @@ class Offer extends PureComponent {
   }
 
   _updateData() {
-    const {loadNearbyOffers, loadReviews, place} = this.props;
+    const {onNearbyOffersLoad, onReviewsLoad, place} = this.props;
 
-    loadNearbyOffers(place.id);
-    loadReviews(place.id);
+    onNearbyOffersLoad(place.id);
+    onReviewsLoad(place.id);
   }
 
   render() {
-    const {authorizationStatus, place, nearbyOffers, reviews, onPlaceCardNameClick, addToFavorites} = this.props;
+    const {authorizationStatus, place, nearbyOffers, reviews, onPlaceCardHover, onAddToFavorites} = this.props;
     const {id, location, name, type, description, price, allPhotos, bedrooms, adults, amenities, host, rating, isPremium, isFavorite} = place;
     const {name: hostName, avatar: hostAvatar, isSuper: isSuperHost} = host;
 
     const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
+    const isReviewedOffer = reviews.length > 0;
+    const isNearbyOffers = nearbyOffers.length > 0;
+
     const shownNearbyPlaces = nearbyOffers.slice(0, MAX_NEARBY_OFFERS_COUNT);
     const mapPlaces = shownNearbyPlaces.concat(place);
+    const photos = allPhotos.slice(0, MAX_PHOTOS_COUNT);
+
     const ratingPercent = getRatingPercent(rating);
     const placeType = capitalizeWord(type);
-    const photos = allPhotos.slice(0, MAX_PHOTOS_COUNT);
     const bookmarkName = `${isFavorite ? `In` : `To`} bookmarks`;
 
     const ReviewFormWrapped = withReview(ReviewForm);
@@ -82,9 +86,8 @@ class Offer extends PureComponent {
                   </div> : null}
                 <div className="property__name-wrapper">
                   <h1 className="property__name">{name}</h1>
-                  <Link
-                    className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`}
-                    onClick={() => addToFavorites({
+                  <Link className={`property__bookmark-button ${isFavorite ? ClassName.FAVORITE : ``} button`}
+                    onClick={() => onAddToFavorites({
                       hotelId: id,
                       status: Number(!isFavorite)
                     })}
@@ -133,13 +136,8 @@ class Offer extends PureComponent {
                   </div>
                 </div>
                 <section className="property__reviews reviews">
-                  <ReviewsList
-                    reviews={reviews}
-                  />
-                  {isAuth &&
-                  <ReviewFormWrapped
-                    id={id}
-                  />}
+                  {isReviewedOffer && <ReviewsList reviews={reviews} />}
+                  {isAuth && <ReviewFormWrapped id={id} />}
                 </section>
               </div>
             </div>
@@ -151,17 +149,17 @@ class Offer extends PureComponent {
               />
             </section>
           </section>
-          <div className="container">
+          {isNearbyOffers && <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
               <PlacesList
                 type={CardType.NEAR_PLACES}
                 places={shownNearbyPlaces}
                 sortType={SortType.POPULAR}
-                onPlaceCardNameClick={onPlaceCardNameClick}
+                onPlaceCardHover={onPlaceCardHover}
               />
             </section>
-          </div>
+          </div>}
         </main>
       </div>
     );
@@ -173,10 +171,10 @@ Offer.propTypes = {
   place: PropTypes.shape(offerType).isRequired,
   nearbyOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape(reviewType)).isRequired,
-  addToFavorites: PropTypes.func.isRequired,
-  loadNearbyOffers: PropTypes.func.isRequired,
-  loadReviews: PropTypes.func.isRequired,
-  onPlaceCardNameClick: PropTypes.func.isRequired,
+  onAddToFavorites: PropTypes.func.isRequired,
+  onNearbyOffersLoad: PropTypes.func.isRequired,
+  onReviewsLoad: PropTypes.func.isRequired,
+  onPlaceCardHover: PropTypes.func.isRequired,
 };
 
 export default Offer;

@@ -12,7 +12,7 @@ import Sort from "../sort/sort.jsx";
 import withActiveFlag from "../../hocs/with-active-flag/with-active-flag.js";
 
 const Main = (props) => {
-  const {activeCity, cities, offers, sortType, activeOffer, onPlaceCardNameClick, onCityNameClick, onPlaceCardHover} = props;
+  const {activeCity, cities, offers, sortType, activeOffer, onPlaceCardHover, onCityNameClick} = props;
   const {name: cityName, location: cityLocation} = activeCity;
 
   const SortWrapped = withActiveFlag(Sort);
@@ -40,7 +40,6 @@ const Main = (props) => {
                   type={CardType.CITIES}
                   places={offers}
                   sortType={sortType}
-                  onPlaceCardNameClick={onPlaceCardNameClick}
                   onPlaceCardHover={onPlaceCardHover}
                 />
               </section>
@@ -67,9 +66,8 @@ Main.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
   activeOffer: PropTypes.number.isRequired,
-  onPlaceCardNameClick: PropTypes.func.isRequired,
-  onCityNameClick: PropTypes.func.isRequired,
   onPlaceCardHover: PropTypes.func.isRequired,
+  onCityNameClick: PropTypes.func.isRequired,
 };
 
 export default Main;

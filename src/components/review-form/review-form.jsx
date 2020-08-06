@@ -7,6 +7,10 @@ import {Operation as DataOperation} from "../../reducer/data/data.js";
 import {LoadStatus} from "../../reducer/data/data.js";
 
 const RATING_TITLES = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
+const ReviewLength = {
+  MIN: 50,
+  MAX: 300
+};
 
 class ReviewForm extends PureComponent {
   constructor(props) {
@@ -34,7 +38,7 @@ class ReviewForm extends PureComponent {
   render() {
     const {rating, review, loadStatus, onChange} = this.props;
     const isDisabledInput = loadStatus === LoadStatus.LOADING;
-    const isDisabledButton = rating === 0 || review.length < 50 || review.length > 300 || isDisabledInput;
+    const isDisabledButton = rating === 0 || review.length < ReviewLength.MIN || review.length > ReviewLength.MAX || isDisabledInput;
 
     return (
       <form className="reviews__form form" action="#" method="post"
@@ -66,8 +70,8 @@ class ReviewForm extends PureComponent {
           })}
         </div>
         <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"
-          minLength="50"
-          maxLength="300"
+          minLength={ReviewLength.MIN}
+          maxLength={ReviewLength.MAX}
           value={review}
           onChange={onChange}
           disabled={`${isDisabledInput ? `disabled` : ``}`}

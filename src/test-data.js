@@ -218,6 +218,6 @@ export const testUserInfo = {
   id: 0,
   name: ``,
   email: ``,
-  avatar: ``,
+  avatar: `/path`,
   isSuper: true,
 };

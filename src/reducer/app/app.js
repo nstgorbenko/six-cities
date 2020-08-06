@@ -9,7 +9,6 @@ const initialState = {
     }
   },
   sortType: SortType.POPULAR,
-  screen: ``,
   activeOffer: 0,
 };
 
@@ -17,7 +16,6 @@ const ActionType = {
   CHANGE_CITY: `CHANGE_CITY`,
   CHANGE_SORT_TYPE: `CHANGE_SORT_TYPE`,
   CHANGE_ACTIVE_OFFER: `CHANGE_ACTIVE_OFFER`,
-  CHANGE_SCREEN_TYPE: `CHANGE_SCREEN_TYPE`,
 };
 
 const ActionCreator = {
@@ -32,11 +30,7 @@ const ActionCreator = {
   changeActiveOffer: (id) => ({
     type: ActionType.CHANGE_ACTIVE_OFFER,
     payload: id,
-  }),
-  changeScreenType: (type) => ({
-    type: ActionType.CHANGE_SCREEN_TYPE,
-    payload: type,
-  }),
+  })
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,10 +46,6 @@ const reducer = (state = initialState, action) => {
     case ActionType.CHANGE_ACTIVE_OFFER:
       return Object.assign({}, state, {
         activeOffer: action.payload,
-      });
-    case ActionType.CHANGE_SCREEN_TYPE:
-      return Object.assign({}, state, {
-        screen: action.payload,
       });
     default:
       return state;

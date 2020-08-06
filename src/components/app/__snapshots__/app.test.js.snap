@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App Component rendering renders default screen correctly 1`] = `
+exports[`App Component rendering renders correctly 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -48,7 +48,7 @@ exports[`App Component rendering renders default screen correctly 1`] = `
                   className="header__avatar-wrapper user__avatar-wrapper"
                 >
                   <img
-                    src="https://4.react.pages.academy/six-cities/"
+                    src="https://4.react.pages.academy/six-cities/path"
                   />
                 </div>
                 <span

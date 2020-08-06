@@ -13,12 +13,14 @@ const initialState = {
     email: ``,
     avatar: ``,
     isSuper: true,
-  }
+  },
+  isError: false
 };
 
 const ActionType = {
   UPDATE_AUTH_STATUS: `UPDATE_AUTH_STATUS`,
   SET_INFO: `SET_INFO`,
+  SET_ERROR: `SET_ERROR`,
 };
 
 const ActionCreator = {
@@ -29,6 +31,10 @@ const ActionCreator = {
   setInfo: (info) => ({
     type: ActionType.SET_INFO,
     payload: info
+  }),
+  setError: (state) => ({
+    type: ActionType.SET_ERROR,
+    payload: state
   }),
 };
 
@@ -51,8 +57,13 @@ const Operation = {
     .then(({data}) => {
       dispatch(ActionCreator.updateAuthStatus(AuthorizationStatus.AUTH));
       dispatch(ActionCreator.setInfo(adaptUserInfo(data)));
+      dispatch(ActionCreator.setError(false));
     })
     .catch((error) => {
+      if (error.response.status === 400) {
+        dispatch(ActionCreator.setError(true));
+        return;
+      }
       throw error;
     });
   },
@@ -67,6 +78,10 @@ const reducer = (state = initialState, action) => {
     case (ActionType.SET_INFO) :
       return Object.assign({}, state, {
         info: action.payload
+      });
+    case (ActionType.SET_ERROR) :
+      return Object.assign({}, state, {
+        isError: action.payload
       });
   }
   return state;

@@ -146,8 +146,8 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     className="reviews__textarea form__textarea"
     disabled=""
     id="review"
-    maxLength="300"
-    minLength="50"
+    maxLength={300}
+    minLength={50}
     name="review"
     onChange={[Function]}
     placeholder="Tell how was your stay, what you like and what can be improved"
@@ -335,8 +335,8 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     className="reviews__textarea form__textarea"
     disabled="disabled"
     id="review"
-    maxLength="300"
-    minLength="50"
+    maxLength={300}
+    minLength={50}
     name="review"
     onChange={[Function]}
     placeholder="Tell how was your stay, what you like and what can be improved"
@@ -519,8 +519,8 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     className="reviews__textarea form__textarea"
     disabled=""
     id="review"
-    maxLength="300"
-    minLength="50"
+    maxLength={300}
+    minLength={50}
     name="review"
     onChange={[Function]}
     placeholder="Tell how was your stay, what you like and what can be improved"
@@ -703,8 +703,8 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     className="reviews__textarea form__textarea"
     disabled=""
     id="review"
-    maxLength="300"
-    minLength="50"
+    maxLength={300}
+    minLength={50}
     name="review"
     onChange={[Function]}
     placeholder="Tell how was your stay, what you like and what can be improved"

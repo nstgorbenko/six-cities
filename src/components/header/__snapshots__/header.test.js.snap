@@ -45,7 +45,7 @@ exports[`Header Component rendering renders correctly with authorizationStatus e
                 className="header__avatar-wrapper user__avatar-wrapper"
               >
                 <img
-                  src="https://4.react.pages.academy/six-cities/"
+                  src="https://4.react.pages.academy/six-cities/path"
                 />
               </div>
               <span

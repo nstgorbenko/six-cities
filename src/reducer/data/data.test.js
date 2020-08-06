@@ -23,7 +23,6 @@ const testStore = {
       }
     },
     sortType: `Top rated first`,
-    screen: `offer`,
     activeOffer: 10,
   },
   DATA: {
@@ -48,7 +47,6 @@ const emptyStore = {
       }
     },
     sortType: `Popular`,
-    screen: ``,
     activeOffer: 0,
   },
   DATA: {
@@ -297,16 +295,20 @@ describe(`Operation working test`, () => {
 
     apiMock
       .onPost(`/comments/${testReview.hotelId}`)
-      .reply(200);
+      .reply(200, testServerReviews);
 
     return reviewSender(dispatch, () => {}, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.UPDATE_LOAD_STATUS,
           payload: `LOADING`,
         });
         expect(dispatch).toHaveBeenNthCalledWith(2, {
+          type: ActionType.LOAD_REVIEWS,
+          payload: testReviews,
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
           type: ActionType.UPDATE_LOAD_STATUS,
           payload: `SUCCESS`,
         });

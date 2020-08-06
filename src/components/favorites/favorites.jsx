@@ -10,7 +10,7 @@ import {offerType} from "../../types.js";
 import PlaceCard from "../place-card/place-card.jsx";
 
 const Favorites = (props) => {
-  const {offers: allOffers, onPlaceCardNameClick} = props;
+  const {offers: allOffers, onPlaceCardHover} = props;
   const isEmpty = allOffers.length === 0;
 
   return (
@@ -40,7 +40,7 @@ const Favorites = (props) => {
                         <PlaceCard key={offer.id}
                           cardType={CardType.FAVORITES}
                           place={offer}
-                          onNameClick={onPlaceCardNameClick}
+                          onHover={onPlaceCardHover}
                         />
                       ))}
                     </div>
@@ -61,7 +61,7 @@ const Favorites = (props) => {
 
 Favorites.propTypes = {
   offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  onPlaceCardNameClick: PropTypes.func.isRequired,
+  onPlaceCardHover: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

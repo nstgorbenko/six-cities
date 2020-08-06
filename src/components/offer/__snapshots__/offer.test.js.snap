@@ -643,7 +643,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                   className="header__avatar-wrapper user__avatar-wrapper"
                 >
                   <img
-                    src="https://4.react.pages.academy/six-cities/"
+                    src="https://4.react.pages.academy/six-cities/path"
                   />
                 </div>
                 <span
@@ -1151,8 +1151,8 @@ exports[`Offer Component rendering renders correctly 2`] = `
                 className="reviews__textarea form__textarea"
                 disabled=""
                 id="review"
-                maxLength="300"
-                minLength="50"
+                maxLength={300}
+                minLength={50}
                 name="review"
                 onChange={[Function]}
                 placeholder="Tell how was your stay, what you like and what can be improved"

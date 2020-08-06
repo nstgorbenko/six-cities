@@ -1,5 +1,5 @@
 import {ActionCreator, ActionType, reducer} from "./app.js";
-import {getActiveOffer, getCity, getScreen, getSortType} from "./selectors.js";
+import {getActiveOffer, getCity, getSortType} from "./selectors.js";
 
 const testInitialState = {
   city: {
@@ -10,7 +10,6 @@ const testInitialState = {
     }
   },
   sortType: `Popular`,
-  screen: ``,
   activeOffer: 0,
 };
 
@@ -24,7 +23,6 @@ const testStore = {
       }
     },
     sortType: `Top rated first`,
-    screen: `offer`,
     activeOffer: 10,
   },
   DATA: {
@@ -61,7 +59,6 @@ describe(`Reducer working test`, () => {
         }
       },
       sortType: `Popular`,
-      screen: ``,
       activeOffer: 0,
     });
   });
@@ -79,25 +76,6 @@ describe(`Reducer working test`, () => {
         }
       },
       sortType: `Top rated first`,
-      screen: ``,
-      activeOffer: 0,
-    });
-  });
-
-  it(`changes screen type with given value`, () => {
-    expect(reducer(testInitialState, {
-      type: ActionType.CHANGE_SCREEN_TYPE,
-      payload: `offer`,
-    })).toEqual({
-      city: {
-        name: ``,
-        location: {
-          coordinates: [0, 0],
-          zoom: 0,
-        }
-      },
-      sortType: `Popular`,
-      screen: `offer`,
       activeOffer: 0,
     });
   });
@@ -115,7 +93,6 @@ describe(`Reducer working test`, () => {
         }
       },
       sortType: `Popular`,
-      screen: ``,
       activeOffer: 100,
     });
   });
@@ -148,13 +125,6 @@ describe(`Action creators working test`, () => {
     });
   });
 
-  it(`returns action with screen type in payload`, () => {
-    expect(ActionCreator.changeScreenType(`OFFER`)).toEqual({
-      type: ActionType.CHANGE_SCREEN_TYPE,
-      payload: `OFFER`,
-    });
-  });
-
   it(`returns action with offer id in payload`, () => {
     expect(ActionCreator.changeActiveOffer(100)).toEqual({
       type: ActionType.CHANGE_ACTIVE_OFFER,
@@ -176,10 +146,6 @@ describe(`Selectors working test`, () => {
         zoom: 10,
       }
     });
-  });
-
-  it(`returns screen value`, () => {
-    expect(getScreen(testStore)).toEqual(`offer`);
   });
 
   it(`returns sort type value`, () => {

@@ -14,9 +14,8 @@ describe(`PlaceCard Component rendering`, () => {
               authorizationStatus={`AUTH`}
               cardType={`cities`}
               place={testPlaces[1]}
-              onNameClick={() => {}}
               onHover={() => {}}
-              addToFavorites={() => {}}
+              onAddToFavorites={() => {}}
             />
           </BrowserRouter>)
       .toJSON();
@@ -32,9 +31,8 @@ describe(`PlaceCard Component rendering`, () => {
               authorizationStatus={`AUTH`}
               cardType={`favorites`}
               place={testPlaces[1]}
-              onNameClick={() => {}}
               onHover={() => {}}
-              addToFavorites={() => {}}
+              onAddToFavorites={() => {}}
             />
           </BrowserRouter>)
       .toJSON();
@@ -50,9 +48,8 @@ describe(`PlaceCard Component rendering`, () => {
               authorizationStatus={`AUTH`}
               cardType={`cities`}
               place={testPlaces[0]}
-              onNameClick={() => {}}
               onHover={() => {}}
-              addToFavorites={() => {}}
+              onAddToFavorites={() => {}}
             />
           </BrowserRouter>)
       .toJSON();
@@ -68,9 +65,8 @@ describe(`PlaceCard Component rendering`, () => {
               authorizationStatus={`AUTH`}
               cardType={`near-places`}
               place={testPlaces[1]}
-              onNameClick={() => {}}
               onHover={() => {}}
-              addToFavorites={() => {}}
+              onAddToFavorites={() => {}}
             />
           </BrowserRouter>)
       .toJSON();

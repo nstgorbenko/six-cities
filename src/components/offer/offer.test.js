@@ -30,10 +30,10 @@ describe(`Offer Component rendering`, () => {
                 place={testPlaces[0]}
                 nearbyOffers={testPlaces}
                 reviews={testReviews}
-                addToFavorites={() => {}}
-                loadNearbyOffers={() => {}}
-                loadReviews={() => {}}
-                onPlaceCardNameClick={() => {}}
+                onAddToFavorites={() => {}}
+                onNearbyOffersLoad={() => {}}
+                onReviewsLoad={() => {}}
+                onPlaceCardHover={() => {}}
               />
             </Provider>
           </BrowserRouter>, {
@@ -64,10 +64,10 @@ describe(`Offer Component rendering`, () => {
                 place={testPlaces[1]}
                 nearbyOffers={testPlaces}
                 reviews={testReviews}
-                addToFavorites={() => {}}
-                loadNearbyOffers={() => {}}
-                loadReviews={() => {}}
-                onPlaceCardNameClick={() => {}}
+                onAddToFavorites={() => {}}
+                onNearbyOffersLoad={() => {}}
+                onReviewsLoad={() => {}}
+                onPlaceCardHover={() => {}}
               />
             </Provider>
           </BrowserRouter>, {

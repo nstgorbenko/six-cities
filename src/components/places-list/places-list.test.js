@@ -23,7 +23,6 @@ describe(`PlacesList Component rendering`, () => {
                 type="cities"
                 places={testPlaces}
                 sortType="Popular"
-                onPlaceCardNameClick={() => {}}
                 onPlaceCardHover={() => {}}
               />
             </Provider>

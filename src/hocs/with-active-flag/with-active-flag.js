@@ -9,10 +9,10 @@ const withActiveFlag = (Component) => {
         isActive: false
       };
 
-      this._handleActiveChange = this._handleActiveChange.bind(this);
+      this.handleActiveChange = this.handleActiveChange.bind(this);
     }
 
-    _handleActiveChange() {
+    handleActiveChange() {
       this.setState((prevState) => ({
         isActive: !prevState.isActive
       }));
@@ -23,7 +23,7 @@ const withActiveFlag = (Component) => {
         <Component
           {...this.props}
           isActive={this.state.isActive}
-          onActiveChange={this._handleActiveChange}
+          onActiveChange={this.handleActiveChange}
         />
       );
     }

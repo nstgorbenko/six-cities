@@ -105,8 +105,8 @@ const Operation = {
   loadReviews: (hotelId) => (dispatch, getState, api) => {
     return api.get(`/comments/${hotelId}`)
     .then(({data}) => {
-      const adaptedReview = adaptReviews(data);
-      dispatch(ActionCreator.loadReviews(adaptedReview));
+      const adaptedReviews = adaptReviews(data);
+      dispatch(ActionCreator.loadReviews(adaptedReviews));
     })
     .catch((error) => {
       throw error;
@@ -120,7 +120,9 @@ const Operation = {
       comment: reviewData.comment,
       rating: reviewData.rating,
     })
-    .then(() => {
+    .then(({data}) => {
+      const adaptedReviews = adaptReviews(data);
+      dispatch(ActionCreator.loadReviews(adaptedReviews));
       dispatch(ActionCreator.updateLoadStatus(LoadStatus.SUCCESS));
     })
     .catch((error) => {

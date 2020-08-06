@@ -7,7 +7,7 @@ import {offerType} from "../../types.js";
 import PlaceCard from "../place-card/place-card.jsx";
 
 const PlacesList = (props) => {
-  const {type, places, sortType, onPlaceCardNameClick, onPlaceCardHover} = props;
+  const {type, places, sortType, onPlaceCardHover} = props;
 
   const typeClassName = type === CardType.CITIES ? `${type}__places-list` : `${type}__list`;
   const shownPlaces = type === CardType.CITIES ? getSortedPlaces(places, sortType) : places;
@@ -19,22 +19,16 @@ const PlacesList = (props) => {
           key={place.id}
           cardType={type}
           place={place}
-          onNameClick={onPlaceCardNameClick}
           onHover={onPlaceCardHover}
         />)}
     </div>
   );
 };
 
-PlacesList.defaultProps = {
-  onPlaceCardHover: () => {},
-};
-
 PlacesList.propTypes = {
   type: PropTypes.oneOf(Object.values(CardType)).isRequired,
   places: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   sortType: PropTypes.string.isRequired,
-  onPlaceCardNameClick: PropTypes.func.isRequired,
   onPlaceCardHover: PropTypes.func.isRequired,
 };
 

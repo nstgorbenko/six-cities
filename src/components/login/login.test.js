@@ -24,6 +24,7 @@ describe(`Login Component rendering`, () => {
             <Provider store={store}>
               <Login
                 onSubmit={() => {}}
+                error={true}
               />
             </Provider>
           </BrowserRouter>)

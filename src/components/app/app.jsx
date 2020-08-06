@@ -1,7 +1,7 @@
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import React, {PureComponent} from "react";
+import React from "react";
 
 import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
 import {AuthorizationStatus} from "../../reducer/user/user.js";
@@ -12,36 +12,29 @@ import Favorites from "../favorites/favorites.jsx";
 import Login from "../login/login.jsx";
 import Main from "../main/main.jsx";
 import Offer from "../offer/offer.jsx";
-import {AppRoute, ErrorMessage, ScreenType} from "../../const.js";
-import {getActiveOffer, getCity, getScreen, getSortType} from "../../reducer/app/selectors.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
+import {AppRoute, ErrorMessage} from "../../const.js";
+import {getActiveOffer, getCity, getSortType} from "../../reducer/app/selectors.js";
+import {getAuthorizationStatus, getErrorStatus} from "../../reducer/user/selectors.js";
 import {getCities, getCityOffers, getNearbyOffers, getOffers, getReviews} from "../../reducer/data/selectors.js";
 import {Operation as UserOperation} from "../../reducer/user/user.js";
 import PrivateRoute from "../private-route/private-route.jsx";
 
-class App extends PureComponent {
-  constructor(props) {
-    super(props);
+const App = (props) => {
+  const {activeOffer, allOffers, authorizationStatus, cities, city, cityOffers, errorStatus, nearbyOffers, reviews, sortType,
+    onActiveOfferChange, onAddToFavorites, onCityChange, onLogin, onNearbyOffersLoad, onReviewsLoad} = props;
 
-    this._renderApp = this._renderApp.bind(this);
+  if (allOffers.length === 0) {
+    return (
+      <Error
+        text={ErrorMessage.FAIL_LOAD}
+      />
+    );
   }
 
-  _renderApp() {
-    const {activeOffer, cities, city, cityOffers, screen, sortType, onActiveOfferChange, onCityChange, onScreenChange} = this.props;
-
-    switch (screen) {
-      case ScreenType.ERROR:
-        return (
-          <Error
-            text={ErrorMessage.FAIL_LOAD}
-          />
-        );
-
-      case ScreenType.LOGIN:
-        return <Redirect to={AppRoute.LOGIN}/>;
-
-      case ScreenType.DEFAULT:
-        return (
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path={AppRoute.MAIN}>
           <Main
             activeCity={city}
             activeOffer={activeOffer}
@@ -51,81 +44,58 @@ class App extends PureComponent {
 
             onCityNameClick={onCityChange}
             onPlaceCardHover={onActiveOfferChange}
-            onPlaceCardNameClick={onScreenChange}
           />
-        );
+        </Route>
 
-      case ScreenType.FAVORITES:
-        return <Redirect to={AppRoute.FAVORITES}/>;
+        <Route exact path={`${AppRoute.OFFER}/:id`}
+          render={({match}) => {
+            const id = Number(match.params.id);
+            const currentOffer = allOffers.find((offer) => offer.id === id);
 
-      case ScreenType.OFFER:
-        return <Redirect to={`${AppRoute.OFFER}/${activeOffer}`}/>;
+            return currentOffer
+              ? <Offer
+                authorizationStatus={authorizationStatus}
+                nearbyOffers={nearbyOffers}
+                place={currentOffer}
+                reviews={reviews}
 
-      default:
-        return null;
-    }
-  }
+                onAddToFavorites={onAddToFavorites}
+                onNearbyOffersLoad={onNearbyOffersLoad}
+                onReviewsLoad={onReviewsLoad}
+                onPlaceCardHover={onActiveOfferChange}
+              />
+              : <Error
+                text={ErrorMessage.NOT_FOUND}
+              />;
+          }}>
+        </Route>
 
-  render() {
-    const {allOffers, authorizationStatus, nearbyOffers, reviews, addToFavorites, loadNearbyOffers, loadReviews, login, onScreenChange} = this.props;
+        <Route exact path={AppRoute.LOGIN}
+          render={() => {
+            switch (authorizationStatus) {
+              case AuthorizationStatus.AUTH:
+                return <Redirect to={AppRoute.MAIN} />;
+              case AuthorizationStatus.NO_AUTH:
+                return <Login onSubmit = {onLogin} error={errorStatus}/>;
+              default:
+                return null;
+            }
+          }}>
+        </Route>
 
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path={AppRoute.MAIN}>
-            {this._renderApp}
-          </Route>
+        <PrivateRoute exact path={AppRoute.FAVORITES}
+          render={() => <Favorites onPlaceCardHover={onActiveOfferChange}/>}
+        />
 
-          <Route exact path={`${AppRoute.OFFER}/:id`}
-            render={(props) => {
-              const id = Number(props.match.params.id);
-              const currentOffer = allOffers.find((offer) => offer.id === id);
-
-              return currentOffer
-                ? <Offer
-                  authorizationStatus={authorizationStatus}
-                  nearbyOffers={nearbyOffers}
-                  place={currentOffer}
-                  reviews={reviews}
-
-                  addToFavorites={addToFavorites}
-                  loadNearbyOffers={loadNearbyOffers}
-                  loadReviews={loadReviews}
-                  onPlaceCardNameClick={onScreenChange}
-                />
-                : <Error
-                  text={ErrorMessage.NOT_FOUND}
-                />;
-            }}>
-          </Route>
-
-          <Route exact path={AppRoute.LOGIN}
-            render={() => {
-              switch (authorizationStatus) {
-                case AuthorizationStatus.AUTH:
-                  return <Redirect to={AppRoute.MAIN} />;
-                case AuthorizationStatus.NO_AUTH:
-                  return <Login onSubmit = {login} />;
-                default:
-                  return null;
-              }
-            }}>
-          </Route>
-
-          <PrivateRoute exact path={AppRoute.FAVORITES}
-            render={() => <Favorites onPlaceCardNameClick={onScreenChange}/>}
+        <Route>
+          <Error
+            text={ErrorMessage.NOT_FOUND}
           />
-
-          <Route>
-            <Error
-              text={ErrorMessage.NOT_FOUND}
-            />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 App.propTypes = {
   activeOffer: PropTypes.number.isRequired,
@@ -134,18 +104,17 @@ App.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
   city: PropTypes.shape(cityType).isRequired,
   cityOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
+  errorStatus: PropTypes.bool.isRequired,
   nearbyOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
   reviews: PropTypes.arrayOf(PropTypes.shape(reviewType)).isRequired,
-  screen: PropTypes.string.isRequired,
   sortType: PropTypes.string.isRequired,
 
-  addToFavorites: PropTypes.func.isRequired,
-  loadNearbyOffers: PropTypes.func.isRequired,
-  loadReviews: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
   onActiveOfferChange: PropTypes.func.isRequired,
+  onAddToFavorites: PropTypes.func.isRequired,
   onCityChange: PropTypes.func.isRequired,
-  onScreenChange: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
+  onNearbyOffersLoad: PropTypes.func.isRequired,
+  onReviewsLoad: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -155,36 +124,32 @@ const mapStateToProps = (state) => ({
   cities: getCities(state),
   city: getCity(state),
   cityOffers: getCityOffers(state),
+  errorStatus: getErrorStatus(state),
   nearbyOffers: getNearbyOffers(state),
   reviews: getReviews(state),
-  screen: getScreen(state),
   sortType: getSortType(state),
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-  addToFavorites(favoriteData) {
-    dispatch(DataOperation.addToFavorites(favoriteData));
-  },
-  loadReviews(id) {
-    dispatch(DataOperation.loadReviews(id));
-  },
-  loadNearbyOffers(id) {
-    dispatch(DataOperation.loadNearbyOffers(id));
-  },
-  login(authData) {
-    dispatch(UserOperation.login(authData))
-      .then(() => dispatch(DataOperation.loadOffers()))
-      .then(() => dispatch(DataOperation.loadFavorites()));
-  },
   onActiveOfferChange(activeOfferId) {
     dispatch(AppActionCreator.changeActiveOffer(activeOfferId));
+  },
+  onAddToFavorites(favoriteData) {
+    dispatch(DataOperation.addToFavorites(favoriteData));
   },
   onCityChange(city) {
     dispatch(AppActionCreator.changeCity(city));
   },
-  onScreenChange(screenType, activeOfferId) {
-    dispatch(AppActionCreator.changeActiveOffer(activeOfferId));
-    dispatch(AppActionCreator.changeScreenType(screenType));
+  onLogin(authData) {
+    dispatch(UserOperation.login(authData))
+      .then(() => dispatch(DataOperation.loadOffers()))
+      .then(() => dispatch(DataOperation.loadFavorites()));
+  },
+  onNearbyOffersLoad(id) {
+    dispatch(DataOperation.loadNearbyOffers(id));
+  },
+  onReviewsLoad(id) {
+    dispatch(DataOperation.loadReviews(id));
   },
 });
 

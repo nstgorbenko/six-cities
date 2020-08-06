@@ -23,21 +23,20 @@ const testProps = {
   cities: testCities,
   city: testCity,
   cityOffers: testPlaces,
+  errorStatus: false,
   nearbyOffers: testPlaces,
   reviews: testReviews,
-  screen: `default`,
   sortType: `Popular`,
-  addToFavorites: () => {},
-  loadNearbyOffers: () => {},
-  loadReviews: () => {},
-  login: () => {},
+  onAddToFavorites: () => {},
+  onNearbyOffersLoad: () => {},
+  onReviewsLoad: () => {},
+  onLogin: () => {},
   onActiveOfferChange: () => {},
   onCityChange: () => {},
-  onScreenChange: () => {},
 };
 
 describe(`App Component rendering`, () => {
-  it(`renders default screen correctly`, () => {
+  it(`renders correctly`, () => {
     const props = testProps;
 
     const tree = renderer
@@ -68,39 +67,31 @@ describe(`App mapDispatchToProps working test`, () => {
     expect(dispatch).toHaveBeenCalledWith({type: `CHANGE_ACTIVE_OFFER`, payload: 15});
   });
 
-  it(`calls changing screen type and active offer action`, () => {
-    const dispatch = jest.fn();
-
-    mapDispatchToProps(dispatch).onScreenChange(`offer`, 15);
-    expect(dispatch).toHaveBeenCalledWith({type: `CHANGE_ACTIVE_OFFER`, payload: 15});
-    expect(dispatch).toHaveBeenCalledWith({type: `CHANGE_SCREEN_TYPE`, payload: `offer`});
-  });
-
   it(`calls add to favorite action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).addToFavorites();
+    mapDispatchToProps(dispatch).onAddToFavorites();
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
   it(`calls load reviews action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).loadReviews();
+    mapDispatchToProps(dispatch).onReviewsLoad();
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
   it(`calls load nearby offers action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).loadNearbyOffers();
+    mapDispatchToProps(dispatch).onNearbyOffersLoad();
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
   it(`calls login action`, () => {
     const dispatch = jest.fn().mockImplementation(() => Promise.resolve());
 
-    mapDispatchToProps(dispatch).login();
+    mapDispatchToProps(dispatch).onLogin();
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });

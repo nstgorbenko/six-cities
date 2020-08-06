@@ -24,7 +24,7 @@ describe(`Favorites Component rendering`, () => {
             <Provider store={store}>
               <Favorites
                 offers={testPlaces}
-                onPlaceCardNameClick={() => {}}
+                onPlaceCardHover={() => {}}
               />
             </Provider>
           </BrowserRouter>)
@@ -40,7 +40,7 @@ describe(`Favorites Component rendering`, () => {
             <Provider store={store}>
               <Favorites
                 offers={[]}
-                onPlaceCardNameClick={() => {}}
+                onPlaceCardHover={() => {}}
               />
             </Provider>
           </BrowserRouter>)

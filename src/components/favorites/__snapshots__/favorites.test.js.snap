@@ -48,7 +48,7 @@ exports[`Favorites Component rendering renders correctly with empty offers array
                   className="header__avatar-wrapper user__avatar-wrapper"
                 >
                   <img
-                    src="https://4.react.pages.academy/six-cities/"
+                    src="https://4.react.pages.academy/six-cities/path"
                   />
                 </div>
                 <span
@@ -161,7 +161,7 @@ exports[`Favorites Component rendering renders correctly with offers array 1`] =
                   className="header__avatar-wrapper user__avatar-wrapper"
                 >
                   <img
-                    src="https://4.react.pages.academy/six-cities/"
+                    src="https://4.react.pages.academy/six-cities/path"
                   />
                 </div>
                 <span

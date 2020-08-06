@@ -26,6 +26,7 @@ describe(`Login working test`, () => {
           <Provider store={store}>
             <Login
               onSubmit={onSubmit}
+              error={false}
             />
           </Provider>
         </BrowserRouter>);
