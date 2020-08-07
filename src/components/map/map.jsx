@@ -6,11 +6,11 @@ import {locationType, offerType} from "../../types.js";
 
 const MarkerSettings = {
   DEFAULT: {
-    iconUrl: `img/pin.svg`,
+    iconUrl: `/img/pin.svg`,
     iconSize: [30, 30]
   },
   ACTIVE: {
-    iconUrl: `img/pin-active.svg`,
+    iconUrl: `/img/pin-active.svg`,
     iconSize: [30, 30]
   },
 };
@@ -42,7 +42,7 @@ class Map extends PureComponent {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.center !== prevProps.center || this.props.activeOffer !== prevProps.activeOffer) {
+    if (this.props.center !== prevProps.center || this.props.activeOffer !== prevProps.activeOffer || this.props.offers !== prevProps.offers) {
       this._updateMap();
     }
   }

@@ -18,9 +18,9 @@ exports[`PlacesList Component rendering renders correctly 1`] = `
         <img
           alt="Stylish apartment in the citycenter"
           className="place-card__image"
-          height="200"
+          height={200}
           src="img/apartment-01.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -47,6 +47,7 @@ exports[`PlacesList Component rendering renders correctly 1`] = `
         </div>
         <button
           className="place-card__bookmark-button place-card__bookmark-button--active button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -89,7 +90,7 @@ exports[`PlacesList Component rendering renders correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/10"
           onClick={[Function]}
         >
           Stylish apartment in the citycenter
@@ -123,9 +124,9 @@ exports[`PlacesList Component rendering renders correctly 1`] = `
         <img
           alt="Private Attic Studio"
           className="place-card__image"
-          height="200"
+          height={200}
           src="img/apartment-02.jpg"
-          width="260"
+          width={260}
         />
       </a>
     </div>
@@ -152,6 +153,7 @@ exports[`PlacesList Component rendering renders correctly 1`] = `
         </div>
         <button
           className="place-card__bookmark-button false button"
+          onClick={[Function]}
           type="button"
         >
           <svg
@@ -194,7 +196,7 @@ exports[`PlacesList Component rendering renders correctly 1`] = `
         className="place-card__name"
       >
         <a
-          href="#"
+          href="/offer/11"
           onClick={[Function]}
         >
           Private Attic Studio

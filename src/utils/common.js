@@ -26,3 +26,30 @@ export const groupOffersByCities = (offers) => {
 export const getRatingPercent = (rating) => {
   return Math.round(rating) * 20;
 };
+
+export const updateOffers = (oldOffers, newOffer) => {
+  const city = newOffer.city.name;
+
+  if (oldOffers.length > 0) {
+    const cityOffers = oldOffers.filter(({name}) => name === city)[0].offers;
+    const thisOfferIndex = cityOffers.findIndex(({id}) => id === newOffer.id);
+    cityOffers[thisOfferIndex] = newOffer;
+
+    return oldOffers;
+  }
+
+  return groupOffersByCities([newOffer]);
+};
+
+export const updateFavorites = (oldFavorites, newFavorite) => {
+  const isFavorite = newFavorite.isFavorite;
+
+  if (isFavorite) {
+    oldFavorites.push(newFavorite);
+  } else {
+    const index = oldFavorites.findIndex(({id}) => id === newFavorite.id);
+    oldFavorites.splice(index, 1);
+  }
+
+  return oldFavorites;
+};

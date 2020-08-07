@@ -29,11 +29,6 @@ exports[`Error Component rendering renders correctly 1`] = `
             >
               Something went wrong.
             </p>
-            <p
-              className="cities__status-description"
-            >
-              Please refresh page to load data.
-            </p>
           </div>
         </section>
         <div

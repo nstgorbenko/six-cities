@@ -11,10 +11,10 @@ class Sort extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handleSortItemClick = this._handleSortItemClick.bind(this);
+    this.handleSortItemClick = this.handleSortItemClick.bind(this);
   }
 
-  _handleSortItemClick(evt) {
+  handleSortItemClick(evt) {
     const {onSortTypeChange, onActiveChange: onMenuToggle} = this.props;
 
     onSortTypeChange(evt.target.dataset.sortType);
@@ -43,7 +43,7 @@ class Sort extends PureComponent {
               key={sortType}
               className={`places__option ${sortType === activeSortType ? `places__option--active` : ``}`}
               data-sort-type={sortType}
-              onClick={(evt) => this._handleSortItemClick(evt)}
+              onClick={(evt) => this.handleSortItemClick(evt)}
             >{sortType}</li>
           )}
         </ul>

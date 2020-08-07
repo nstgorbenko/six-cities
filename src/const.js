@@ -1,16 +1,22 @@
+export const AppRoute = {
+  FAVORITES: `/favorites`,
+  LOGIN: `/login`,
+  MAIN: `/`,
+  OFFER: `/offer`,
+};
+
 export const CardType = {
   CITIES: `cities`,
+  FAVORITES: `favorites`,
   NEAR_PLACES: `near-places`
 };
 
-export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
-
-export const ScreenType = {
-  DEFAULT: `default`,
-  ERROR: `error`,
-  LOGIN: `login`,
-  OFFER: `offer`
+export const ErrorMessage = {
+  FAIL_LOAD: [`Oops!`, `Something went wrong.`, `Please refresh page to load data.`],
+  NOT_FOUND: [`404`, `Page not found.`]
 };
+
+export const OFFER_TYPES = [`apartment`, `room`, `house`, `hotel`];
 
 export const SortType = {
   POPULAR: `Popular`,

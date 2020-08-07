@@ -1,28 +1,42 @@
+import {BrowserRouter} from "react-router-dom";
+import configureStore from "redux-mock-store";
+import {Provider} from "react-redux";
 import React from "react";
 import {mount} from "enzyme";
 
 import Login from "./login.jsx";
+import {testUserInfo} from "../../test-data.js";
+
+const testStore = configureStore([]);
+
+const store = testStore({
+  USER: {
+    authorizationStatus: `AUTH`,
+    info: testUserInfo
+  }
+});
 
 describe(`Login working test`, () => {
-  it(`passes user login data callback when user submit form`, () => {
+  it(`submits the form`, () => {
     const onSubmit = jest.fn();
+    const formSendPrevention = jest.fn();
 
     const login = mount(
-        <Login
-          onSubmit={onSubmit}
-        />);
+        <BrowserRouter>
+          <Provider store={store}>
+            <Login
+              onSubmit={onSubmit}
+              error={false}
+            />
+          </Provider>
+        </BrowserRouter>);
 
-    const {loginRef, passwordRef} = login.instance();
-    loginRef.current = {value: `Oliver.conner@gmail.com`};
-    passwordRef.current = {value: 11111};
-
-    const submitButton = login.find(`form`);
-    submitButton.simulate(`submit`, {preventDefault() {}});
+    const form = login.find(`form`);
+    form.simulate(`submit`, {
+      preventDefault: formSendPrevention
+    });
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith({
-      login: `Oliver.conner@gmail.com`,
-      password: 11111,
-    });
+    expect(formSendPrevention).toHaveBeenCalledTimes(1);
   });
 });

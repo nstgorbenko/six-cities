@@ -12,18 +12,12 @@ import createAPI from "./api.js";
 import {Operation as DataOperation} from "./reducer/data/data.js";
 import {getFirstCity} from "./utils/common.js";
 import reducer from "./reducer/reducer.js";
-import {ScreenType} from "./const.js";
-
-const onDataError = () => {
-  store.dispatch(AppActionCreator.changeScreenType(ScreenType.ERROR));
-};
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.updateAuthStatus(AuthorizationStatus.NO_AUTH));
-  store.dispatch(AppActionCreator.changeScreenType(ScreenType.LOGIN));
 };
 
-const api = createAPI(onDataError, onUnauthorized);
+const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
@@ -31,14 +25,18 @@ const store = createStore(
         applyMiddleware(thunk.withExtraArgument(api)))
 );
 
+const init = () => {
+  ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.querySelector(`#root`)
+  );
+};
+
 store.dispatch(DataOperation.loadOffers())
   .then((offers) => store.dispatch(AppActionCreator.changeCity(getFirstCity(offers))))
   .then(() => store.dispatch(UserOperation.checkAuthStatus()))
-  .then(() => store.dispatch(AppActionCreator.changeScreenType(ScreenType.DEFAULT)));
+  .then(() => store.dispatch(DataOperation.loadFavorites()))
+  .finally(() => init());
 
-ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.querySelector(`#root`)
-);
