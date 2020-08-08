@@ -33,7 +33,7 @@ class Login extends PureComponent {
           <div className="page__login-container container">
             <section className="login">
               <h1 className="login__title">Sign in</h1>
-              {error && <p>Please make sure you enter correct email.</p>}
+              {error && <p className="error-message">Please make sure you enter correct email.</p>}
               <form className="login__form form" action="#" method="post" onSubmit={this.handleSubmit}>
                 <div className="login__input-wrapper form__input-wrapper">
                   <label className="visually-hidden">E-mail</label>

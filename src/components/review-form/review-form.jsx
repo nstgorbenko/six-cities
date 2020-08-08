@@ -82,7 +82,7 @@ class ReviewForm extends PureComponent {
           </p>
           <button className="reviews__submit form__submit button" type="submit" disabled={`${isDisabledButton ? `disabled` : ``}`}>Submit</button>
         </div>
-        {loadStatus === LoadStatus.ERROR && <p className="reviews__text-amount">Something went wrong. Please try again later</p>}
+        {loadStatus === LoadStatus.ERROR && <p className="reviews__text-amount error-message">Something went wrong. Please try again later</p>}
       </form>
     );
   }
