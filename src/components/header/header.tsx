@@ -1,16 +1,20 @@
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {AppRoute} from "../../const.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {getAuthorizationStatus, getUserInfo} from "../../reducer/user/selectors.js";
-import {userType} from "../../types.js";
+import {AppRoute} from "../../const";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {getAuthorizationStatus, getUserInfo} from "../../reducer/user/selectors";
+import {UserType} from "../../types";
 
-const Header = (props) => {
+interface Props {
+  authorizationStatus: string;
+  userInfo: UserType;
+}
+
+const Header: React.FC<Props> = (props: Props) => {
   const {authorizationStatus, userInfo} = props;
-  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
+  const isAuth: boolean = authorizationStatus === AuthorizationStatus.AUTH;
 
   return (
     <header className="header">
@@ -37,11 +41,6 @@ const Header = (props) => {
       </div>
     </header>
   );
-};
-
-Header.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  userInfo: PropTypes.shape(userType).isRequired,
 };
 
 const mapStateToProps = (state) => ({

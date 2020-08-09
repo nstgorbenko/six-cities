@@ -27,13 +27,23 @@ export const getRatingPercent = (rating) => {
   return Math.round(rating) * 20;
 };
 
+export const updateNearbyOffers = (oldNearbyOffers, newNearbyOffer) => {
+
+  if (oldNearbyOffers.length > 0) {
+    const newNearbyOfferIndex = oldNearbyOffers.findIndex(({id}) => id === newNearbyOffer.id);
+    oldNearbyOffers[newNearbyOfferIndex] = newNearbyOffer;
+  }
+
+  return oldNearbyOffers;
+};
+
 export const updateOffers = (oldOffers, newOffer) => {
   const city = newOffer.city.name;
 
   if (oldOffers.length > 0) {
     const cityOffers = oldOffers.filter(({name}) => name === city)[0].offers;
-    const thisOfferIndex = cityOffers.findIndex(({id}) => id === newOffer.id);
-    cityOffers[thisOfferIndex] = newOffer;
+    const newOfferIndex = cityOffers.findIndex(({id}) => id === newOffer.id);
+    cityOffers[newOfferIndex] = newOffer;
 
     return oldOffers;
   }

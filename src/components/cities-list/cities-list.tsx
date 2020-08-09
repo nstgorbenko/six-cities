@@ -1,9 +1,14 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {cityType} from "../../types.js";
+import {CityType} from "../../types";
 
-const CitiesList = (props) => {
+interface Props {
+  activeCity: CityType;
+  cities: Array<CityType>;
+  onCityNameClick(city: CityType): void;
+}
+
+const CitiesList: React.FC<Props> = (props: Props) => {
   const {activeCity, cities, onCityNameClick} = props;
 
   return (
@@ -23,12 +28,6 @@ const CitiesList = (props) => {
       </section>
     </div>
   );
-};
-
-CitiesList.propTypes = {
-  activeCity: PropTypes.shape(cityType).isRequired,
-  cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
-  onCityNameClick: PropTypes.func.isRequired,
 };
 
 export default CitiesList;

@@ -1,17 +1,17 @@
 import {applyMiddleware, createStore} from "redux";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {Provider} from "react-redux";
-import React from "react";
-import ReactDOM from "react-dom";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
 import thunk from "redux-thunk";
 
-import App from "./components/app/app.jsx";
-import {ActionCreator as AppActionCreator} from "./reducer/app/app.js";
-import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from "./reducer/user/user.js";
-import createAPI from "./api.js";
-import {Operation as DataOperation} from "./reducer/data/data.js";
-import {getFirstCity} from "./utils/common.js";
-import reducer from "./reducer/reducer.js";
+import App from "./components/app/app";
+import {ActionCreator as AppActionCreator} from "./reducer/app/app";
+import {AuthorizationStatus, ActionCreator as UserActionCreator, Operation as UserOperation} from "./reducer/user/user";
+import createAPI from "./api";
+import {Operation as DataOperation} from "./reducer/data/data";
+import {getFirstCity} from "./utils/common";
+import reducer from "./reducer/reducer";
 
 const onUnauthorized = () => {
   store.dispatch(UserActionCreator.updateAuthStatus(AuthorizationStatus.NO_AUTH));

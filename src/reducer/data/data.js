@@ -1,6 +1,6 @@
 import {adaptOffer, adaptOffers, adaptReviews} from "../../utils/adapter.js";
-import {groupOffersByCities, updateOffers, updateFavorites} from "../../utils/common.js";
-import {getGroupedOffers, getFavorites} from "./selectors.js";
+import {groupOffersByCities, updateOffers, updateFavorites, updateNearbyOffers} from "../../utils/common.js";
+import {getGroupedOffers, getFavorites, getNearbyOffers} from "./selectors.js";
 
 export const LoadStatus = {
   ERROR: `ERROR`,
@@ -55,12 +55,15 @@ const Operation = {
 
       const oldOffers = getGroupedOffers(getState()).slice();
       const oldFavorites = getFavorites(getState()).slice();
+      const oldNearbyOffers = getNearbyOffers(getState()).slice();
 
       const groupedOffers = updateOffers(oldOffers, adaptedFavoriteOffer);
       const favoriteOffers = updateFavorites(oldFavorites, adaptedFavoriteOffer);
+      const nearbyOffers = updateNearbyOffers(oldNearbyOffers, adaptedFavoriteOffer);
 
       dispatch(ActionCreator.loadOffers(groupedOffers));
       dispatch(ActionCreator.loadFavorites(favoriteOffers));
+      dispatch(ActionCreator.loadNearbyOffers(nearbyOffers));
     })
     .catch((error) => {
       throw error;

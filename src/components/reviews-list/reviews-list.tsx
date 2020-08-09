@@ -1,18 +1,18 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {reviewType} from "../../types.js";
+import Review from "../review/review";
+import {REVIEWS_TO_SHOW} from "../../const";
+import {ReviewType} from "../../types";
 
-import Review from "../review/review.jsx";
+interface Props {
+  reviews: Array<ReviewType>;
+}
 
-const REVIEWS_TO_SHOW = 10;
-
-const sortReviewsByDate = (a, b) => new Date(b.time) - new Date(a.time);
-
-const ReviewsList = (props) => {
+const ReviewsList: React.FC<Props> = (props: Props) => {
   const {reviews} = props;
 
-  const shownReviews = [...reviews]
+  const sortReviewsByDate = (a: ReviewType, b: ReviewType): number => new Date(b.time).getTime() - new Date(a.time).getTime();
+  const shownReviews: Array<ReviewType> = [...reviews]
     .sort(sortReviewsByDate)
     .slice(0, REVIEWS_TO_SHOW);
 
@@ -29,10 +29,6 @@ const ReviewsList = (props) => {
       </ul>
     </React.Fragment>
   );
-};
-
-ReviewsList.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.shape(reviewType)).isRequired,
 };
 
 export default ReviewsList;

@@ -1,18 +1,21 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {getRatingPercent} from "../../utils/common.js";
-import {formatDateToDatetime, formatDateToReviewTime} from "../../utils/date.js";
-import {reviewType} from "../../types.js";
+import {getRatingPercent} from "../../utils/common";
+import {formatDateToDatetime, formatDateToReviewTime} from "../../utils/date";
+import {ReviewType} from "../../types";
 
-const Review = (props) => {
+interface Props {
+  info: ReviewType;
+}
+
+const Review: React.FC<Props> = (props: Props) => {
   const {info} = props;
   const {user, rating, text, time} = info;
   const {name, avatar} = user;
 
-  const ratingPercent = getRatingPercent(rating);
-  const datetime = formatDateToDatetime(time);
-  const reviewTime = formatDateToReviewTime(time);
+  const ratingPercent: number = getRatingPercent(rating);
+  const datetime: string = formatDateToDatetime(time);
+  const reviewTime: string = formatDateToReviewTime(time);
 
   return (
     <li className="reviews__item">
@@ -34,10 +37,6 @@ const Review = (props) => {
       </div>
     </li>
   );
-};
-
-Review.propTypes = {
-  info: PropTypes.shape(reviewType).isRequired,
 };
 
 export default Review;

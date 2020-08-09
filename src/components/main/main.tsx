@@ -1,17 +1,26 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {CardType} from "../../const.js";
-import CitiesList from "../cities-list/cities-list.jsx";
-import Header from "../header/header.jsx";
-import Map from '../map/map.jsx';
-import NoPlaces from "../no-places/no-places.jsx";
-import {cityType, offerType} from "../../types.js";
-import PlacesList from "../places-list/places-list.jsx";
-import Sort from "../sort/sort.jsx";
-import withActiveFlag from "../../hocs/with-active-flag/with-active-flag.js";
+import {CardType} from "../../const";
+import CitiesList from "../cities-list/cities-list";
+import Header from "../header/header";
+import Map from '../map/map';
+import NoPlaces from "../no-places/no-places";
+import {CityType, OfferType} from "../../types";
+import PlacesList from "../places-list/places-list";
+import Sort from "../sort/sort";
+import withActiveFlag from "../../hocs/with-active-flag/with-active-flag";
 
-const Main = (props) => {
+interface Props {
+  activeCity: CityType;
+  cities: Array<CityType>;
+  offers: Array<OfferType>;
+  sortType: string;
+  activeOffer: number;
+  onPlaceCardHover(cardId: number): void;
+  onCityNameClick(city: CityType): void;
+}
+
+const Main: React.FC<Props> = (props: Props) => {
   const {activeCity, cities, offers, sortType, activeOffer, onPlaceCardHover, onCityNameClick} = props;
   const {name: cityName, location: cityLocation} = activeCity;
 
@@ -26,7 +35,6 @@ const Main = (props) => {
         <CitiesList
           activeCity={activeCity}
           cities={cities}
-          sortType={sortType}
           onCityNameClick={onCityNameClick}
         />
         <div className="cities">
@@ -58,16 +66,6 @@ const Main = (props) => {
       </main>
     </div>
   );
-};
-
-Main.propTypes = {
-  activeCity: PropTypes.shape(cityType).isRequired,
-  cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
-  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  sortType: PropTypes.string.isRequired,
-  activeOffer: PropTypes.number.isRequired,
-  onPlaceCardHover: PropTypes.func.isRequired,
-  onCityNameClick: PropTypes.func.isRequired,
 };
 
 export default Main;

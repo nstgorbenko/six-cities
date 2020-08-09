@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-const NoPlaces = (props) => {
+interface Props {
+  activeCity: string;
+}
+
+const NoPlaces: React.FC<Props> = (props: Props) => {
   const {activeCity} = props;
 
   return (
@@ -15,10 +18,6 @@ const NoPlaces = (props) => {
       <div className="cities__right-section"></div>
     </div>
   );
-};
-
-NoPlaces.propTypes = {
-  activeCity: PropTypes.string.isRequired,
 };
 
 export default NoPlaces;

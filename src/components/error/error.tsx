@@ -1,7 +1,10 @@
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-const Error = (props) => {
+interface Props {
+  text: Array<string>;
+}
+
+const Error: React.FC<Props> = (props: Props) => {
   const {text} = props;
 
   return (
@@ -23,10 +26,6 @@ const Error = (props) => {
       </main>
     </div>
   );
-};
-
-Error.propTypes = {
-  text: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Error;

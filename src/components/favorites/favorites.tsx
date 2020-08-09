@@ -1,17 +1,21 @@
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {CardType} from "../../const.js";
-import {getFavorites} from "../../reducer/data/selectors.js";
-import {groupOffersByCities} from "../../utils/common.js";
-import Header from "../header/header.jsx";
-import {offerType} from "../../types.js";
-import PlaceCard from "../place-card/place-card.jsx";
+import {CardType} from "../../const";
+import {getFavorites} from "../../reducer/data/selectors";
+import {groupOffersByCities} from "../../utils/common";
+import Header from "../header/header";
+import {OfferType} from "../../types";
+import PlaceCard from "../place-card/place-card";
 
-const Favorites = (props) => {
+interface Props {
+  offers: Array<OfferType>;
+  onPlaceCardHover(cardId: number): void;
+}
+
+const Favorites: React.FC<Props> = (props: Props) => {
   const {offers: allOffers, onPlaceCardHover} = props;
-  const isEmpty = allOffers.length === 0;
+  const isEmpty: boolean = allOffers.length === 0;
 
   return (
     <div className={`page ${isEmpty ? `page--favorites-empty` : ``}`}>
@@ -57,11 +61,6 @@ const Favorites = (props) => {
       </footer>
     </div>
   );
-};
-
-Favorites.propTypes = {
-  offers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  onPlaceCardHover: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

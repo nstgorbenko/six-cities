@@ -1,18 +1,28 @@
 import {connect} from "react-redux";
-import React, {Fragment, PureComponent} from "react";
-import PropTypes from "prop-types";
+import * as React from 'react';
 
-import {getLoadStatus} from "../../reducer/data/selectors.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
-import {LoadStatus} from "../../reducer/data/data.js";
+import {getLoadStatus} from "../../reducer/data/selectors";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {LoadStatus} from "../../reducer/data/data";
+import {RATING_TITLES, ReviewLength} from "../../const";
 
-const RATING_TITLES = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
-const ReviewLength = {
-  MIN: 50,
-  MAX: 300
-};
+interface Props {
+  id: number;
+  rating: number;
+  review: string;
+  loadStatus: string;
+  onChange(): void;
+  onReset(): void;
+  onSubmit(reviewData: {
+    hotelId: number;
+    comment: string;
+    rating: number;
+  }): Promise<void>;
+}
 
-class ReviewForm extends PureComponent {
+class ReviewForm extends React.PureComponent<Props> {
+  props: Props;
+
   constructor(props) {
     super(props);
 
@@ -37,8 +47,8 @@ class ReviewForm extends PureComponent {
 
   render() {
     const {rating, review, loadStatus, onChange} = this.props;
-    const isDisabledInput = loadStatus === LoadStatus.LOADING;
-    const isDisabledButton = rating === 0 || review.length < ReviewLength.MIN || review.length > ReviewLength.MAX || isDisabledInput;
+    const isDisabledInput: boolean = loadStatus === LoadStatus.LOADING;
+    const isDisabledButton: boolean = rating === 0 || review.length < ReviewLength.MIN || review.length > ReviewLength.MAX || isDisabledInput;
 
     return (
       <form className="reviews__form form" action="#" method="post"
@@ -47,14 +57,14 @@ class ReviewForm extends PureComponent {
         <label className="reviews__label form__label" htmlFor="review">Your review</label>
         <div className="reviews__rating-form form__rating">
           {RATING_TITLES.map((ratingTitle, index) => {
-            const id = RATING_TITLES.length - index;
+            const id: number = RATING_TITLES.length - index;
             return (
-              <Fragment key={ratingTitle}>
+              <React.Fragment key={ratingTitle}>
                 <input className="form__rating-input visually-hidden" name="rating" type="radio"
                   value={id}
                   id={`${id}-stars`}
                   checked={id === rating}
-                  disabled={`${isDisabledInput ? `disabled` : ``}`}
+                  disabled={isDisabledInput}
                   onChange={onChange}
                 />
                 <label className="reviews__rating-label form__rating-label"
@@ -65,7 +75,7 @@ class ReviewForm extends PureComponent {
                     <use xlinkHref="#icon-star"></use>
                   </svg>
                 </label>
-              </Fragment>
+              </React.Fragment>
             );
           })}
         </div>
@@ -74,29 +84,19 @@ class ReviewForm extends PureComponent {
           maxLength={ReviewLength.MAX}
           value={review}
           onChange={onChange}
-          disabled={`${isDisabledInput ? `disabled` : ``}`}
+          disabled={isDisabledInput}
         ></textarea>
         <div className="reviews__button-wrapper">
           <p className="reviews__help">
             To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
           </p>
-          <button className="reviews__submit form__submit button" type="submit" disabled={`${isDisabledButton ? `disabled` : ``}`}>Submit</button>
+          <button className="reviews__submit form__submit button" type="submit" disabled={isDisabledButton}>Submit</button>
         </div>
         {loadStatus === LoadStatus.ERROR && <p className="reviews__text-amount error-message">Something went wrong. Please try again later</p>}
       </form>
     );
   }
 }
-
-ReviewForm.propTypes = {
-  id: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  review: PropTypes.string.isRequired,
-  loadStatus: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onReset: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = (state) => ({
   loadStatus: getLoadStatus(state),

@@ -1,7 +1,20 @@
-import React, {PureComponent} from "react";
+import * as React from 'react';
+import {Subtract} from "utility-types";
+
+interface State {
+  isActive: boolean;
+}
+
+interface InjectedProps {
+  isActive: boolean;
+  onActiveChange(): void;
+}
 
 const withActiveFlag = (Component) => {
-  class WithActiveFlag extends PureComponent {
+  type P = React.ComponentProps<typeof Component>;
+  type T = Subtract<P, InjectedProps>;
+
+  class WithActiveFlag extends React.PureComponent<T, State> {
     constructor(props) {
       super(props);
 

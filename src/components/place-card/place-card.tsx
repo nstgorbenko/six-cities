@@ -1,42 +1,40 @@
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {AppRoute, CardType} from "../../const.js";
-import {capitalizeWord, getRatingPercent} from "../../utils/common.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
-import {getAuthorizationStatus} from "../../reducer/user/selectors.js";
-import {offerType} from "../../types.js";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {AppRoute, CardType, ImageSize} from "../../const";
+import {capitalizeWord, getRatingPercent} from "../../utils/common";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import {getAuthorizationStatus} from "../../reducer/user/selectors";
+import {OfferType} from "../../types";
 
-const FAVORITE_CLASS = `place-card__bookmark-button--active`;
-const ImageSize = {
-  DEFAULT: {
-    width: 260,
-    height: 200
-  },
-  FAVORITES: {
-    width: 150,
-    height: 110
-  }
-};
+interface Props {
+  authorizationStatus: string;
+  cardType: CardType;
+  place: OfferType;
+  onHover(cardId: number): void;
+  onAddToFavorites(hotelData: {
+    hotelId: number;
+    status: number;
+  }): void;
+}
 
-const PlaceCard = (props) => {
+const PlaceCard: React.FC<Props> = (props: Props) => {
   const {authorizationStatus, cardType, place, onHover, onAddToFavorites} = props;
   const {id, name, type, price, photo, rating, isPremium, isFavorite} = place;
 
-  const ratingPercent = getRatingPercent(rating);
-  const placeType = capitalizeWord(type);
+  const ratingPercent: number = getRatingPercent(rating);
+  const placeType: string = capitalizeWord(type);
 
-  const isAuth = authorizationStatus === AuthorizationStatus.AUTH;
-  const bookmarkActiveClass = isFavorite && FAVORITE_CLASS;
+  const isAuth: boolean = authorizationStatus === AuthorizationStatus.AUTH;
+  const bookmarkActiveClass: string = isFavorite ? `place-card__bookmark-button--active` : ``;
   const bookmarkName = `${isFavorite ? `In` : `To`} bookmarks`;
 
-  const articleClassName = cardType === CardType.CITIES ? `${cardType}__place-card` : `${cardType}__card`;
-  const imageSize = cardType === CardType.FAVORITES ? ImageSize.FAVORITES : ImageSize.DEFAULT;
-  const isCardMark = cardType === CardType.CITIES && isPremium;
-  const isCityCardType = cardType === CardType.CITIES;
+  const isCityCardType: boolean = cardType === CardType.CITIES;
+  const articleClassName: string = isCityCardType ? `${cardType}__place-card` : `${cardType}__card`;
+  const imageSize: {width: number; height: number} = cardType === CardType.FAVORITES ? ImageSize.FAVORITES : ImageSize.DEFAULT;
+  const isCardMark: boolean = isCityCardType && isPremium;
 
   return (
     <article className={`${articleClassName} place-card`}
@@ -85,14 +83,6 @@ const PlaceCard = (props) => {
       </div>
     </article>
   );
-};
-
-PlaceCard.propTypes = {
-  authorizationStatus: PropTypes.string.isRequired,
-  cardType: PropTypes.oneOf(Object.values(CardType)).isRequired,
-  place: PropTypes.shape(offerType).isRequired,
-  onHover: PropTypes.func.isRequired,
-  onAddToFavorites: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,25 +1,50 @@
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
-import React from "react";
+import * as React from 'react';
 
-import {ActionCreator as AppActionCreator} from "../../reducer/app/app.js";
-import {AuthorizationStatus} from "../../reducer/user/user.js";
-import {cityType, offerType, reviewType} from "../../types.js";
-import {Operation as DataOperation} from "../../reducer/data/data.js";
-import Error from "../error/error.jsx";
-import Favorites from "../favorites/favorites.jsx";
-import Login from "../login/login.jsx";
-import Main from "../main/main.jsx";
-import Offer from "../offer/offer.jsx";
-import {AppRoute, ErrorMessage} from "../../const.js";
-import {getActiveOffer, getCity, getSortType} from "../../reducer/app/selectors.js";
-import {getAuthorizationStatus, getErrorStatus} from "../../reducer/user/selectors.js";
-import {getCities, getCityOffers, getNearbyOffers, getOffers, getReviews} from "../../reducer/data/selectors.js";
-import {Operation as UserOperation} from "../../reducer/user/user.js";
-import PrivateRoute from "../private-route/private-route.jsx";
+import {ActionCreator as AppActionCreator} from "../../reducer/app/app";
+import {AuthorizationStatus} from "../../reducer/user/user";
+import {CityType, OfferType, ReviewType} from "../../types";
+import {Operation as DataOperation} from "../../reducer/data/data";
+import Error from "../error/error";
+import Favorites from "../favorites/favorites";
+import Login from "../login/login";
+import Main from "../main/main";
+import Offer from "../offer/offer";
+import {AppRoute, ErrorMessage} from "../../const";
+import {getActiveOffer, getCity, getSortType} from "../../reducer/app/selectors";
+import {getAuthorizationStatus, getErrorStatus} from "../../reducer/user/selectors";
+import {getCities, getCityOffers, getNearbyOffers, getOffers, getReviews} from "../../reducer/data/selectors";
+import {Operation as UserOperation} from "../../reducer/user/user";
+import PrivateRoute from "../private-route/private-route";
 
-const App = (props) => {
+interface Props {
+  activeOffer: number;
+  allOffers: Array<OfferType>;
+  authorizationStatus: string;
+  cities: Array<CityType>;
+  city: CityType;
+  cityOffers: Array<OfferType>;
+  errorStatus: boolean;
+  nearbyOffers: Array<OfferType>;
+  reviews: Array<ReviewType>;
+  sortType: string;
+
+  onActiveOfferChange(cardId: number): void;
+  onAddToFavorites(hotelData: {
+    hotelId: number;
+    status: number;
+  }): void;
+  onCityChange(city: CityType): void;
+  onLogin(userData: {
+    login: string;
+    password: string;
+  }): void;
+  onNearbyOffersLoad(hotelId: number): void;
+  onReviewsLoad(hotelId: number): void;
+}
+
+const App: React.FC<Props> = (props: Props) => {
   const {activeOffer, allOffers, authorizationStatus, cities, city, cityOffers, errorStatus, nearbyOffers, reviews, sortType,
     onActiveOfferChange, onAddToFavorites, onCityChange, onLogin, onNearbyOffersLoad, onReviewsLoad} = props;
 
@@ -50,7 +75,7 @@ const App = (props) => {
         <Route exact path={`${AppRoute.OFFER}/:id`}
           render={({match}) => {
             const id = Number(match.params.id);
-            const currentOffer = allOffers.find((offer) => offer.id === id);
+            const currentOffer: OfferType = allOffers.find((offer) => offer.id === id);
 
             return currentOffer
               ? <Offer
@@ -95,26 +120,6 @@ const App = (props) => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-  activeOffer: PropTypes.number.isRequired,
-  allOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  authorizationStatus: PropTypes.string.isRequired,
-  cities: PropTypes.arrayOf(PropTypes.shape(cityType)).isRequired,
-  city: PropTypes.shape(cityType).isRequired,
-  cityOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  errorStatus: PropTypes.bool.isRequired,
-  nearbyOffers: PropTypes.arrayOf(PropTypes.shape(offerType)).isRequired,
-  reviews: PropTypes.arrayOf(PropTypes.shape(reviewType)).isRequired,
-  sortType: PropTypes.string.isRequired,
-
-  onActiveOfferChange: PropTypes.func.isRequired,
-  onAddToFavorites: PropTypes.func.isRequired,
-  onCityChange: PropTypes.func.isRequired,
-  onLogin: PropTypes.func.isRequired,
-  onNearbyOffersLoad: PropTypes.func.isRequired,
-  onReviewsLoad: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
