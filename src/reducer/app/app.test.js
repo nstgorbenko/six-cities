@@ -1,5 +1,5 @@
-import {ActionCreator, ActionType, reducer} from "./app.js";
-import {getActiveOffer, getCity, getSortType} from "./selectors.js";
+import {ActionCreator, ActionType, reducer} from "./app";
+import {getActiveOffer, getCity, getSortType} from "./selectors";
 
 const testInitialState = {
   city: {

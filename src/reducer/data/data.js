@@ -1,6 +1,6 @@
-import {adaptOffer, adaptOffers, adaptReviews} from "../../utils/adapter.js";
-import {groupOffersByCities, updateOffers, updateFavorites} from "../../utils/common.js";
-import {getGroupedOffers, getFavorites} from "./selectors.js";
+import {adaptOffer, adaptOffers, adaptReviews} from "../../utils/adapter";
+import {groupOffersByCities, updateOffers, updateFavorites, updateNearbyOffers} from "../../utils/common";
+import {getGroupedOffers, getFavorites, getNearbyOffers} from "./selectors";
 
 export const LoadStatus = {
   ERROR: `ERROR`,
@@ -55,15 +55,15 @@ const Operation = {
 
       const oldOffers = getGroupedOffers(getState()).slice();
       const oldFavorites = getFavorites(getState()).slice();
+      const oldNearbyOffers = getNearbyOffers(getState()).slice();
 
       const groupedOffers = updateOffers(oldOffers, adaptedFavoriteOffer);
       const favoriteOffers = updateFavorites(oldFavorites, adaptedFavoriteOffer);
+      const nearbyOffers = updateNearbyOffers(oldNearbyOffers, adaptedFavoriteOffer);
 
       dispatch(ActionCreator.loadOffers(groupedOffers));
       dispatch(ActionCreator.loadFavorites(favoriteOffers));
-    })
-    .catch((error) => {
-      throw error;
+      dispatch(ActionCreator.loadNearbyOffers(nearbyOffers));
     });
   },
 
@@ -72,9 +72,6 @@ const Operation = {
       .then(({data}) => {
         const adaptedFavoriteOffers = adaptOffers(data);
         dispatch(ActionCreator.loadFavorites(adaptedFavoriteOffers));
-      })
-      .catch((error) => {
-        throw error;
       });
   },
 
@@ -83,9 +80,6 @@ const Operation = {
     .then(({data}) => {
       const adaptedOffers = adaptOffers(data);
       dispatch(ActionCreator.loadNearbyOffers(adaptedOffers));
-    })
-    .catch((error) => {
-      throw error;
     });
   },
 
@@ -96,9 +90,6 @@ const Operation = {
         const groupedOffers = groupOffersByCities(adaptedOffers);
         dispatch(ActionCreator.loadOffers(groupedOffers));
         return groupedOffers;
-      })
-      .catch((error) => {
-        throw error;
       });
   },
 
@@ -107,9 +98,6 @@ const Operation = {
     .then(({data}) => {
       const adaptedReviews = adaptReviews(data);
       dispatch(ActionCreator.loadReviews(adaptedReviews));
-    })
-    .catch((error) => {
-      throw error;
     });
   },
 
@@ -125,9 +113,8 @@ const Operation = {
       dispatch(ActionCreator.loadReviews(adaptedReviews));
       dispatch(ActionCreator.updateLoadStatus(LoadStatus.SUCCESS));
     })
-    .catch((error) => {
+    .catch(() => {
       dispatch(ActionCreator.updateLoadStatus(LoadStatus.ERROR));
-      throw error;
     });
   },
 };

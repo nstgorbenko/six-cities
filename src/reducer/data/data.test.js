@@ -1,7 +1,8 @@
-import {ActionCreator, ActionType, Operation, reducer} from "./data.js";
-import createAPI from "../../api.js";
-import {getCities, getCityOffers, getLoadStatus, getNearbyOffers, getOffers, getReviews} from "./selectors.js";
-import {testGroupedPlace, testGroupedPlaces, testPlace, testPlaces, testReviews, testServerOffers, testServerReviews} from "../../test-data.js";
+import {ActionCreator, ActionType, Operation, reducer} from "./data";
+import createAPI from "../../api";
+import {getCities, getCityOffers, getLoadStatus, getNearbyOffers, getOffers, getReviews} from "./selectors";
+import {noop} from "../../utils/common";
+import {testGroupedPlace, testGroupedPlaces, testPlace, testPlaces, testReviews, testServerOffers, testServerReviews} from "../../test-data";
 
 import MockAdapter from "axios-mock-adapter";
 
@@ -70,7 +71,7 @@ const emptyStore = {
 
 const getState = () => emptyStore;
 
-const api = createAPI(() => {});
+const api = createAPI(noop);
 const apiMock = new MockAdapter(api);
 
 describe(`Reducer working test`, () => {
@@ -198,7 +199,7 @@ describe(`Operation working test`, () => {
 
     return favoriteOfferSender(dispatch, getState, api)
       .then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(2);
+        expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
           type: ActionType.LOAD_OFFERS,
           payload: testGroupedPlace,
@@ -206,6 +207,10 @@ describe(`Operation working test`, () => {
         expect(dispatch).toHaveBeenNthCalledWith(2, {
           type: ActionType.LOAD_FAVORITES,
           payload: [testPlace],
+        });
+        expect(dispatch).toHaveBeenNthCalledWith(3, {
+          type: ActionType.LOAD_NEARBY_OFFERS,
+          payload: [],
         });
       });
   });
@@ -218,7 +223,7 @@ describe(`Operation working test`, () => {
       .onGet(`/favorite`)
       .reply(200, testServerOffers);
 
-    return favoritesLoader(dispatch, () => {}, api)
+    return favoritesLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
@@ -237,7 +242,7 @@ describe(`Operation working test`, () => {
       .onGet(`/hotels/${hotelId}/nearby`)
       .reply(200, testServerOffers);
 
-    return nearbyLoader(dispatch, () => {}, api)
+    return nearbyLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
@@ -255,7 +260,7 @@ describe(`Operation working test`, () => {
       .onGet(`/hotels`)
       .reply(200, testServerOffers);
 
-    return offersLoader(dispatch, () => {}, api)
+    return offersLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
@@ -274,7 +279,7 @@ describe(`Operation working test`, () => {
       .onGet(`/comments/${hotelId}`)
       .reply(200, testServerReviews);
 
-    return reviewsLoader(dispatch, () => {}, api)
+    return reviewsLoader(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatch).toHaveBeenCalledWith({
@@ -297,7 +302,7 @@ describe(`Operation working test`, () => {
       .onPost(`/comments/${testReview.hotelId}`)
       .reply(200, testServerReviews);
 
-    return reviewSender(dispatch, () => {}, api)
+    return reviewSender(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {

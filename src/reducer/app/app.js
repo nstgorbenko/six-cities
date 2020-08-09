@@ -1,4 +1,4 @@
-import {SortType} from "../../const.js";
+import {SortType} from "../../const";
 
 const initialState = {
   city: {

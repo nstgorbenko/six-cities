@@ -1,6 +1,6 @@
-import {getFirstCity} from "./common.js";
-import {getSortedPlaces, sortEventsByPriceToHigh, sortEventsByPriceToLow, sortEventsByRating} from "./sort.js";
-import {SortType} from "../const.js";
+import {getFirstCity} from "./common";
+import {getSortedPlaces, sortEventsByPriceToHigh, sortEventsByPriceToLow, sortEventsByRating} from "./sort";
+import {SortType} from "../const";
 
 describe(`getFirstCity working test`, () => {
   it(`returns first city data from grouped offers array`, () => {

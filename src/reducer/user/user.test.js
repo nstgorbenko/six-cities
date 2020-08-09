@@ -1,6 +1,7 @@
-import {ActionCreator, ActionType, Operation, reducer} from "./user.js";
-import createAPI from "../../api.js";
-import {getAuthorizationStatus, getUserInfo, getErrorStatus} from "./selectors.js";
+import {ActionCreator, ActionType, Operation, reducer} from "./user";
+import createAPI from "../../api";
+import {getAuthorizationStatus, getUserInfo, getErrorStatus} from "./selectors";
+import {noop} from "../../utils/common";
 
 import MockAdapter from "axios-mock-adapter";
 
@@ -35,7 +36,7 @@ const testUserInfo = {
   isSuper: undefined,
 };
 
-const api = createAPI(() => {});
+const api = createAPI(noop);
 const apiMock = new MockAdapter(api);
 
 describe(`Reducer working test`, () => {
@@ -147,7 +148,7 @@ describe(`Operation working test`, () => {
       .onGet(`/login`)
       .reply(200, testUserInfo);
 
-    return authorizationChecker(dispatch, () => {}, api)
+    return authorizationChecker(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
@@ -169,7 +170,7 @@ describe(`Operation working test`, () => {
       .onPost(`/login`)
       .reply(200, testUserInfo);
 
-    return authorization(dispatch, () => {}, api)
+    return authorization(dispatch, noop, api)
       .then(() => {
         expect(dispatch).toHaveBeenCalledTimes(3);
         expect(dispatch).toHaveBeenNthCalledWith(1, {
