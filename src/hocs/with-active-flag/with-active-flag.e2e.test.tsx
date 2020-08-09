@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import {shallow} from "enzyme";
 
-import withActiveFlag from "./with-active-flag.js";
+import withActiveFlag from "./with-active-flag";
 
 const MockComponent = () => <div />;
 

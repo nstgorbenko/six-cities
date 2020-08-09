@@ -14,7 +14,7 @@ exports[`Sort Component rendering renders correctly with isActive equal false 1`
   <span
     className="places__sorting-type"
     onClick={[Function]}
-    tabIndex="0"
+    tabIndex={0}
   >
     Popular
     <svg
@@ -34,7 +34,7 @@ exports[`Sort Component rendering renders correctly with isActive equal false 1`
       className="places__option places__option--active"
       data-sort-type="Popular"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Popular
     </li>
@@ -42,7 +42,7 @@ exports[`Sort Component rendering renders correctly with isActive equal false 1`
       className="places__option "
       data-sort-type="Price: low to high"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: low to high
     </li>
@@ -50,7 +50,7 @@ exports[`Sort Component rendering renders correctly with isActive equal false 1`
       className="places__option "
       data-sort-type="Price: high to low"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: high to low
     </li>
@@ -58,7 +58,7 @@ exports[`Sort Component rendering renders correctly with isActive equal false 1`
       className="places__option "
       data-sort-type="Top rated first"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Top rated first
     </li>
@@ -80,7 +80,7 @@ exports[`Sort Component rendering renders correctly with isActive equal true 1`]
   <span
     className="places__sorting-type"
     onClick={[Function]}
-    tabIndex="0"
+    tabIndex={0}
   >
     Popular
     <svg
@@ -100,7 +100,7 @@ exports[`Sort Component rendering renders correctly with isActive equal true 1`]
       className="places__option places__option--active"
       data-sort-type="Popular"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Popular
     </li>
@@ -108,7 +108,7 @@ exports[`Sort Component rendering renders correctly with isActive equal true 1`]
       className="places__option "
       data-sort-type="Price: low to high"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: low to high
     </li>
@@ -116,7 +116,7 @@ exports[`Sort Component rendering renders correctly with isActive equal true 1`]
       className="places__option "
       data-sort-type="Price: high to low"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Price: high to low
     </li>
@@ -124,7 +124,7 @@ exports[`Sort Component rendering renders correctly with isActive equal true 1`]
       className="places__option "
       data-sort-type="Top rated first"
       onClick={[Function]}
-      tabIndex="0"
+      tabIndex={0}
     >
       Top rated first
     </li>

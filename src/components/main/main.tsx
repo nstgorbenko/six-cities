@@ -16,8 +16,8 @@ interface Props {
   offers: Array<OfferType>;
   sortType: string;
   activeOffer: number;
-  onPlaceCardHover(cardId: number): void;
   onCityNameClick(city: CityType): void;
+  onPlaceCardHover(cardId: number): void;
 }
 
 const Main: React.FC<Props> = (props: Props) => {

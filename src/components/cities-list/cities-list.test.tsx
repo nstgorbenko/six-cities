@@ -1,8 +1,9 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import CitiesList from "./cities-list.jsx";
-import {testCity, testCities} from "../../test-data.js";
+import CitiesList from "./cities-list";
+import {noop} from "../../utils/common";
+import {testCity, testCities} from "../../test-data";
 
 describe(`PlacesList Component rendering`, () => {
   it(`renders correctly`, () => {
@@ -10,7 +11,7 @@ describe(`PlacesList Component rendering`, () => {
       .create(<CitiesList
         activeCity={testCity}
         cities={testCities}
-        onCityNameClick={() => {}}
+        onCityNameClick={noop}
       />)
       .toJSON();
 

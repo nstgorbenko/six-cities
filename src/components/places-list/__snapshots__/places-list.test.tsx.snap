@@ -152,7 +152,7 @@ exports[`PlacesList Component rendering renders correctly 1`] = `
           </span>
         </div>
         <button
-          className="place-card__bookmark-button false button"
+          className="place-card__bookmark-button  button"
           onClick={[Function]}
           type="button"
         >

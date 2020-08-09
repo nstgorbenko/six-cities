@@ -1,8 +1,8 @@
-import React from "react";
+import * as React from "react";
 import {shallow} from "enzyme";
 
-import CitiesList from "./cities-list.jsx";
-import {testCity, testCities} from "../../test-data.js";
+import CitiesList from "./cities-list";
+import {testCity, testCities} from "../../test-data";
 
 describe(`CitiesList working test`, () => {
   it(`passes city name to callback when user click on this name`, () => {

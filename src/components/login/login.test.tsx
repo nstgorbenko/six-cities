@@ -1,11 +1,12 @@
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Login from "./login.jsx";
-import {testUserInfo} from "../../test-data.js";
+import Login from "./login";
+import {noop} from "../../utils/common";
+import {testUserInfo} from "../../test-data";
 
 const testStore = configureStore([]);
 
@@ -23,7 +24,7 @@ describe(`Login Component rendering`, () => {
           <BrowserRouter>
             <Provider store={store}>
               <Login
-                onSubmit={() => {}}
+                onSubmit={noop}
                 error={true}
               />
             </Provider>

@@ -1,14 +1,13 @@
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import React from "react";
+import * as React from "react";
 import {mount} from "enzyme";
 
-import Login from "./login.jsx";
-import {testUserInfo} from "../../test-data.js";
+import Login from "./login";
+import {testUserInfo} from "../../test-data";
 
 const testStore = configureStore([]);
-
 const store = testStore({
   USER: {
     authorizationStatus: `AUTH`,

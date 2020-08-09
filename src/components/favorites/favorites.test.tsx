@@ -1,11 +1,12 @@
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import {Favorites} from "./favorites.jsx";
-import {testPlaces, testUserInfo} from "../../test-data.js";
+import {Favorites} from "./favorites";
+import {noop} from "../../utils/common";
+import {testPlaces, testUserInfo} from "../../test-data";
 
 const testStore = configureStore([]);
 
@@ -24,7 +25,7 @@ describe(`Favorites Component rendering`, () => {
             <Provider store={store}>
               <Favorites
                 offers={testPlaces}
-                onPlaceCardHover={() => {}}
+                onPlaceCardHover={noop}
               />
             </Provider>
           </BrowserRouter>)
@@ -40,7 +41,7 @@ describe(`Favorites Component rendering`, () => {
             <Provider store={store}>
               <Favorites
                 offers={[]}
-                onPlaceCardHover={() => {}}
+                onPlaceCardHover={noop}
               />
             </Provider>
           </BrowserRouter>)

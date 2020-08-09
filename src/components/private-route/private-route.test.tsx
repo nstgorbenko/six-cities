@@ -1,8 +1,8 @@
 import {BrowserRouter} from "react-router-dom";
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import {PrivateRoute} from './private-route.jsx';
+import {PrivateRoute} from './private-route';
 
 describe(`PrivateRoute Component rendering`, () => {
   it(`renders correctly`, () => {

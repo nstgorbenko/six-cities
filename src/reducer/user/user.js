@@ -1,4 +1,4 @@
-import {adaptUserInfo} from "../../utils/adapter.js";
+import {adaptUserInfo} from "../../utils/adapter";
 
 const AuthorizationStatus = {
   NO_AUTH: `NO_AUTH`,
@@ -44,9 +44,6 @@ const Operation = {
       .then(({data}) => {
         dispatch(ActionCreator.updateAuthStatus(AuthorizationStatus.AUTH));
         dispatch(ActionCreator.setInfo(adaptUserInfo(data)));
-      })
-      .catch((error) => {
-        throw error;
       });
   },
   login: (authData) => (dispatch, getState, api) => {
@@ -62,9 +59,7 @@ const Operation = {
     .catch((error) => {
       if (error.response.status === 400) {
         dispatch(ActionCreator.setError(true));
-        return;
       }
-      throw error;
     });
   },
 };

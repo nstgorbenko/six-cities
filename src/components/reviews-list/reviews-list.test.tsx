@@ -1,15 +1,16 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import ReviewsList from "./reviews-list.jsx";
-import {testReviews} from "../../test-data.js";
+import ReviewsList from "./reviews-list";
+import {testReviews} from "../../test-data";
 
 describe(`ReviewsList Component rendering`, () => {
   it(`renders correctly`, () => {
     const tree = renderer
-      .create(<ReviewsList
-        reviews = {testReviews}
-      />)
+      .create(
+          <ReviewsList
+            reviews = {testReviews}
+          />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

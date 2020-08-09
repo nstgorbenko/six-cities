@@ -1,11 +1,12 @@
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import Offer from "./offer.jsx";
-import {testPlaces, testReviews, testUserInfo} from "../../test-data.js";
+import {noop} from "../../utils/common";
+import Offer from "./offer";
+import {testPlaces, testReviews, testUserInfo} from "../../test-data";
 
 const testStore = configureStore([]);
 
@@ -30,10 +31,10 @@ describe(`Offer Component rendering`, () => {
                 place={testPlaces[0]}
                 nearbyOffers={testPlaces}
                 reviews={testReviews}
-                onAddToFavorites={() => {}}
-                onNearbyOffersLoad={() => {}}
-                onReviewsLoad={() => {}}
-                onPlaceCardHover={() => {}}
+                onAddToFavorites={noop}
+                onNearbyOffersLoad={noop}
+                onReviewsLoad={noop}
+                onPlaceCardHover={noop}
               />
             </Provider>
           </BrowserRouter>, {
@@ -64,10 +65,10 @@ describe(`Offer Component rendering`, () => {
                 place={testPlaces[1]}
                 nearbyOffers={testPlaces}
                 reviews={testReviews}
-                onAddToFavorites={() => {}}
-                onNearbyOffersLoad={() => {}}
-                onReviewsLoad={() => {}}
-                onPlaceCardHover={() => {}}
+                onAddToFavorites={noop}
+                onNearbyOffersLoad={noop}
+                onReviewsLoad={noop}
+                onPlaceCardHover={noop}
               />
             </Provider>
           </BrowserRouter>, {

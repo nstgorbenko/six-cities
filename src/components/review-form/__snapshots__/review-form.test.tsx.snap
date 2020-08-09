@@ -19,7 +19,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={true}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="5-stars"
       name="rating"
       onChange={[Function]}
@@ -44,7 +44,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="4-stars"
       name="rating"
       onChange={[Function]}
@@ -69,7 +69,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="3-stars"
       name="rating"
       onChange={[Function]}
@@ -94,7 +94,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="2-stars"
       name="rating"
       onChange={[Function]}
@@ -119,7 +119,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="1-stars"
       name="rating"
       onChange={[Function]}
@@ -144,7 +144,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
   </div>
   <textarea
     className="reviews__textarea form__textarea"
-    disabled=""
+    disabled={false}
     id="review"
     maxLength={300}
     minLength={50}
@@ -175,14 +175,14 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     </p>
     <button
       className="reviews__submit form__submit button"
-      disabled="disabled"
+      disabled={true}
       type="submit"
     >
       Submit
     </button>
   </div>
   <p
-    className="reviews__text-amount"
+    className="reviews__text-amount error-message"
   >
     Something went wrong. Please try again later
   </p>
@@ -208,7 +208,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={true}
       className="form__rating-input visually-hidden"
-      disabled="disabled"
+      disabled={true}
       id="5-stars"
       name="rating"
       onChange={[Function]}
@@ -233,7 +233,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled="disabled"
+      disabled={true}
       id="4-stars"
       name="rating"
       onChange={[Function]}
@@ -258,7 +258,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled="disabled"
+      disabled={true}
       id="3-stars"
       name="rating"
       onChange={[Function]}
@@ -283,7 +283,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled="disabled"
+      disabled={true}
       id="2-stars"
       name="rating"
       onChange={[Function]}
@@ -308,7 +308,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled="disabled"
+      disabled={true}
       id="1-stars"
       name="rating"
       onChange={[Function]}
@@ -333,7 +333,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
   </div>
   <textarea
     className="reviews__textarea form__textarea"
-    disabled="disabled"
+    disabled={true}
     id="review"
     maxLength={300}
     minLength={50}
@@ -364,7 +364,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     </p>
     <button
       className="reviews__submit form__submit button"
-      disabled="disabled"
+      disabled={true}
       type="submit"
     >
       Submit
@@ -392,7 +392,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={true}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="5-stars"
       name="rating"
       onChange={[Function]}
@@ -417,7 +417,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="4-stars"
       name="rating"
       onChange={[Function]}
@@ -442,7 +442,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="3-stars"
       name="rating"
       onChange={[Function]}
@@ -467,7 +467,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="2-stars"
       name="rating"
       onChange={[Function]}
@@ -492,7 +492,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="1-stars"
       name="rating"
       onChange={[Function]}
@@ -517,7 +517,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
   </div>
   <textarea
     className="reviews__textarea form__textarea"
-    disabled=""
+    disabled={false}
     id="review"
     maxLength={300}
     minLength={50}
@@ -548,7 +548,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     </p>
     <button
       className="reviews__submit form__submit button"
-      disabled="disabled"
+      disabled={true}
       type="submit"
     >
       Submit
@@ -576,7 +576,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={true}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="5-stars"
       name="rating"
       onChange={[Function]}
@@ -601,7 +601,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="4-stars"
       name="rating"
       onChange={[Function]}
@@ -626,7 +626,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="3-stars"
       name="rating"
       onChange={[Function]}
@@ -651,7 +651,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="2-stars"
       name="rating"
       onChange={[Function]}
@@ -676,7 +676,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     <input
       checked={false}
       className="form__rating-input visually-hidden"
-      disabled=""
+      disabled={false}
       id="1-stars"
       name="rating"
       onChange={[Function]}
@@ -701,7 +701,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
   </div>
   <textarea
     className="reviews__textarea form__textarea"
-    disabled=""
+    disabled={false}
     id="review"
     maxLength={300}
     minLength={50}
@@ -732,7 +732,7 @@ exports[`ReviewForm Component rendering renders correctly with loadStatus equal 
     </p>
     <button
       className="reviews__submit form__submit button"
-      disabled=""
+      disabled={false}
       type="submit"
     >
       Submit

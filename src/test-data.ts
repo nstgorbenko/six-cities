@@ -1,4 +1,7 @@
-export const testCity = {
+import {CityType, ReviewType, OfferType} from "./types";
+import {PlaceType} from "./const";
+
+export const testCity: CityType = {
   name: `Amsterdam`,
   location: {
     coordinates: [55.5, 22.2],
@@ -6,7 +9,7 @@ export const testCity = {
   },
 };
 
-export const testCities = [{
+export const testCities: Array<CityType> = [{
   name: `Amsterdam`,
   location: {
     coordinates: [55.5, 22.2],
@@ -50,7 +53,7 @@ export const testServerReviews = [{
   }
 }];
 
-export const testReviews = [{
+export const testReviews: Array<ReviewType> = [{
   id: 101,
   user: {
     id: 5,
@@ -74,7 +77,7 @@ export const testReviews = [{
   time: `2019-12-05T22:55:56.845Z`,
 }];
 
-export const testPlace = {
+export const testPlace: OfferType = {
   id: 10,
   city: testCity,
   location: {
@@ -82,7 +85,7 @@ export const testPlace = {
     zoom: 15,
   },
   name: `Stylish apartment in the citycenter`,
-  type: `room`,
+  type: PlaceType.ROOM,
   description: `Located in the City Center, close to all important attractions.`,
   price: 136,
   photo: `img/apartment-01.jpg`,
@@ -101,7 +104,7 @@ export const testPlace = {
   isFavorite: true,
 };
 
-export const testPlaces = [testPlace, {
+export const testPlaces: Array<OfferType> = [testPlace, {
   id: 11,
   city: testCity,
   location: {
@@ -109,7 +112,7 @@ export const testPlaces = [testPlace, {
     zoom: 15,
   },
   name: `Private Attic Studio`,
-  type: `apartment`,
+  type: PlaceType.APARTMENT,
   description: `Cosy and comfortable apartment on the ground floor of a typical Amsterdam building.`,
   price: 230,
   photo: `img/apartment-02.jpg`,

@@ -27,6 +27,10 @@ export const getRatingPercent = (rating) => {
   return Math.round(rating) * 20;
 };
 
+export const noop = () => {
+  // do nothing
+};
+
 export const updateNearbyOffers = (oldNearbyOffers, newNearbyOffer) => {
 
   if (oldNearbyOffers.length > 0) {

@@ -1,7 +1,7 @@
 import {createSelector} from "reselect";
 
-import {getCity} from "../app/selectors.js";
-import NameSpace from "../name-space.js";
+import {getCity} from "../app/selectors";
+import NameSpace from "../name-space";
 
 const NAME_SPACE = NameSpace.DATA;
 

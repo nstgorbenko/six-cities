@@ -1,9 +1,11 @@
 import {BrowserRouter} from "react-router-dom";
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import {PlaceCard} from "./place-card.jsx";
-import {testPlaces} from "../../test-data.js";
+import {CardType} from "../../const";
+import {noop} from "../../utils/common";
+import {PlaceCard} from "./place-card";
+import {testPlaces} from "../../test-data";
 
 describe(`PlaceCard Component rendering`, () => {
   it(`renders correctly with cities cardType`, () => {
@@ -12,10 +14,10 @@ describe(`PlaceCard Component rendering`, () => {
           <BrowserRouter>
             <PlaceCard
               authorizationStatus={`AUTH`}
-              cardType={`cities`}
+              cardType={CardType.CITIES}
               place={testPlaces[1]}
-              onHover={() => {}}
-              onAddToFavorites={() => {}}
+              onHover={noop}
+              onAddToFavorites={noop}
             />
           </BrowserRouter>)
       .toJSON();
@@ -29,10 +31,10 @@ describe(`PlaceCard Component rendering`, () => {
           <BrowserRouter>
             <PlaceCard
               authorizationStatus={`AUTH`}
-              cardType={`favorites`}
+              cardType={CardType.FAVORITES}
               place={testPlaces[1]}
-              onHover={() => {}}
-              onAddToFavorites={() => {}}
+              onHover={noop}
+              onAddToFavorites={noop}
             />
           </BrowserRouter>)
       .toJSON();
@@ -46,10 +48,10 @@ describe(`PlaceCard Component rendering`, () => {
           <BrowserRouter>
             <PlaceCard
               authorizationStatus={`AUTH`}
-              cardType={`cities`}
+              cardType={CardType.CITIES}
               place={testPlaces[0]}
-              onHover={() => {}}
-              onAddToFavorites={() => {}}
+              onHover={noop}
+              onAddToFavorites={noop}
             />
           </BrowserRouter>)
       .toJSON();
@@ -63,10 +65,10 @@ describe(`PlaceCard Component rendering`, () => {
           <BrowserRouter>
             <PlaceCard
               authorizationStatus={`AUTH`}
-              cardType={`near-places`}
+              cardType={CardType.NEAR_PLACES}
               place={testPlaces[1]}
-              onHover={() => {}}
-              onAddToFavorites={() => {}}
+              onHover={noop}
+              onAddToFavorites={noop}
             />
           </BrowserRouter>)
       .toJSON();

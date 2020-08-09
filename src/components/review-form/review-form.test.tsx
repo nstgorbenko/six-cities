@@ -1,7 +1,8 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import {ReviewForm} from "./review-form.jsx";
+import {noop} from "../../utils/common";
+import {ReviewForm} from "./review-form";
 
 describe(`ReviewForm Component rendering`, () => {
   it(`renders correctly with loadStatus equal SUCCESS`, () => {
@@ -12,9 +13,9 @@ describe(`ReviewForm Component rendering`, () => {
             rating={5}
             review={``}
             loadStatus={`SUCCESS`}
-            onChange={() => {}}
-            onReset={() => {}}
-            onSubmit={() => {}}
+            onChange={noop}
+            onReset={noop}
+            onSubmit={noop}
           />)
       .toJSON();
 
@@ -29,9 +30,9 @@ describe(`ReviewForm Component rendering`, () => {
             rating={5}
             review={``}
             loadStatus={`LOADING`}
-            onChange={() => {}}
-            onReset={() => {}}
-            onSubmit={() => {}}
+            onChange={noop}
+            onReset={noop}
+            onSubmit={noop}
           />)
       .toJSON();
 
@@ -46,9 +47,9 @@ describe(`ReviewForm Component rendering`, () => {
             rating={5}
             review={``}
             loadStatus={`ERROR`}
-            onChange={() => {}}
-            onReset={() => {}}
-            onSubmit={() => {}}
+            onChange={noop}
+            onReset={noop}
+            onSubmit={noop}
           />)
       .toJSON();
 
@@ -63,9 +64,9 @@ describe(`ReviewForm Component rendering`, () => {
             rating={5}
             review={`More than 50 characters of my review about staying in this hotel.`}
             loadStatus={`SUCCESS`}
-            onChange={() => {}}
-            onReset={() => {}}
-            onSubmit={() => {}}
+            onChange={noop}
+            onReset={noop}
+            onSubmit={noop}
           />)
       .toJSON();
 

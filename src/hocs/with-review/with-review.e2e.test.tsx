@@ -1,7 +1,7 @@
-import React from "react";
+import * as React from "react";
 import {shallow} from "enzyme";
 
-import withReview from "./with-review.js";
+import withReview from "./with-review";
 
 const MockComponent = () => <div />;
 
@@ -9,7 +9,7 @@ describe(`withReview HOC working test`, () => {
   it(`changes state with given value and then reset it to initial`, () => {
     const MockComponentWrapped = withReview(MockComponent);
 
-    const mockComponentWrapped = shallow(<MockComponentWrapped />);
+    const mockComponentWrapped = shallow(<MockComponentWrapped id={1} />);
 
     expect(mockComponentWrapped.props().rating).toEqual(0);
 

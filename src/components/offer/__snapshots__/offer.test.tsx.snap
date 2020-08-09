@@ -1024,7 +1024,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                 <input
                   checked={false}
                   className="form__rating-input visually-hidden"
-                  disabled=""
+                  disabled={false}
                   id="5-stars"
                   name="rating"
                   onChange={[Function]}
@@ -1049,7 +1049,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                 <input
                   checked={false}
                   className="form__rating-input visually-hidden"
-                  disabled=""
+                  disabled={false}
                   id="4-stars"
                   name="rating"
                   onChange={[Function]}
@@ -1074,7 +1074,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                 <input
                   checked={false}
                   className="form__rating-input visually-hidden"
-                  disabled=""
+                  disabled={false}
                   id="3-stars"
                   name="rating"
                   onChange={[Function]}
@@ -1099,7 +1099,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                 <input
                   checked={false}
                   className="form__rating-input visually-hidden"
-                  disabled=""
+                  disabled={false}
                   id="2-stars"
                   name="rating"
                   onChange={[Function]}
@@ -1124,7 +1124,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                 <input
                   checked={false}
                   className="form__rating-input visually-hidden"
-                  disabled=""
+                  disabled={false}
                   id="1-stars"
                   name="rating"
                   onChange={[Function]}
@@ -1149,7 +1149,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
               </div>
               <textarea
                 className="reviews__textarea form__textarea"
-                disabled=""
+                disabled={false}
                 id="review"
                 maxLength={300}
                 minLength={50}
@@ -1180,7 +1180,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                 </p>
                 <button
                   className="reviews__submit form__submit button"
-                  disabled="disabled"
+                  disabled={true}
                   type="submit"
                 >
                   Submit
@@ -1358,7 +1358,7 @@ exports[`Offer Component rendering renders correctly 2`] = `
                   </span>
                 </div>
                 <button
-                  className="place-card__bookmark-button false button"
+                  className="place-card__bookmark-button  button"
                   onClick={[Function]}
                   type="button"
                 >

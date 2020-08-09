@@ -1,9 +1,11 @@
 import {BrowserRouter} from "react-router-dom";
 import {mount} from "enzyme";
-import React from "react";
+import * as React from "react";
 
-import {mapDispatchToProps, PlaceCard} from "./place-card.jsx";
-import {testPlaces} from "../../test-data.js";
+import {CardType} from "../../const";
+import {mapDispatchToProps, PlaceCard} from "./place-card";
+import {noop} from "../../utils/common";
+import {testPlaces} from "../../test-data";
 
 describe(`PlaceCard working test`, () => {
   it(`passes its id to callback when mouseEnter occur and 0 - when mouseLeave`, () => {
@@ -13,10 +15,10 @@ describe(`PlaceCard working test`, () => {
         <BrowserRouter>
           <PlaceCard
             authorizationStatus={`AUTH`}
-            cardType={`cities`}
+            cardType={CardType.CITIES}
             place={testPlaces[0]}
             onHover={onHover}
-            onAddToFavorites={() => {}}
+            onAddToFavorites={noop}
           />
         </BrowserRouter>);
 
@@ -38,9 +40,9 @@ describe(`PlaceCard working test`, () => {
         <BrowserRouter>
           <PlaceCard
             authorizationStatus={`AUTH`}
-            cardType={`cities`}
+            cardType={CardType.CITIES}
             place={testPlaces[0]}
-            onHover={() => {}}
+            onHover={noop}
             onAddToFavorites={onAddToFavorites}
           />
         </BrowserRouter>);

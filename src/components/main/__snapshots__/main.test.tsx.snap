@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App Component rendering renders correctly 1`] = `
+exports[`Main Component rendering renders correctly 1`] = `
 <div
   className="page page--gray page--main"
 >
@@ -156,7 +156,7 @@ exports[`App Component rendering renders correctly 1`] = `
             <span
               className="places__sorting-type"
               onClick={[Function]}
-              tabIndex="0"
+              tabIndex={0}
             >
               Popular
               <svg
@@ -176,7 +176,7 @@ exports[`App Component rendering renders correctly 1`] = `
                 className="places__option places__option--active"
                 data-sort-type="Popular"
                 onClick={[Function]}
-                tabIndex="0"
+                tabIndex={0}
               >
                 Popular
               </li>
@@ -184,7 +184,7 @@ exports[`App Component rendering renders correctly 1`] = `
                 className="places__option "
                 data-sort-type="Price: low to high"
                 onClick={[Function]}
-                tabIndex="0"
+                tabIndex={0}
               >
                 Price: low to high
               </li>
@@ -192,7 +192,7 @@ exports[`App Component rendering renders correctly 1`] = `
                 className="places__option "
                 data-sort-type="Price: high to low"
                 onClick={[Function]}
-                tabIndex="0"
+                tabIndex={0}
               >
                 Price: high to low
               </li>
@@ -200,7 +200,7 @@ exports[`App Component rendering renders correctly 1`] = `
                 className="places__option "
                 data-sort-type="Top rated first"
                 onClick={[Function]}
-                tabIndex="0"
+                tabIndex={0}
               >
                 Top rated first
               </li>
@@ -357,7 +357,7 @@ exports[`App Component rendering renders correctly 1`] = `
                     </span>
                   </div>
                   <button
-                    className="place-card__bookmark-button false button"
+                    className="place-card__bookmark-button  button"
                     onClick={[Function]}
                     type="button"
                   >

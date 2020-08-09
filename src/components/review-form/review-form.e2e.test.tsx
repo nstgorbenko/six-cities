@@ -1,7 +1,8 @@
-import React from "react";
+import * as React from "react";
 import {shallow} from "enzyme";
 
-import {mapDispatchToProps, ReviewForm} from "./review-form.jsx";
+import {mapDispatchToProps, ReviewForm} from "./review-form";
+import {noop} from "../../utils/common";
 
 describe(`ReviewForm working test`, () => {
   it(`passes review data to callback when user submit the form`, () => {
@@ -14,8 +15,8 @@ describe(`ReviewForm working test`, () => {
           rating={5}
           review={`More than 50 characters of my review about staying in this hotel.`}
           loadStatus={`SUCCESS`}
-          onChange={() => {}}
-          onReset={() => {}}
+          onChange={noop}
+          onReset={noop}
           onSubmit={onSubmit}
         />);
 
@@ -37,7 +38,7 @@ describe(`ReviewForm mapDispatchToProps working test`, () => {
   it(`calls post review action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).onSubmit();
+    mapDispatchToProps(dispatch).onSubmit({});
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });

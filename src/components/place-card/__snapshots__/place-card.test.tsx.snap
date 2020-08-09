@@ -50,7 +50,7 @@ exports[`PlaceCard Component rendering renders correctly with cities cardType 1`
         </span>
       </div>
       <button
-        className="place-card__bookmark-button false button"
+        className="place-card__bookmark-button  button"
         onClick={[Function]}
         type="button"
       >
@@ -254,7 +254,7 @@ exports[`PlaceCard Component rendering renders correctly with favorites cardType
         </span>
       </div>
       <button
-        className="place-card__bookmark-button false button"
+        className="place-card__bookmark-button  button"
         onClick={[Function]}
         type="button"
       >
@@ -356,7 +356,7 @@ exports[`PlaceCard Component rendering renders correctly with near-places cardTy
         </span>
       </div>
       <button
-        className="place-card__bookmark-button false button"
+        className="place-card__bookmark-button  button"
         onClick={[Function]}
         type="button"
       >

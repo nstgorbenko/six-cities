@@ -1,11 +1,13 @@
 import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import PlacesList from "./places-list.jsx";
-import {testPlaces} from "../../test-data.js";
+import {CardType} from "../../const";
+import {noop} from "../../utils/common";
+import PlacesList from "./places-list";
+import {testPlaces} from "../../test-data";
 
 const testStore = configureStore([]);
 
@@ -20,10 +22,10 @@ describe(`PlacesList Component rendering`, () => {
           <BrowserRouter>
             <Provider store={store}>
               <PlacesList
-                type="cities"
+                type={CardType.CITIES}
                 places={testPlaces}
                 sortType="Popular"
-                onPlaceCardHover={() => {}}
+                onPlaceCardHover={noop}
               />
             </Provider>
           </BrowserRouter>)

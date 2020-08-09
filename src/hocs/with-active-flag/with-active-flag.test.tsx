@@ -1,7 +1,8 @@
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import withActiveFlag from "./with-active-flag.js";
+import {noop} from "../../utils/common";
+import withActiveFlag from "./with-active-flag";
 
 const MockComponent = () => <div />;
 
@@ -10,10 +11,11 @@ describe(`withActiveFlag HOC rendering`, () => {
     const MockComponentWrapped = withActiveFlag(MockComponent);
 
     const tree = renderer
-      .create(<MockComponentWrapped
-        isActive={false}
-        onActiveChange={() => {}}
-      />)
+      .create(
+          <MockComponentWrapped
+            isActive={false}
+            onActiveChange={noop}
+          />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

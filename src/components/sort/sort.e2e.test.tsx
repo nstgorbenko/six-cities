@@ -1,20 +1,22 @@
-import React from "react";
+import * as React from "react";
 import {shallow} from "enzyme";
 
-import {mapDispatchToProps, Sort} from "./sort.jsx";
-import {SortType} from "../../const.js";
+import {mapDispatchToProps, Sort} from "./sort";
+import {noop} from "../../utils/common";
+import {SortType} from "../../const";
 
 describe(`Sort working test`, () => {
   it(`passes sort type name to callback when user click on this name`, () => {
     const onSortTypeChange = jest.fn();
     const sortTypes = Object.assign(SortType);
 
-    const sort = shallow(<Sort
-      activeSortType="Popular"
-      onSortTypeChange={onSortTypeChange}
-      isActive={false}
-      onActiveChange={() => {}}
-    />);
+    const sort = shallow(
+        <Sort
+          activeSortType="Popular"
+          onSortTypeChange={onSortTypeChange}
+          isActive={false}
+          onActiveChange={noop}
+        />);
 
     const secondSortTypeName = sort.find(`li`).at(1);
     secondSortTypeName.simulate(`click`, {target: {dataset: {sortType: sortTypes[1]}}});

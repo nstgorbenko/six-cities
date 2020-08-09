@@ -99,7 +99,8 @@ exports[`Favorites Component rendering renders correctly with empty offers array
   >
     <a
       className="footer__logo-link"
-      href="main.html"
+      href="/"
+      onClick={[Function]}
     >
       <img
         alt="6 cities logo"
@@ -356,7 +357,7 @@ exports[`Favorites Component rendering renders correctly with offers array 1`] =
                       </span>
                     </div>
                     <button
-                      className="place-card__bookmark-button false button"
+                      className="place-card__bookmark-button  button"
                       onClick={[Function]}
                       type="button"
                     >
@@ -424,7 +425,8 @@ exports[`Favorites Component rendering renders correctly with offers array 1`] =
   >
     <a
       className="footer__logo-link"
-      href="main.html"
+      href="/"
+      onClick={[Function]}
     >
       <img
         alt="6 cities logo"

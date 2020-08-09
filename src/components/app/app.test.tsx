@@ -1,10 +1,11 @@
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
-import React from "react";
-import renderer from "react-test-renderer";
+import * as React from "react";
+import * as renderer from "react-test-renderer";
 
-import {App, mapDispatchToProps} from "./app.jsx";
-import {testCity, testCities, testPlaces, testUserInfo, testReviews} from "../../test-data.js";
+import {App, mapDispatchToProps} from "./app";
+import {noop} from "../../utils/common";
+import {testCity, testCities, testPlaces, testUserInfo, testReviews} from "../../test-data";
 
 const testStore = configureStore([]);
 const store = testStore({
@@ -27,12 +28,12 @@ const testProps = {
   nearbyOffers: testPlaces,
   reviews: testReviews,
   sortType: `Popular`,
-  onAddToFavorites: () => {},
-  onNearbyOffersLoad: () => {},
-  onReviewsLoad: () => {},
-  onLogin: () => {},
-  onActiveOfferChange: () => {},
-  onCityChange: () => {},
+  onAddToFavorites: noop,
+  onNearbyOffersLoad: noop,
+  onReviewsLoad: noop,
+  onLogin: noop,
+  onActiveOfferChange: noop,
+  onCityChange: noop,
 };
 
 describe(`App Component rendering`, () => {
@@ -70,28 +71,28 @@ describe(`App mapDispatchToProps working test`, () => {
   it(`calls add to favorite action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).onAddToFavorites();
+    mapDispatchToProps(dispatch).onAddToFavorites({});
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
   it(`calls load reviews action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).onReviewsLoad();
+    mapDispatchToProps(dispatch).onReviewsLoad(1);
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
   it(`calls load nearby offers action`, () => {
     const dispatch = jest.fn();
 
-    mapDispatchToProps(dispatch).onNearbyOffersLoad();
+    mapDispatchToProps(dispatch).onNearbyOffersLoad(1);
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 
   it(`calls login action`, () => {
     const dispatch = jest.fn().mockImplementation(() => Promise.resolve());
 
-    mapDispatchToProps(dispatch).onLogin();
+    mapDispatchToProps(dispatch).onLogin({});
     expect(dispatch).toHaveBeenCalledTimes(1);
   });
 });

@@ -2,10 +2,11 @@ import {BrowserRouter} from "react-router-dom";
 import configureStore from "redux-mock-store";
 import {Provider} from "react-redux";
 import {mount} from "enzyme";
-import React from "react";
+import * as React from "react";
 
-import Offer from "./offer.jsx";
-import {testPlaces, testReviews, testUserInfo} from "../../test-data.js";
+import {noop} from "../../utils/common";
+import Offer from "./offer";
+import {testPlaces, testReviews, testUserInfo} from "../../test-data";
 
 const testStore = configureStore([]);
 const store = testStore({
@@ -31,9 +32,9 @@ describe(`Offer working test`, () => {
               nearbyOffers={testPlaces}
               reviews={testReviews}
               onAddToFavorites={onAddToFavorites}
-              onNearbyOffersLoad={() => {}}
-              onReviewsLoad={() => {}}
-              onPlaceCardHover={() => {}}
+              onNearbyOffersLoad={noop}
+              onReviewsLoad={noop}
+              onPlaceCardHover={noop}
             />
           </Provider>
         </BrowserRouter>, {

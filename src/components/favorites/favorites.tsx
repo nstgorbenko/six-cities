@@ -1,6 +1,8 @@
 import {connect} from "react-redux";
+import {Link} from "react-router-dom";
 import * as React from 'react';
 
+import {AppRoute} from "../../const";
 import {CardType} from "../../const";
 import {getFavorites} from "../../reducer/data/selectors";
 import {groupOffersByCities} from "../../utils/common";
@@ -55,9 +57,9 @@ const Favorites: React.FC<Props> = (props: Props) => {
         </div>
       </main>
       <footer className="footer">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.MAIN}>
           <img className="footer__logo" src="img/logo.svg" alt="6 cities logo" width="64" height="33" />
-        </a>
+        </Link>
       </footer>
     </div>
   );
