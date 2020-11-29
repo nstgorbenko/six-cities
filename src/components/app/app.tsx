@@ -1,4 +1,4 @@
-import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
+import {HashRouter, Redirect, Route, Switch} from "react-router-dom";
 import {connect} from "react-redux";
 import * as React from 'react';
 
@@ -57,7 +57,7 @@ const App: React.FC<Props> = (props: Props) => {
   }
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path={AppRoute.MAIN}>
           <Main
@@ -118,7 +118,7 @@ const App: React.FC<Props> = (props: Props) => {
           />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

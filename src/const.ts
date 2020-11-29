@@ -40,7 +40,7 @@ export const MarkerSettings: {
   [key: string]: {iconUrl: string; iconSize: [number, number]};
 } = {
   DEFAULT: {
-    iconUrl: `/img/pin.svg`,
+    iconUrl: `./img/pin.svg`,
     iconSize: [30, 30]
   },
   ACTIVE: {
