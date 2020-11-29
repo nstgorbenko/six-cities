@@ -44,7 +44,7 @@ export const MarkerSettings: {
     iconSize: [30, 30]
   },
   ACTIVE: {
-    iconUrl: `/img/pin-active.svg`,
+    iconUrl: `./img/pin-active.svg`,
     iconSize: [30, 30]
   },
 };
