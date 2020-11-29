@@ -30,7 +30,7 @@ const Header: React.FC<Props> = (props: Props) => {
               <li className="header__nav-item user">
                 <Link className="header__nav-link header__nav-link--profile" to={AppRoute.FAVORITES}>
                   <div className="header__avatar-wrapper user__avatar-wrapper">
-                    {isAuth && <img src={`https://4.react.pages.academy/six-cities${userInfo.avatar}`} />}
+                    {isAuth && <img src={`${userInfo.avatar}`} />}
                   </div>
                   <span className="header__user-name user__name">{isAuth ? userInfo.email : `Sign In`}</span>
                 </Link>

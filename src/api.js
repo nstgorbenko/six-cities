@@ -5,7 +5,7 @@ const Error = {
 };
 
 const LOADING_TIME = 5000;
-const APP_URL = `https://4.react.pages.academy/six-cities`;
+const APP_URL = `https://5.react.pages.academy/six-cities`;
 
 const createAPI = (onUnauthorized) => {
   const api = axios.create({
