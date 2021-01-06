@@ -47,7 +47,7 @@
     "node": "10"
   },
   "dependencies": {
-    "axios": "0.19.2",
+    "axios": "0.21.1",
     "leaflet": "1.6.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
